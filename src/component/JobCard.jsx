@@ -6,6 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
+
 const bull = (
   <Box
     component="span"
@@ -57,6 +58,8 @@ export default function JobCard() {
     <Box sx={{ minWidth: 275 }}>
       <Card variant="elevation">{card}</Card>
     </Box>
+
+  
     </>
   );
 }

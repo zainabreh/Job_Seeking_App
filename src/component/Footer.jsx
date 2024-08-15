@@ -6,7 +6,8 @@ const Footer = () => {
   const [color, setColor] = React.useState("primary");
   return (
     <>
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
+    <div style={{ display: 'flex', flexDirection: 'column'
+     }}>
     <Sheet
         variant="solid"
         color={color}

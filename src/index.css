@@ -25,6 +25,120 @@
   gap: 20px;
   /* border: 2px solid rgb(29, 18, 230); */
 }
+
+.Usercontainer{
+  width: 70%;
+  margin: 0 auto;
+}
+
+/* usercard.css */
+
+.usercard {
+  background-color: #f7f7f7;
+  /* padding: 20px; */
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.usercard .card-title {
+  font-size: 35px;
+  margin-bottom: 25px;
+  text-align: center;
+  font-weight: bold;
+  color: #333;
+}
+
+.usercard table {
+  border-collapse: separate;
+  border-spacing: 20px 10px;
+}
+
+.usercard th, .usercard td {
+  font-size: 18px;
+  padding: 20px;
+  text-align: justify;
+}
+
+.usercard th {
+  font-weight: bold;
+}
+
+.usercard td:nth-child(2) {
+  text-align: left;
+}
+.edite{
+  cursor: pointer;
+}
+
+
+/* form.css */
+
+.container {
+  /* max-width: 800px; */
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.form-control {
+  height: 40px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form-control:focus {
+  border-color: #aaa;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-select {
+  height: 40px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form-check-label {
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+.form-check-input {
+  margin-top: 10px;
+}
+
+.btn-primary {
+  background-color: #337ab7;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #23527c;
+}
+
+
+
+
 /* @media screen {
   .filter-container{
     padding: 5px;
