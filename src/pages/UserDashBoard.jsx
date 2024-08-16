@@ -1,17 +1,12 @@
-import React from 'react'
-import UsepProfileCard from '../component/UsepProfileCard'
+import React from "react";
+import UsepProfileCard from "../component/UsepProfileCard";
 
 const UserDashBoard = () => {
   return (
-    <div>
-
-<div className="dashBoardContainer">
-    {/* <Sidebar/> */}
-      <UsepProfileCard/>
-</div>
-      
+    <div className="dashBoardContainer">
+      <UsepProfileCard />
     </div>
-  )
-}
+  );
+};
 
-export default UserDashBoard
+export default UserDashBoard;

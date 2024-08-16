@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Updateprofile = () => {
+const Userupdateprofile = () => {
   return (
     <>
-      <div className="container">
+      <div style={{margin:"40px"}}>
         <h3 style={{marginBlock:"15px"}}><span style={{ textDecoration:"underline", textDecorationColor:"blue",textDecorationThickness:"3px"}}>Upd</span>ate Profile</h3>
         <form className="row g-3">
           <div className="col-md-6">
@@ -65,4 +65,4 @@ const Updateprofile = () => {
   );
 };
 
-export default Updateprofile;
+export default Userupdateprofile;

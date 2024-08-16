@@ -60,7 +60,7 @@ const UsepProfileCard = () => {
                     </tr>
                   </tbody>
                 </table>
-               <Link to={"/updateprofile"}> <p className="edite" style={{textAlign:"justify",fontSize:"20px",fontWeight:"bolder", padding:"20px"}}><i className="fa-solid fa-pen-to-square"></i> Edit</p></Link>
+               <Link to={"/Userupdateprofile"}> <p className="edite" style={{textAlign:"justify",fontSize:"20px",fontWeight:"bolder", padding:"20px"}}><i className="fa-solid fa-pen-to-square"></i> Edit</p></Link>
               </div>
             </div>
           </div>

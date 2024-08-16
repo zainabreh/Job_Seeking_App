@@ -34,11 +34,11 @@
 /* usercard.css */
 
 .usercard {
-  background-color: #f7f7f7;
+  /* background-color: #f7f7f7; */
   /* padding: 20px; */
   border: 1px solid #ddd;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
 }
 
 .usercard .card-title {
@@ -58,6 +58,8 @@
   font-size: 18px;
   padding: 20px;
   text-align: justify;
+   /* background-color: #f7f7f7; */
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .usercard th {
@@ -76,10 +78,12 @@
 
 .container {
   /* max-width: 800px; */
+  width: 100%;
   margin: 40px auto;
+  /* height: 100%; */
   padding: 20px;
   background-color: #f7f7f7;
-  border: 1px solid #ddd;
+  /* border: 1px solid #ddd; */
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -136,7 +140,29 @@ form {
   background-color: #23527c;
 }
 
-
+.dashBoardContainer{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  /* border: 5px solid green; */
+}
+.sidebar{
+  width: 15%;
+  height: 100vh;
+  padding: 30px;
+  background-color: #116ec0;
+  color: white !important;
+  /* border: 5px solid red; */
+}
+.dashboard-container{
+  width: 85%;
+  /* border: 5px solid red; */
+}
+.table-container{
+  margin-block: 100px;
+  margin-inline: 50px;
+}
 
 
 /* @media screen {
