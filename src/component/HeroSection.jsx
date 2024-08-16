@@ -51,15 +51,15 @@ export default function HeroSection() {
               p: "2px 4px",
               display: "flex",
               alignItems: "center",
-              width: 400,
+              width: 300,
             }}
           >
             <InputBase
-              sx={{ ml: 1, flex: 1 }}
+              sx={{ ml: 1, flex: 1,zIndex:10 }}
               placeholder="Search Jobs"
               inputProps={{ "aria-label": "Search Jobs" }}
             />
-            <IconButton type="button" sx={{ p: "10px", color:"black" }} aria-label="search">
+            <IconButton type="button" sx={{ p: "10px", color:"black",zIndex:10 }} aria-label="search">
               <SearchIcon />
             </IconButton>
           </Paper>
@@ -69,7 +69,7 @@ export default function HeroSection() {
           component="img"
           alt=""
           src="https://storage.googleapis.com/cms-storage-bucket/72521e62275b24d3c37d.png"
-          sx={{ position: "absolute", height: "100%", top: 0, right: 0 }}
+          sx={{ position: "absolute", height: "100%", top: 0, right: 0 ,zIndex:-1}}
         />
         <IconButton
           sx={{

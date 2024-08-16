@@ -11,7 +11,7 @@ const UsepProfileCard = () => {
               <div className="card-body">
                 <h5
                   className="card-title"
-                  style={{ fontSize: "35px", marginBlock: "25px" }}
+                  style={{ fontSize: "25px", marginBlock: "25px" }}
                 >
                   User Information
                 </h5>

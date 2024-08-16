@@ -59,7 +59,7 @@ export default function JobContainer() {
       <div className="main-container">
         <div className="filter-container">
           {/* Category */}
-          <Box sx={{ width: 300 }}>
+          <Box sx={{ width: 250 }}>
             <Button
               sx={{ display: "block", mt: 2 }}
               onClick={handleCategoryOpen}
@@ -91,7 +91,7 @@ export default function JobContainer() {
           </Box>
 
           {/* Types */}
-          <Box sx={{ width: 300 }}>
+          <Box sx={{ width: 250 }}>
             <Button sx={{ display: "block", mt: 2 }} onClick={handleTypesOpen}>
               Filter Job By Types
             </Button>
@@ -120,7 +120,7 @@ export default function JobContainer() {
           </Box>
 
           {/* Location */}
-          <Box sx={{ width: 300 }}>
+          <Box sx={{ width: 250 }}>
             <Button
               sx={{ display: "block", mt: 2 }}
               onClick={handleLocationOpen}
