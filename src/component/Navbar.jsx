@@ -129,6 +129,20 @@ function Navbar() {
             ))}
           </Box>
 
+          {/* <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } ,textAlign:"end"}}>
+          <Link to={"/"}>
+               <Button
+                // key={page}
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block',fontWeight:"700",fontSize:"15px", "&:hover": {
+                  color: "#64b5f6"
+                } }}
+              >
+                logIn
+              </Button>
+             </Link>
+          </Box> */}
+
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

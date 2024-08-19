@@ -34,13 +34,15 @@
 .usercard {
   border: 1px solid #ddd;
   border-radius: 10px;
+  background-color: #448aff;
   /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
 }
 
 .usercard .card-title {
+  color: white;
   text-align: center;
   font-weight: bold;
-  color: #333;
+  /* color: #333; */
 }
 
 .usercard table {
@@ -65,6 +67,8 @@
 }
 .edite{
   cursor: pointer;
+  color: white;
+
 }
 
 
@@ -74,7 +78,7 @@
   width: 100%;
   margin: 40px auto;
   padding: 20px;
-  background-color: #f7f7f7;
+  background-color: #448aff;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -153,9 +157,8 @@ form {
   height: 100vh;
 }
 .table-container{
-  /* width: 100%; */
   margin-block: 100px;
-  margin-inline: 50px;
+  background-color: '#448aff';
 }
 
 
@@ -223,4 +226,73 @@ form {
     margin-inline: 10px;
   }
  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+body {
+  background-color: #f8f9fa;
+  font-family: 'Arial', sans-serif;
+}
+
+.container {
+  margin-top: 50px;
+}
+
+.card {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.logo img {
+  width: 100px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.btn-primary {
+  background-color: #6f42c1;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #5a32a3;
+}
+
+.text-center {
+  margin-top: 20px;
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import UsepProfileCard from "../component/UsepProfileCard";
+import UsepProfileCard from "../pages/UsepProfileCard";
 
 const UserDashBoard = () => {
   return (

@@ -11,9 +11,11 @@ const UsepProfileCard = () => {
               <div className="card-body">
                 <h5
                   className="card-title"
-                  style={{ fontSize: "25px", marginBlock: "25px" }}
+                  style={{ fontSize: "25px", marginBlock: "25px" ,textAlign:"justify",marginLeft:"20px"}}
                 >
-                  User Information
+                  <span style={{textDecoration: "underline",
+                    textDecorationColor: "white",
+                    textDecorationThickness: "3px",}}>Us</span>er Information
                 </h5>
                 <table
                   className="table table-borderless review_table"

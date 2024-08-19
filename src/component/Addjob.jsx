@@ -4,7 +4,9 @@ const Addjob = () => {
   return (
     <>
       <div className="container">
-        <form className="row g-3">
+        <h2 style={{textAlign:"center",marginBlock:"20px",fontWeight:"600",color:"white"}}>Create New Job</h2>
+        <form className="row g-3" style={{  color: "white"
+}}>
           <div className="col-md-4">
             <label for="inputEmail4" className="form-label">
               Position
@@ -124,7 +126,7 @@ const Addjob = () => {
 
 
           <div className="col-12">
-            <button type="submit" className="btn btn-primary" style={{marginTop:"20px"}}>
+            <button type="submit" className="btn" style={{marginTop:"20px",backgroundColor:"white"}}>
               Submit
             </button>
           </div>

@@ -18,12 +18,12 @@ const rows = [
 
 export default function Recuiterapplication() {
   return (
-    <div className="table-container">
+    <div className="table-container container" style={{color:"white"}}>
       <h3 style={{ marginBlock: "15px" }}>
         <span
           style={{
             textDecoration: "underline",
-            textDecorationColor: "blue",
+            textDecorationColor: "white",
             textDecorationThickness: "3px",
           }}
         >
@@ -34,32 +34,32 @@ export default function Recuiterapplication() {
       </h3>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
+          <TableHead sx={{backgroundColor:"#0d47a1"}}>
             <TableRow>
-              <TableCell sx={{ fontWeight: "700", fontSize: "15px" }}>
+              <TableCell sx={{ fontWeight: "700", fontSize: "15px" ,color:"white"}}>
                 #
               </TableCell>
               <TableCell
                 align="left"
-                sx={{ fontWeight: "700", fontSize: "15px" }}
+                sx={{ fontWeight: "700", fontSize: "15px" ,color:"white"}}
               >
                 Job Postion
               </TableCell>
               <TableCell
                 align="left"
-                sx={{ fontWeight: "700", fontSize: "15px" }}
+                sx={{ fontWeight: "700", fontSize: "15px",color:"white" }}
               >
                 Company
               </TableCell>
               <TableCell
                 align="left"
-                sx={{ fontWeight: "700", fontSize: "15px" }}
+                sx={{ fontWeight: "700", fontSize: "15px",color:"white" }}
               >
                 Status
               </TableCell>
               <TableCell
                 align="left"
-                sx={{ fontWeight: "700", fontSize: "15px" }}
+                sx={{ fontWeight: "700", fontSize: "15px" ,color:"white"}}
               >
                 Actions
               </TableCell>
@@ -77,6 +77,11 @@ export default function Recuiterapplication() {
                 <TableCell align="left">{row.position}</TableCell>
                 <TableCell align="left">{row.company}</TableCell>
                 <TableCell align="left">{row.status}</TableCell>
+                <TableCell align="left">
+                <i class="fa-regular fa-eye" style={{fontSize:"20px",padding:"5px",cursor:"pointer",color:"blue"}}></i>
+                <i class="fa-solid fa-pen-to-square" style={{fontSize:"20px",padding:"5px",cursor:"pointer",color:"green"}}></i>
+                <i class="fa-solid fa-trash" style={{fontSize:"20px",padding:"5px",cursor:"pointer",color:"red"}}></i>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

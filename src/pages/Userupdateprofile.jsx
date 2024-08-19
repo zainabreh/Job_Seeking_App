@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 const Userupdateprofile = () => {
   return (
     <>
-      <div style={{margin:"40px"}}>
-        <h3 style={{marginBlock:"15px"}}><span style={{ textDecoration:"underline", textDecorationColor:"blue",textDecorationThickness:"3px"}}>Upd</span>ate Profile</h3>
+      <div className="container" style={{margin:"40px",color:"white"}}>
+        <h3 style={{marginBlock:"15px"}}><span style={{ textDecoration:"underline", textDecorationColor:"white",textDecorationThickness:"3px"}}>Upd</span>ate Profile</h3>
         <form className="row g-3">
           <div className="col-md-6">
             <label for="inputEmail4" className="form-label">
@@ -54,7 +54,7 @@ const Userupdateprofile = () => {
           </div>
           
           <div className="col-12" style={{textAlign:"center",marginTop:"40px"}}>
-            <Link to={"/usepProfileCard"}><button type="submit" className="btn btn-primary" style={{fontSize:"16.5px",fontWeight:"700"}}>
+            <Link to={"/usepProfileCard"}><button type="submit" className="btn" style={{fontSize:"16.5px",backgroundColor:"white"}}>
              Update Profile
             </button>
             </Link>
