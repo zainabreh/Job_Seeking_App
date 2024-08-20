@@ -20,6 +20,7 @@ import Managejob from "./component/Managejob";
 import Recuiterapplication from "./pages/Recuiterapplication";
 import JobDetail from "./component/JobDetail";
 import LogIn from "./pages/LogIn";
+import Signup from "./pages/Signup";
 
 function App() {
   const router = createBrowserRouter(
@@ -27,6 +28,7 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route path="/" element={<Home />}></Route>
         <Route path="/login" element={<LogIn />}></Route>
+        <Route path="/signup" element={<Signup />}></Route>
         <Route path="/jobdetail" element={<JobDetail />}></Route>
         <Route  element={<Sidebarlayout />}>
           <Route path="userdashboard" element={<UserDashBoard />}></Route>

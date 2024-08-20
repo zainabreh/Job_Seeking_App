@@ -1,14 +1,13 @@
 import { useFormik } from "formik";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import * as yup from "yup";
+import { userData } from "../../Redux/Feature/auth.slice";
+import { Link } from "react-router-dom";
 
-const LogIn = () => {
-  const [signup, setSignup] = useState(false);
-  const [formData,setFormData] = useState([])
-
-  const toggleSignup = () => {
-    setSignup(!signup);
-  };
+const Signup = () => {
+  const [formData,setFormData] = useState([]);
+  const dispatch = useDispatch()
 
   const { handleChange, handleSubmit, handleBlur, touched, values, errors } =
     useFormik({
@@ -31,6 +30,7 @@ const LogIn = () => {
       onSubmit: (v) => {
         console.log(v);
         setFormData(v)
+        dispatch(userData(formData))
         console.log(formData);
       },
     });
@@ -58,16 +58,13 @@ const LogIn = () => {
                 Jobs
               </span>
             </div>
-            {!signup ? (
-              <h3 class="card-title text-center">Sign In</h3>
-            ) : (
+          
               <h3 class="card-title text-center">Sign Up</h3>
-            )}
+           
 
             <form onSubmit={handleSubmit}>
               <div class="form-group">
-                {signup && (
-                  <>
+               
                     <label for="username">Username</label>
                     <input
                       type="text"
@@ -80,8 +77,7 @@ const LogIn = () => {
                       placeholder="Type Here"
                     />
                     {touched.username && errors.username ? (<div style={{color:'red'}}>{errors.username }</div>) : ("")}
-                  </>
-                )}
+                
               </div>
               <div class="form-group">
                 <label for="email">Email</label>
@@ -112,8 +108,7 @@ const LogIn = () => {
                 {touched.password && errors.password ? (<div style={{color:'red'}}>{errors.password }</div>) : ("")}
               </div>
               <div class="form-group">
-                {signup && (
-                  <>
+              
                     <label for="confirmPassword">Confirm Password</label>
                     <input
                       type="password"
@@ -126,45 +121,26 @@ const LogIn = () => {
                       placeholder="Type Here"
                     />
                     {touched.cpassword && errors.cpassword ? (<div style={{color:'red'}}>{errors.cpassword }</div>) : ("")}
-                  </>
-                )}
+               
               </div>
-              {signup ? (
+             
                 <button type="submit" class="btn btn-primary btn-block">
                   Register
                 </button>
-              ) : (
-                <button type="submit" class="btn btn-primary btn-block">
-                  LogIn
-                </button>
-              )}
+             
             </form>
             <div class="text-center">
-              {!signup ? (
-                <>
-                  <p>
-                    Don't have an account?{" "}
-                    <span
-                      onClick={toggleSignup}
-                      style={{ cursor: "pointer", color: "#2962ff" }}
-                    >
-                      Register
-                    </span>
-                  </p>
-                </>
-              ) : (
-                <>
+             
+                 
                   <p>
                     Already have an account?{" "}
                     <span
-                      onClick={toggleSignup}
                       style={{ cursor: "pointer", color: "#2962ff" }}
                     >
-                      LogIn
+                      <Link to={"/login"}>LogIn</Link>
                     </span>
                   </p>
-                </>
-              )}
+               
             </div>
           </div>
         </div>
@@ -173,4 +149,4 @@ const LogIn = () => {
   );
 };
 
-export default LogIn;
+export default Signup;
