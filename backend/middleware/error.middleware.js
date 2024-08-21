@@ -12,7 +12,7 @@ export const errorHandler = (err,req,res,next)=>{
         error = new Error(msg)
     }
 
-    if(err.code == 1100){
+    if(err.code == 11000){
         const msg = `Duplicate ${Object.keys(err.keyValue)} Not Allowed`
         error = new Error(msg)
     }
