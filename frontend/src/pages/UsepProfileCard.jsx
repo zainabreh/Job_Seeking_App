@@ -43,9 +43,9 @@ const UsepProfileCard = () => {
                     </tr>
                     <tr>
                       <td scope="col" style={{ fontWeight: "600" }}>
-                        Join:
+                        PhoneNumber:
                       </td>
-                      <td style={{fontWeight:"600"}}>Aug 12,2024</td>
+                      <td style={{fontWeight:"600"}}>0334568715</td>
                     </tr>
                     <tr>
                       <td scope="col" style={{ fontWeight: "600" }}>

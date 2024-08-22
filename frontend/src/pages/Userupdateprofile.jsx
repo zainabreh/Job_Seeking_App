@@ -24,33 +24,21 @@ const Userupdateprofile = () => {
               placeholder="abc"
             />
           </div>
-          <div className="col-md-6">
-            <label for="inputRole" className="form-label">
-              Role
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="inputRole"
-              placeholder="user"
-            />
-          </div>
-          <div className="col-md-6">
-            <label for="inputLocation" className="form-label">
-              Location
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="inputLocation"
-              placeholder="Apartment, studio, or floor"
-            />
-          </div>
+          <div class="col-md-6">
+    <label for="inputState" class="form-label">Roles</label>
+    <select id="inputState" class="form-select">
+      <option selected>Choose...</option>
+      <option>User</option>
+      <option>Recuiter</option>
+      <option>Admin</option>
+    </select>
+  </div>
+         
           <div className="col-md-6">
             <label for="inputGender" className="form-label">
-              Gender
+              PhoneNumber
             </label>
-            <input type="text" className="form-control" id="inputGender" placeholder="gender"/>
+            <input type="text" className="form-control" id="inputGender" placeholder="phone Number"/>
           </div>
           
           <div className="col-12" style={{textAlign:"center",marginTop:"40px"}}>
