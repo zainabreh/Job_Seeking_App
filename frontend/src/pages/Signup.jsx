@@ -1,15 +1,16 @@
 import { useFormik } from "formik";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import * as yup from "yup";
-import { userData } from "../../Redux/Feature/auth.slice";
 import { Link } from "react-router-dom";
+import { useRegisterUserMutation } from "../../Redux/Feature/auth/auth.api.js";
+import {ToastContainer,toast} from 'react-toastify'
+import 'react-toastify/ReactToastify.css'
+import { useDispatch } from "react-redux";
 
 const Signup = () => {
-  const [formData, setFormData] = useState([]);
-  const dispatch = useDispatch();
   const [preview, setPreview] = useState(undefined);
-
+  const dispatch = useDispatch()
+const [registerUser,{isLoading,error,data}] =useRegisterUserMutation()
 
   const { handleChange, handleSubmit, handleBlur,handleReset, touched, values, errors,setFieldValue } =
     useFormik({
@@ -39,11 +40,19 @@ const Signup = () => {
            .oneOf([yup.ref('password'), null], 'Passwords must match').required("Check for correction")
 
       }),
-      onSubmit: (v) => {
-        console.log(v);
-        setFormData(v);
-        dispatch(userData(formData));
-        console.log(formData);
+      onSubmit: async (v) => {
+        delete v.cpassword
+        // console.log(v);
+        try {
+          let user = await registerUser(v).unwrap()
+          console.log("After register",user);
+          
+          dispatch(setUserInfo(user))
+          toast.success("User Registered Successfully")
+          
+        } catch (error) {
+          toast.error(error)
+        }
         handleReset()
         setPreview(undefined)
         document.getElementById('preview-reset').value = ""
@@ -65,6 +74,7 @@ const Signup = () => {
 
   return (
     <>
+    <ToastContainer/>
       <div class="container" style={{ width: "800px", padding: "20px" }}>
         <div class="card">
           <div class="card-body">
@@ -275,7 +285,7 @@ const Signup = () => {
                   }
                   class="rounded mx-auto mt-3"
                    
-                   value={values.avatar}
+                  
                   width={100}
                   alt="..."
                 />

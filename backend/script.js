@@ -6,9 +6,16 @@ import authRouter from "./routing/auth.routing.js"
 import { errorHandler } from './middleware/error.middleware.js'
 import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
+import cors from "cors"
+
+const corsOptions = {
+    origin: "http://localhost:5173"
+}
 
 connectDB()
 const app = express()
+
+app.use(cors())
 
 app.use(bodyParser.json())
 app.use(cookieParser())

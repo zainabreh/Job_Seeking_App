@@ -1,12 +1,9 @@
 import { useFormik } from "formik";
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React from "react";
 import * as yup from "yup";
-import { userData } from "../../Redux/Feature/auth.slice";
 import { Link } from "react-router-dom";
 
 const LogIn = () => {
-  const dispatch = useDispatch();
 
   const { handleChange, handleSubmit, handleBlur, touched, values, errors } =
     useFormik({
@@ -20,7 +17,6 @@ const LogIn = () => {
       }),
       onSubmit: (v) => {
         console.log(v);
-        dispatch(userData(v));
       },
     });
 
