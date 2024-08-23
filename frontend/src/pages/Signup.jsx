@@ -3,59 +3,78 @@ import React, { useState } from "react";
 import * as yup from "yup";
 import { Link } from "react-router-dom";
 import { useRegisterUserMutation } from "../../Redux/Feature/auth/auth.api.js";
-import {ToastContainer,toast} from 'react-toastify'
-import 'react-toastify/ReactToastify.css'
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/ReactToastify.css";
 import { useDispatch } from "react-redux";
 import { setUserInfo } from "../../Redux/Feature/auth/auth.slice.js";
 
 const Signup = () => {
   const [preview, setPreview] = useState(undefined);
-  const dispatch = useDispatch()
-const [registerUser,{isLoading,error,data}] =useRegisterUserMutation()
+  const [apimsg, setApimsg] = useState("");
+  const dispatch = useDispatch();
+  const [registerUser, { isLoading, error, data }] = useRegisterUserMutation();
 
-  const { handleChange, handleSubmit, handleBlur,handleReset, touched, values, errors,setFieldValue } =
-    useFormik({
-      initialValues: {
-        firstname: "",
-        lastname: "",
-        username: "",
-        email: "",
-        phoneNumber: "",
-        roles: "",
-        password: "",
-        cpassword: "",
-        gender: "",
-        avatar: "",
-      },
-      validationSchema: yup.object({
-        firstname: yup.string().required("Required"),
-        lastname: yup.string().required("Required"),
-        roles: yup.string().required("Required"),
-        gender: yup.string().required("Required"),
-        avatar: yup.string(),
-        username: yup.string().required("Required"),
-        email: yup.string().required("Reqiured"),
-        phoneNumber: yup.string().required("Reqiured"),
-        password: yup.string().required('Password is required'),
-        cpassword: yup.string()
-           .oneOf([yup.ref('password'), null], 'Passwords must match').required("Check for correction")
+  const {
+    handleChange,
+    handleSubmit,
+    handleBlur,
+    handleReset,
+    touched,
+    values,
+    errors,
+    setFieldValue,
+  } = useFormik({
+    initialValues: {
+      firstname: "",
+      lastname: "",
+      username: "",
+      email: "",
+      phoneNumber: "",
+      roles: "",
+      password: "",
+      cpassword: "",
+      gender: "",
+      avatar: "",
+    },
+    validationSchema: yup.object({
+      firstname: yup.string().required("Required"),
+      lastname: yup.string().required("Required"),
+      roles: yup.string().required("Required"),
+      gender: yup.string().required("Required"),
+      avatar: yup.string(),
+      username: yup.string().required("Required"),
+      email: yup.string().required("Reqiured"),
+      phoneNumber: yup.string().required("Reqiured"),
+      password: yup.string().required("Password is required"),
+      cpassword: yup
+        .string()
+        .oneOf([yup.ref("password"), null], "Passwords must match")
+        .required("Check for correction"),
+    }),
+    onSubmit: async (v) => {
+      delete v.cpassword;
+      console.log(v);
 
-      }),
-      onSubmit: async (v) => {
-        delete v.cpassword
-        console.log(v);
+      const user = await registerUser(v).unwrap();
+      dispatch(setUserInfo(user));
+      console.log(user);
       
-          const {newUser} = await registerUser(v).unwrap()
-          console.log("After register",newUser);
-          
-          dispatch(setUserInfo(newUser))
-          toast.success("User Registered Successfully")
-          
-        handleReset()
-        setPreview(undefined)
-        document.getElementById('preview-reset').value = ""
-      },
-    });
+      // toast.success("User Registered Successfully");
+
+      if (user) {
+        setApimsg(user);
+      } else {
+        setApimsg({
+          success: false,
+          error: "Something went wrong",
+        });
+      }
+
+      handleReset();
+      setPreview(undefined);
+      document.getElementById("preview-reset").value = "";
+    },
+  });
 
   const handleImgChange = (e) => {
     const read = new FileReader();
@@ -64,7 +83,6 @@ const [registerUser,{isLoading,error,data}] =useRegisterUserMutation()
         console.log("inside ready state");
         setFieldValue("avatar", read.result);
         setPreview(read.result);
-        
       }
     };
     read.readAsDataURL(e.target.files[0]);
@@ -72,8 +90,9 @@ const [registerUser,{isLoading,error,data}] =useRegisterUserMutation()
 
   return (
     <>
-    <ToastContainer/>
+      <ToastContainer />
       <div class="container" style={{ width: "800px", padding: "20px" }}>
+        
         <div class="card">
           <div class="card-body">
             <div class="logo">
@@ -94,7 +113,16 @@ const [registerUser,{isLoading,error,data}] =useRegisterUserMutation()
             </div>
 
             <h3 class="card-title text-center">Register</h3>
-
+            {apimsg && (
+          <div
+            class={`alert alert-${
+              apimsg && apimsg.success ? "success" : "danger"
+            }`}
+            role="alert"
+          >
+            {apimsg && apimsg.message}
+          </div>
+        )}
             <form onSubmit={handleSubmit} className="row g-3 mt-3">
               <div class="form-group col-md-6">
                 <input
@@ -209,8 +237,6 @@ const [registerUser,{isLoading,error,data}] =useRegisterUserMutation()
                 )}
               </div>
 
-              
-
               <div class="form-group col-md-6">
                 <input
                   type="password"
@@ -267,7 +293,6 @@ const [registerUser,{isLoading,error,data}] =useRegisterUserMutation()
               <div class="form-group col-md-6">
                 <input
                   className="form-control pt-2 "
-                 
                   type="file"
                   name="avatar"
                   id="preview-reset"
@@ -282,8 +307,6 @@ const [registerUser,{isLoading,error,data}] =useRegisterUserMutation()
                       : "https://www.w3schools.com/howto/img_avatar.png "
                   }
                   class="rounded mx-auto mt-3"
-                   
-                  
                   width={100}
                   alt="..."
                 />
