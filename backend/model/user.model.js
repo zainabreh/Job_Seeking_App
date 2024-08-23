@@ -38,7 +38,7 @@ const userSchema = new Schema({
         enum:['user','recuiter','admin'],
     },
     avatar:{
-        type:String
+        type:[{url:"",type:String}]
     }
 })
 
