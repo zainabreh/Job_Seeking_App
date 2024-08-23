@@ -6,6 +6,7 @@ import { useRegisterUserMutation } from "../../Redux/Feature/auth/auth.api.js";
 import {ToastContainer,toast} from 'react-toastify'
 import 'react-toastify/ReactToastify.css'
 import { useDispatch } from "react-redux";
+import { setUserInfo } from "../../Redux/Feature/auth/auth.slice.js";
 
 const Signup = () => {
   const [preview, setPreview] = useState(undefined);
@@ -42,17 +43,14 @@ const [registerUser,{isLoading,error,data}] =useRegisterUserMutation()
       }),
       onSubmit: async (v) => {
         delete v.cpassword
-        // console.log(v);
-        try {
-          let user = await registerUser(v).unwrap()
-          console.log("After register",user);
+        console.log(v);
+      
+          const {newUser} = await registerUser(v).unwrap()
+          console.log("After register",newUser);
           
-          dispatch(setUserInfo(user))
+          dispatch(setUserInfo(newUser))
           toast.success("User Registered Successfully")
           
-        } catch (error) {
-          toast.error(error)
-        }
         handleReset()
         setPreview(undefined)
         document.getElementById('preview-reset').value = ""

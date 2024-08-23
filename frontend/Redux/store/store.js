@@ -4,24 +4,23 @@ import authReducer from "../Feature/auth/auth.slice.js";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-// const persistConfig = {
-//   key: "authUser",
-//   storage,
-// };
+const persistConfig = {
+  key: "authUser",
+  storage,
+};
 
-// const rootReducer = combineReducers({
-//     auth: authReducer,
-//   [authApi.reducerPath]: authApi.reducer
-// });
+const rootReducer = combineReducers({
+    auth: authReducer,
+  [authApi.reducerPath]: authApi.reducer
+});
 
-// const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
   reducer: {  
-    auth: authReducer,
-    [authApi.reducerPath]: authApi.reducer
+    persistedReducer
 },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat([authApi.middleware]),
 });
-// export const persistor = persistStore(store);
+export const persistor = persistStore(store);
