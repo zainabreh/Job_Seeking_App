@@ -21,6 +21,18 @@ export const getSingleUser = async (req,res,next)=>{
         next(error)
     }
 }
+export const getProfile = async (req,res,next)=>{
+    let id = req.user.id
+    
+    try {
+       let user = await userModel.findById(id)
+        res.json({
+            user,
+        })
+    } catch (error) {
+        next(error)
+    }
+}
 export const createNewUser = async (req,res,next)=>{
     try {
         const user = req.body

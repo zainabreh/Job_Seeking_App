@@ -23,8 +23,10 @@ const LogIn = () => {
       }),
       onSubmit: async (v) => {
         let user = await loginUser(v).unwrap()
+        
         if (user && user.success == true) {
           dispatch(setUserInfo(user))
+          console.log(user);
           navigate("/")
         } else {
           setApimsg(user);

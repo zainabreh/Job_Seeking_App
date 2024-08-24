@@ -14,6 +14,9 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import BusinessCenterRoundedIcon from '@mui/icons-material/BusinessCenterRounded';
 import { Link } from 'react-router-dom';
+import { useGetProfileQuery } from '../../Redux/Feature/auth/auth.api';
+import { useDispatch } from 'react-redux';
+import { setUserInfo } from '../../Redux/Feature/auth/auth.slice';
 
 const pages = ['Home'];
 const settings = [ 'Dashboard', 'Logout'];
@@ -21,6 +24,18 @@ const settings = [ 'Dashboard', 'Logout'];
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const dispatch = useDispatch()
+
+  const {data,isFatching,isLoading} = useGetProfileQuery()
+
+  React.useEffect(() => {
+    if (data) {
+      console.log(data);
+      dispatch(setUserInfo(data));
+    }
+  }, [data]);;
+  
+  
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
