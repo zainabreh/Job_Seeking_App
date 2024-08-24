@@ -3,20 +3,22 @@ import 'dotenv/config'
 import { connectDB } from './config/connectdb.js'
 import userRouter from "./routing/user.routing.js"
 import authRouter from "./routing/auth.routing.js"
+import jobRouter from "./routing/job.routing.js"
 import { errorHandler } from './middleware/error.middleware.js'
-import bodyParser from 'body-parser'
+// import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import cors from "cors"
 import { v2 as cloudinary } from 'cloudinary';
 
 const corsOptions = {
-    origin: "http://localhost:5173"
+    origin: "http://localhost:5173",
+    credentials:true
 }
 
 connectDB()
 const app = express()
 
-app.use(cors())
+app.use(cors(corsOptions))
 
 
  // Configuration
@@ -38,6 +40,7 @@ app.use(express.urlencoded({limit: '50mb'}));
 
 app.use("/",userRouter)
 app.use("/",authRouter)
+app.use("/",jobRouter)
 
 
 app.use(errorHandler)

@@ -33,26 +33,26 @@ export const signup = async (req, res, next) => {
 };
 
 export const login = async (req, res, next) => {
-  let user = req.body;
+  let loguser = req.body;
 
   try {
-    if (!user.email) return next(new Error("provide Email"));
-    if (!user.password) return next(new Error("provide Password"));
+    if (!loguser.email) return next(new Error("provide Email"));
+    if (!loguser.password) return next(new Error("provide Password"));
 
-    let dbuser = await userModel.findOne({ email: user.email });
+    let user = await userModel.findOne({ email: loguser.email });
 
-    if (dbuser === null) return next(new Error("Invalid User"));
+    if (user === null) return next(new Error("Invalid User"));
 
-    let logpassword = await bcrypt.compare(user.password, dbuser.password);
+    let logpassword = await bcrypt.compare(loguser.password, user.password);
 
     if (!logpassword) return next(new Error("Invalid Password"));
 
     let jwt_key = jwt.sign(
       {
-        id: dbuser._id,
-        username: dbuser.username,
-        email: dbuser.email,
-        role: dbuser.roles,
+        id: user._id,
+        username: user.username,
+        email: user.email,
+        role: user.roles,
       },
       process.env.TOKEN,
       { expiresIn: "2h" }
@@ -60,7 +60,8 @@ export const login = async (req, res, next) => {
 
     res.cookie("auth", jwt_key, { maxAge: 90000, httpOnly: true }).json({
       token: jwt_key,
-      message: "logIn successfully",
+      user,
+     success:true
     });
   } catch (error) {
     next(error);

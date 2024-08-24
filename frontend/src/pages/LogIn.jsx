@@ -1,11 +1,17 @@
 import { useFormik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import * as yup from "yup";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useLoginUserMutation } from "../../Redux/Feature/auth/auth.api";
+import { useDispatch } from "react-redux";
+import {setUserInfo} from '../../Redux/Feature/auth/auth.slice.js'
 
 const LogIn = () => {
-
-  const { handleChange, handleSubmit, handleBlur, touched, values, errors } =
+  const [loginUser,{data,isLoading,error}] = useLoginUserMutation()
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const [apimsg, setApimsg] = useState("");
+  const { handleChange, handleSubmit,handleReset, handleBlur, touched, values, errors } =
     useFormik({
       initialValues: {
         email: "",
@@ -15,8 +21,15 @@ const LogIn = () => {
         email: yup.string().required("Reqiured"),
         password: yup.string().required("Required"),
       }),
-      onSubmit: (v) => {
-        console.log(v);
+      onSubmit: async (v) => {
+        let user = await loginUser(v).unwrap()
+        if (user && user.success == true) {
+          dispatch(setUserInfo(user))
+          navigate("/")
+        } else {
+          setApimsg(user);
+        }
+        handleReset()
       },
     });
 
@@ -43,7 +56,16 @@ const LogIn = () => {
             </div>
 
             <h3 class="card-title text-center">Sign In</h3>
-
+            {apimsg && (
+          <div
+            class={`alert alert-${
+              apimsg && apimsg.success ? "success" : "danger"
+            }`}
+            role="alert"
+          >
+            {apimsg && apimsg.message}
+          </div>
+        )}
             <form onSubmit={handleSubmit}>
               <div class="form-group">
                 <label for="email">Email</label>

@@ -3,7 +3,7 @@ export const authApi = createApi({
     reducerPath:"authApi",
     baseQuery: fetchBaseQuery({
         baseUrl:"http://localhost:8000/auth",
-        // credentials:'include'
+        credentials:'include'
     }),
     endpoints: (builder)=>({
         registerUser: builder.mutation({
@@ -18,7 +18,7 @@ export const authApi = createApi({
             query: (data)=>({
                 url:"/login",
                 method:"POST",
-                body:data
+                body:data,
             })
         }),
 
