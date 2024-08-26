@@ -16,7 +16,8 @@ export const signup = async (req, res, next) => {
 
     if (uploadResult) {
       user.avatar = uploadResult.secure_url;
-
+      console.log(user.avatar);
+      
       let userPassword = user.password;
       user.password = await bcrypt.hash(userPassword, 10);
 
@@ -59,8 +60,8 @@ export const login = async (req, res, next) => {
     );
 
     res.cookie("auth", jwt_key, { maxAge: 90000, httpOnly: true }).json({
+      success:true,
       user,
-     success:true
     });
   } catch (error) {
     next(error);
@@ -69,7 +70,7 @@ export const login = async (req, res, next) => {
 
 export const logout = (req, res, next) => {
   try {
-    res.cookie("auth", null, { maxAge: Date.now() }).json({
+    res.cookie("auth", null, { expiresIn: new Date(Date.now()) }).json({//new Date(Date.now())
       message: "logout successfully",
     });
   } catch (error) {

@@ -26,7 +26,6 @@ const LogIn = () => {
         
         if (user && user.success == true) {
           dispatch(setUserInfo(user))
-          console.log(user);
           navigate("/")
         } else {
           setApimsg(user);

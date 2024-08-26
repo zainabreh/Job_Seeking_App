@@ -1,198 +1,102 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
-import BusinessCenterRoundedIcon from '@mui/icons-material/BusinessCenterRounded';
-import { Link } from 'react-router-dom';
-import { useGetProfileQuery } from '../../Redux/Feature/auth/auth.api';
-import { useDispatch } from 'react-redux';
-import { setUserInfo } from '../../Redux/Feature/auth/auth.slice';
+import React from "react";
+import { Link } from "react-router-dom";
+import { useGetProfileQuery, useLogoutUserMutation } from "../../Redux/Feature/auth/auth.api";
+import { useDispatch, useSelector } from "react-redux";
+import { clearUserInfo, setUserInfo } from "../../Redux/Feature/auth/auth.slice";
 
-const pages = ['Home'];
-const settings = [ 'Dashboard', 'Logout'];
+const Navbar = () => {
+  const [logoutUser] = useLogoutUserMutation()
+  const {data} = useGetProfileQuery()
+  console.log("useGetProfileQuery",data);
 
-function Navbar() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+
   const dispatch = useDispatch()
-
-  const {data,isFatching,isLoading} = useGetProfileQuery()
-
-  React.useEffect(() => {
-    if (data) {
-      console.log(data);
-      dispatch(setUserInfo(data));
-    }
-  }, [data]);;
   
+  dispatch(setUserInfo(data))
+
+
   
+  const {user,isAuthenticated} = useSelector(v=>v.auth)
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
+console.log(user);
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-
-  return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <BusinessCenterRoundedIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            Jobs
-          </Typography>
-
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Link to={"/"}><Typography textAlign="center">{page}</Typography></Link>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            LOGO
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-             <Link to={"/"}>
-               <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
-             </Link>
-            ))}
-          </Box>
-
-          {/* <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } ,textAlign:"end"}}>
-          <Link to={"/"}>
-               <Button
-                // key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block',fontWeight:"700",fontSize:"15px", "&:hover": {
-                  color: "#64b5f6"
-                } }}
-              >
-                logIn
-              </Button>
-             </Link>
-          </Box> */}
-
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Link to={"/userdashboard"} >
-                  <Typography textAlign="center">{setting}</Typography>
-                  </Link>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-        </Toolbar>
-      </Container>
-    </AppBar>
-  );
+const handleLogOut = async ()=>{
+  await logoutUser()
+  dispatch(clearUserInfo())
 }
-export default Navbar;
 
+  
+  return (
+    <>
+      <nav class="navbar bg-primary" data-bs-theme="dark">
+        <div class="container-fluid">
+          <Link to={'/'}><div
+            class="logo"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              paddingTop: "12px",
+            }}
+          >
+            <i
+              class="fa-solid fa-briefcase"
+              style={{ fontSize: "20px", color: "white" }}
+            ></i>
+            &nbsp;&nbsp;
+            <span
+              style={{
+                fontSize: "25px",
+                fontWeight: "600",
+                color: "white",
+              }}
+            >
+              Jobs
+            </span>
+          </div></Link>
+          {
+            isAuthenticated ?
+             <div class="btn-group dropstart">
+              <button
+                class="btn  dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                style={{ outline: "none", border: "none", color: "white" }}
+              >
+                {/* Hi, {user.user.firstname}  {user.user.lastname} */}
+              </button>
+              <ul
+                class="dropdown-menu dropdown-menu-dark"
+                style={{ width: "20px" }}
+              >
+                <li>
+                  <a class="dropdown-item" href="#">
+                    Dashboard
+                  </a>
+                </li>
+                <li>
+                  <hr class="dropdown-divider" />
+                </li>
+                <li>
+                  <button class="dropdown-item" onClick={handleLogOut}>
+                    LogOut
+                  </button>
+                </li>
+              </ul>
+            </div> 
+            : 
+          <div>
+            <Link to={"/login"}>
+              <h5 style={{ fontWeight: "600", color: "white" }}>LogIn</h5>
+            </Link>
+          </div>
+          }
+          
+        </div>
+      </nav>
+    </>
+  );
+};
+
+export default Navbar;
