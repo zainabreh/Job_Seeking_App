@@ -1,31 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useGetProfileQuery, useLogoutUserMutation } from "../../Redux/Feature/auth/auth.api";
 import { useDispatch, useSelector } from "react-redux";
 import { clearUserInfo, setUserInfo } from "../../Redux/Feature/auth/auth.slice";
 
 const Navbar = () => {
-  const [logoutUser] = useLogoutUserMutation()
-  const {data} = useGetProfileQuery()
-  console.log("useGetProfileQuery",data);
-
 
   const dispatch = useDispatch()
-  
-  dispatch(setUserInfo(data))
+  const [logoutUser] = useLogoutUserMutation()
+  const { data, error, isLoading } = useGetProfileQuery();
 
+  console.log("Data Header",data);
 
-  
-  const {user,isAuthenticated} = useSelector(v=>v.auth)
+  const {user,isAuthenticated} = useSelector((v)=>v.auth)
 
-console.log(user);
 
 const handleLogOut = async ()=>{
   await logoutUser()
-  dispatch(clearUserInfo())
+  dispatch(clearUserInfo({
+    user: null,
+    isAuthenticated: false
+}))
 }
 
-  
+
   return (
     <>
       <nav class="navbar bg-primary" data-bs-theme="dark">
@@ -64,7 +62,7 @@ const handleLogOut = async ()=>{
                 aria-expanded="false"
                 style={{ outline: "none", border: "none", color: "white" }}
               >
-                {/* Hi, {user.user.firstname}  {user.user.lastname} */}
+                Hi, {user.user.firstname}  {user.user.lastname}
               </button>
               <ul
                 class="dropdown-menu dropdown-menu-dark"

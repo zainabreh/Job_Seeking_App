@@ -22,15 +22,9 @@ const LogIn = () => {
         password: yup.string().required("Required"),
       }),
       onSubmit: async (v) => {
-        let user = await loginUser(v).unwrap()
-        
-        if (user && user.success == true) {
-          dispatch(setUserInfo(user))
-          navigate("/")
-        } else {
-          setApimsg(user);
-        }
+        await loginUser(v)
         handleReset()
+        navigate('/')
       },
     });
 
