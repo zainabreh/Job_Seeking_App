@@ -17,7 +17,7 @@ const Navbar = () => {
 
 const handleLogOut = async ()=>{
   await logoutUser()
-  dispatch(clearUserInfo({
+  dispatch(setUserInfo({
     user: null,
     isAuthenticated: false
 }))
@@ -69,18 +69,20 @@ const handleLogOut = async ()=>{
                 style={{ width: "20px" }}
               >
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <Link to={'userdashboard'} class="dropdown-item">
                     Dashboard
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <hr class="dropdown-divider" />
                 </li>
+                <Link to={'/'}>
                 <li>
                   <button class="dropdown-item" onClick={handleLogOut}>
                     LogOut
                   </button>
                 </li>
+                </Link>
               </ul>
             </div> 
             : 

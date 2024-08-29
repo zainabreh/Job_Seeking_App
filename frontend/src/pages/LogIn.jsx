@@ -22,7 +22,8 @@ const LogIn = () => {
         password: yup.string().required("Required"),
       }),
       onSubmit: async (v) => {
-        await loginUser(v)
+        const userdata = await loginUser(v)
+        dispatch(setUserInfo(userdata))
         handleReset()
         navigate('/')
       },

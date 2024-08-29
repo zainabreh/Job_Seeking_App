@@ -30,7 +30,10 @@ export const authApi = createApi({
                     dispatch(authApi.endpoints.getProfile.initiate(null))
                     
                 } catch (error) {
-                    dispatch(clearUserInfo)
+                    dispatch(clearUserInfo({
+                        user: null,
+                        isAuthenticated: false
+                    }))
                 }
             }
         }),
