@@ -30,7 +30,7 @@ const Signup = () => {
       username: "",
       email: "",
       phoneNumber: "",
-      roles: "",
+      roles: "user",
       password: "",
       cpassword: "",
       gender: "",
@@ -193,7 +193,7 @@ const Signup = () => {
                 )}
               </div>
 
-              <div class="col-md-6">
+              {/* <div class="col-md-6">
                 <select
                   id="inputState"
                   class="form-select"
@@ -213,7 +213,7 @@ const Signup = () => {
                 ) : (
                   ""
                 )}
-              </div>
+              </div> */}
 
               <div class="col-md-6">
                 <select

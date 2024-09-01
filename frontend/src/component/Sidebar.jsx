@@ -11,15 +11,25 @@ const Sidebar = () => {
     <div>
     <i class="fa-solid fa-user" style={{fontSize:"60px",textAlign:"center",marginInline:"10px",marginBlock:"10px"
     }}></i>
-    <p class="nav-list" aria-current="page">Username</p>
+    <p class="nav-list" aria-current="page">UserName</p>
 
     </div>
   </li> */}
+
+  {/* <li class="nav-item">
+    <div>
+    <i class="fa-solid fa-user" style={{fontSize:"60px",textAlign:"center",marginInline:"10px",marginBlock:"10px"
+    }}></i>
+    <p class="nav-list" aria-current="page">RecuiterName</p>
+
+    </div>
+  </li> */}
+
   <li class="nav-item">
     <div>
     <i class="fa-solid fa-user" style={{fontSize:"60px",textAlign:"center",marginInline:"10px",marginBlock:"10px"
     }}></i>
-    <p class="nav-list" aria-current="page">Recuitername</p>
+    <p class="nav-list" aria-current="page">AdminName</p>
 
     </div>
   </li>

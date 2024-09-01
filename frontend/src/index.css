@@ -230,7 +230,40 @@ form {
  
 }
 
-
+.info-card {
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column; /* Display text in flex column */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 1.2rem; /* Decreased font size */
+  font-weight: normal; /* Decreased font weight */
+}
+.info-card span {
+  display: block;
+  font-size: 2rem; /* Decreased font size */
+}
+.bg-blue {
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+}
+.bg-cyan {
+  background: linear-gradient(135deg, #00c6ff 0%, #f8f806 100%);
+}
+.bg-green {
+  background: linear-gradient(135deg, #00b09b 0%, #96c93d 100%);
+}
+.bg-purple {
+  background: linear-gradient(135deg, #7f00ff 0%, #e100ff 100%);
+}
+.bg-red {
+  background: linear-gradient(135deg, #e8e33e 0%, #ff4b2b 100%);
+}
+.info-section {
+  margin-bottom: 20px;
+}
 
 
 
