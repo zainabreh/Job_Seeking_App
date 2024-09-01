@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const RecuiterProfileCard = () => {
+const AdminProfileCard = () => {
   return (
     <>
       <div className="Usercontainer" style={{ marginBlock: "80px" }}>
@@ -15,7 +15,7 @@ const RecuiterProfileCard = () => {
                 >
                   <span style={{textDecoration: "underline",
                     textDecorationColor: "white",
-                    textDecorationThickness: "3px",}}>Rec</span>uiter Information
+                    textDecorationThickness: "3px",}}>Ad</span>min Information
                 </h5>
                 <table
                   className="table table-borderless review_table"
@@ -25,7 +25,7 @@ const RecuiterProfileCard = () => {
                   <tbody>
                     <tr>
                       <td scope="col" style={{ fontWeight: "600" }}>
-                        Recuitername:
+                        AdminName:
                       </td>
                       <td style={{fontWeight:"600"}}>John</td>
                     </tr>
@@ -33,7 +33,7 @@ const RecuiterProfileCard = () => {
                       <td scope="col" style={{ fontWeight: "600"}}>
                         Role:
                       </td>
-                      <td style={{fontWeight:"600"}}>recuiter</td>
+                      <td style={{fontWeight:"600"}}>admin</td>
                     </tr>
                     <tr>
                       <td scope="col" style={{ fontWeight: "600"}}>
@@ -62,7 +62,7 @@ const RecuiterProfileCard = () => {
                     </tr>
                   </tbody>
                 </table>
-               <Link to={"/recuiterupdateprofile"}> <p className="edite" style={{textAlign:"justify",fontSize:"20px",fontWeight:"bolder", padding:"20px"}}><i className="fa-solid fa-pen-to-square"></i> Edit</p></Link>
+               <Link to={"/adminupdateprofile"}> <p className="edite" style={{textAlign:"justify",fontSize:"20px",fontWeight:"bolder", padding:"20px"}}><i className="fa-solid fa-pen-to-square"></i> Edit</p></Link>
               </div>
             </div>
           </div>
@@ -72,4 +72,4 @@ const RecuiterProfileCard = () => {
   );
 };
 
-export default RecuiterProfileCard;
+export default AdminProfileCard;

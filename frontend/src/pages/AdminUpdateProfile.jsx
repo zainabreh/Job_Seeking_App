@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Recuiterupdaterofile = () => {
+const AdminUpdateProfile = () => {
   return (
     <>
       <div className="container" style={{margin:"40px",color:"white"}}>
@@ -34,7 +34,7 @@ const Recuiterupdaterofile = () => {
           </div>
           
           <div className="col-12" style={{textAlign:"center",marginTop:"40px"}}>
-            <Link to={"/usepProfileCard"}><button type="submit" className="btn" style={{fontSize:"16.5px",backgroundColor:"white"}}>
+            <Link to={"/adminprofilecard"}><button type="submit" className="btn" style={{fontSize:"16.5px",backgroundColor:"white"}}>
              Update Profile
             </button>
             </Link>
@@ -45,5 +45,5 @@ const Recuiterupdaterofile = () => {
   );
 };
 
-export default Recuiterupdaterofile;
+export default AdminUpdateProfile;
 

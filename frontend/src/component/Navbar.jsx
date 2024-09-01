@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useGetProfileQuery, useLogoutUserMutation } from "../../Redux/Feature/auth/auth.api";
+import { useGetProfileQuery, useLogoutUserMutation } from "../../Redux/auth/auth.api";
 import { useDispatch, useSelector } from "react-redux";
-import { clearUserInfo, setUserInfo } from "../../Redux/Feature/auth/auth.slice";
+import { clearUserInfo, setUserInfo } from "../../Redux/Feature/auth.slice";
 
 const Navbar = () => {
 
@@ -62,7 +62,7 @@ const handleLogOut = async ()=>{
                 aria-expanded="false"
                 style={{ outline: "none", border: "none", color: "white" }}
               >
-                Hi, {user.user.firstname}  {user.user.lastname}
+                {/* Hi, {user.user.firstname}  {user.user.lastname} */}
               </button>
               <ul
                 class="dropdown-menu dropdown-menu-dark"

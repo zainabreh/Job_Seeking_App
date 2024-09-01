@@ -1,5 +1,5 @@
 import {createApi,fetchBaseQuery} from '@reduxjs/toolkit/query/react'
-import { clearUserInfo, setUserInfo } from './auth.slice';
+import { clearUserInfo, setUserInfo } from '../Feature/auth.slice';
 export const authApi = createApi({
     reducerPath:"authApi",
     baseQuery: fetchBaseQuery({

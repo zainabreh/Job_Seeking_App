@@ -24,15 +24,7 @@ const Userupdateprofile = () => {
               placeholder="abc"
             />
           </div>
-          <div class="col-md-6">
-    <label for="inputState" class="form-label">Roles</label>
-    <select id="inputState" class="form-select">
-      <option selected>Choose...</option>
-      <option>User</option>
-      <option>Recuiter</option>
-      <option>Admin</option>
-    </select>
-  </div>
+         
          
           <div className="col-md-6">
             <label for="inputGender" className="form-label">

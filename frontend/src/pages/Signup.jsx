@@ -2,11 +2,11 @@ import { useFormik } from "formik";
 import React, { useState } from "react";
 import * as yup from "yup";
 import { Link } from "react-router-dom";
-import { useRegisterUserMutation } from "../../Redux/Feature/auth/auth.api.js";
+import { useRegisterUserMutation } from "../../Redux/auth/auth.api.js";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/ReactToastify.css";
 import { useDispatch } from "react-redux";
-import { setUserInfo } from "../../Redux/Feature/auth/auth.slice.js";
+import { setUserInfo } from "../../Redux/Feature/auth.slice.js";
 
 const Signup = () => {
   const [preview, setPreview] = useState(undefined);

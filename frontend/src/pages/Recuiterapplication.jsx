@@ -78,9 +78,9 @@ export default function Recuiterapplication() {
                 <TableCell align="left">{row.company}</TableCell>
                 <TableCell align="left">{row.status}</TableCell>
                 <TableCell align="left">
-                <i class="fa-regular fa-eye" style={{fontSize:"20px",padding:"5px",cursor:"pointer",color:"blue"}}></i>
-                <i class="fa-solid fa-pen-to-square" style={{fontSize:"20px",padding:"5px",cursor:"pointer",color:"green"}}></i>
-                <i class="fa-solid fa-trash" style={{fontSize:"20px",padding:"5px",cursor:"pointer",color:"red"}}></i>
+                <span class="badge text-bg-success">Accept</span>
+                <span class="badge text-bg-danger" style={{marginInline:"5px"}}>Reject</span>
+                <span class="badge text-bg-warning text-white">Pending</span>
                 </TableCell>
               </TableRow>
             ))}

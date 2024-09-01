@@ -2,9 +2,9 @@ import { useFormik } from "formik";
 import React, { useState } from "react";
 import * as yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
-import { useLoginUserMutation } from "../../Redux/Feature/auth/auth.api";
+import { useLoginUserMutation } from "../../Redux/auth/auth.api";
 import { useDispatch } from "react-redux";
-import {setUserInfo} from '../../Redux/Feature/auth/auth.slice.js'
+import { setUserInfo } from "../../Redux/Feature/auth.slice";
 
 const LogIn = () => {
   const [loginUser,{data,isLoading,error}] = useLoginUserMutation()

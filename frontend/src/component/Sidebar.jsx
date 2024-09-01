@@ -35,7 +35,7 @@ const Sidebar = () => {
   </div>
   </Link>
   </li>
-  {/* <li class="nav-item">
+  <li class="nav-item">
   <Link to={"/recuiterProfileCard"}>
   <div style={{display:"flex",alignItems:"center",gap:"10px",cursor:"pointer",color:"white"
   }}>
@@ -44,9 +44,9 @@ const Sidebar = () => {
     <p class="nav-list" style={{margin:"5px",fontWeight:"700",color:"white"}}>Profile</p>
   </div>
   </Link>
-  </li> */}
+  </li>
   
-  {/* <li class="nav-item">
+  <li class="nav-item">
   <Link to={"/userapplication"}>
   <div style={{display:"flex",alignItems:"center",gap:"10px",cursor:"pointer",color:"white"
   }}>
@@ -55,7 +55,7 @@ const Sidebar = () => {
     <p class="nav-list" style={{margin:"5px",fontWeight:"700",color:"white"}}>Applications</p>
   </div>
   </Link>
-  </li> */}
+  </li>
   <li class="nav-item">
   <Link to={"/recuiterapplication"}>
   <div style={{display:"flex",alignItems:"center",gap:"10px",cursor:"pointer",color:"white"
@@ -90,6 +90,43 @@ const Sidebar = () => {
   </Link>
   </li>
 
+
+
+  <li class="nav-item">
+  <Link to={"/manageUsers"}>
+  <div style={{display:"flex",alignItems:"center",gap:"10px",cursor:"pointer",color:"white"
+  }}>
+  <i class="fa-solid fa-user-gear" style={{fontSize:"20px"}}></i>
+    <p class="nav-list" style={{margin:"5px",fontWeight:"700",color:"white"}}>Manage Users</p>
+  </div>
+  </Link>
+  </li>
+
+
+
+
+  <li class="nav-item">
+  <Link to={"/adminprofilecard"}>
+  <div style={{display:"flex",alignItems:"center",gap:"10px",cursor:"pointer",color:"white"
+  }}>
+
+  <i class="fa-regular fa-user" style={{fontSize:"20px"}}></i>
+    <p class="nav-list" style={{margin:"5px",fontWeight:"700",color:"white"}}>Profile</p>
+  </div>
+  </Link>
+  </li>
+
+
+  <li class="nav-item">
+  <Link to={"/admin"}>
+  <div style={{display:"flex",alignItems:"center",gap:"10px",cursor:"pointer",color:"white"
+  }}>
+
+  <i class="fa-regular fa-user" style={{fontSize:"20px"}}></i>
+    <p class="nav-list" style={{margin:"5px",fontWeight:"700",color:"white"}}>Admin</p>
+  </div>
+  </Link>
+  </li>
 
   
 </ul>
