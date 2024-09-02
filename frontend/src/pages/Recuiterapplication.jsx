@@ -78,9 +78,9 @@ export default function Recuiterapplication() {
                 <TableCell align="left">{row.company}</TableCell>
                 <TableCell align="left">{row.status}</TableCell>
                 <TableCell align="left">
-                <span class="badge text-bg-success">Accept</span>
-                <span class="badge text-bg-danger" style={{marginInline:"5px"}}>Reject</span>
-                <span class="badge text-bg-warning text-white">Pending</span>
+                <span className="badge text-bg-success">Accept</span>
+                <span className="badge text-bg-danger" style={{marginInline:"5px"}}>Reject</span>
+                <span className="badge text-bg-warning text-white">Pending</span>
                 </TableCell>
               </TableRow>
             ))}

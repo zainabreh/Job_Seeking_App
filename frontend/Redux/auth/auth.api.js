@@ -1,83 +1,75 @@
-import {createApi,fetchBaseQuery} from '@reduxjs/toolkit/query/react'
-import { clearUserInfo, setUserInfo } from '../Feature/auth.slice';
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { clearUserInfo, setIsAuthenticated, setUserInfo } from "../Feature/auth.slice";
 export const authApi = createApi({
-    reducerPath:"authApi",
-    baseQuery: fetchBaseQuery({
-        baseUrl:"http://localhost:8000",
-        credentials:'include',
-        mode: 'cors'
+  reducerPath: "authApi",
+  baseQuery: fetchBaseQuery({
+    baseUrl: "http://localhost:8000",
+    credentials: "include",
+    mode: "cors",
+  }),
+  endpoints: (builder) => ({
+    registerUser: builder.mutation({
+      query: (data) => ({
+        url: "/auth/signup",
+        method: "POST",
+        body: data,
+      }),
     }),
-    endpoints: (builder)=>({
-        registerUser: builder.mutation({
-            query: (data)=>({
-                url:"/auth/signup",
-                method:'POST',
-                body: data,
-            })
-        }),
 
-        loginUser:  builder.mutation({
-            query: (data)=>({
-                url:"/auth/login",
-                method:"POST",
-                body:data,
-            }),
-            async onQueryStarted(args,{dispatch,queryFulfilled}){
-                try {
-                    await queryFulfilled
-                    console.log("inside query login");
-
-                    dispatch(authApi.endpoints.getProfile.initiate(null))
-                    
-                } catch (error) {
-                    dispatch(clearUserInfo({
-                        user: null,
-                        isAuthenticated: false
-                    }))
-                }
-            }
-        }),
-
-        getProfile:  builder.query({
-            query: ()=>"getUserProfile",
-            async onQueryStarted(args,{dispatch,queryFulfilled}){
-                try {
-                    console.log("inside get profile api");
-                    
-                    const {data} = await queryFulfilled
-                    console.log("get profile api data",data);
-
-                    if(data.success === false){
-                        dispatch(clearUserInfo({
-                            user: null,
-                            isAuthenticated: false
-                        }))
-                    }
-                    
-                    dispatch(setUserInfo({
-                        user: data,
-                        isAuthenticated: true
-                    }))
-
-
-                } catch (error) {
-                    dispatch(clearUserInfo({
-                        user: null,
-                        isAuthenticated: false
-                    }))
-                }
-            }
-        }),
-
-        logoutUser: builder.mutation({
-            query: ()=>({
-                url:"/auth/logout",
-                method:"POST",
-            })
-
-        })
-
+    loginUser: builder.mutation({
+      query: (data) => ({
+        url: "/auth/login",
+        method: "POST",
+        body: data,
+      }),
+      async onQueryStarted(arg,{dispatch,queryFulfilled}){
+        try {
+            await queryFulfilled
+            dispatch(authApi.endpoints.getprofile.initiate(null))
+        } catch (error) {
+            console.log("qqqqqqqqqqqqqqqqqqqqq");
+            
+        }
+      }
+    }),
+    getprofile: builder.query({
+      query: ()=> 'getUserProfile',
+      async onQueryStarted(arg,{dispatch,queryFulfilled}){
+          try {
+              const {data} = await queryFulfilled
+              if(!data.success){
+                dispatch(setIsAuthenticated(false))
+                return
+              }
+              dispatch(setUserInfo(data))
+              dispatch(setIsAuthenticated(true))
+              
+          } catch (error) {
+            dispatch(setUserInfo(''))
+            dispatch(setIsAuthenticated(false))
+          }
+      }
+    }),
+    logoutUser: builder.query({
+      query: ()=>'/auth/logout',
+      async onQueryStarted(arg,{dispatch,queryFulfilled}){
+          try {
+              await queryFulfilled;
+              dispatch(setUserInfo(''))
+              dispatch(setIsAuthenticated(false))
+          } catch (error) {
+            dispatch(setUserInfo(''))
+            dispatch(setIsAuthenticated(false))
+          }
+      }
     })
-})
+  }),
 
-export const {useRegisterUserMutation,useLoginUserMutation,useLogoutUserMutation,useGetProfileQuery} = authApi
+});
+
+export const {
+  useRegisterUserMutation,
+  useLoginUserMutation,
+  useLazyLogoutUserQuery,
+  useGetprofileQuery,
+} = authApi;

@@ -36,7 +36,7 @@ const card = (
   <React.Fragment>
     <CardContent>
       <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-      <i class="fa-solid fa-location-dot"></i>  Islamabad
+      <i className="fa-solid fa-location-dot"></i>  Islamabad
       </Typography>
       <Typography variant="h5" component="div">
         {/* be{bull}nev{bull}o{bull}lent */}

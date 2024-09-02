@@ -1,35 +1,26 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useGetProfileQuery, useLogoutUserMutation } from "../../Redux/auth/auth.api";
-import { useDispatch, useSelector } from "react-redux";
-import { clearUserInfo, setUserInfo } from "../../Redux/Feature/auth.slice";
+import { useGetprofileQuery, useLazyLogoutUserQuery } from "../../Redux/auth/auth.api";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
 
-  const dispatch = useDispatch()
-  const [logoutUser] = useLogoutUserMutation()
-  const { data, error, isLoading } = useGetProfileQuery();
-
-  console.log("Data Header",data);
-
+  const {isLoading} = useGetprofileQuery()
   const {user,isAuthenticated} = useSelector((v)=>v.auth)
-
+  
+  const [logoutUser,{data}] = useLazyLogoutUserQuery()
 
 const handleLogOut = async ()=>{
   await logoutUser()
-  dispatch(setUserInfo({
-    user: null,
-    isAuthenticated: false
-}))
 }
 
 
   return (
     <>
-      <nav class="navbar bg-primary" data-bs-theme="dark">
-        <div class="container-fluid">
+      <nav className="navbar bg-primary" data-bs-theme="dark">
+        <div className="container-fluid">
           <Link to={'/'}><div
-            class="logo"
+            className="logo"
             style={{
               display: "flex",
               alignItems: "center",
@@ -38,7 +29,7 @@ const handleLogOut = async ()=>{
             }}
           >
             <i
-              class="fa-solid fa-briefcase"
+              className="fa-solid fa-briefcase"
               style={{ fontSize: "20px", color: "white" }}
             ></i>
             &nbsp;&nbsp;
@@ -54,31 +45,31 @@ const handleLogOut = async ()=>{
           </div></Link>
           {
             isAuthenticated ?
-             <div class="btn-group dropstart">
+             <div className="btn-group dropstart">
               <button
-                class="btn  dropdown-toggle"
+                className="btn  dropdown-toggle"
                 type="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
                 style={{ outline: "none", border: "none", color: "white" }}
               >
-                {/* Hi, {user.user.firstname}  {user.user.lastname} */}
+                 Hi, {user?.user?.firstname}  {user?.user?.lastname} 
               </button>
               <ul
-                class="dropdown-menu dropdown-menu-dark"
+                className="dropdown-menu dropdown-menu-dark"
                 style={{ width: "20px" }}
               >
                 <li>
-                  <Link to={'userdashboard'} class="dropdown-item">
+                  <Link to={'userdashboard'} className="dropdown-item">
                     Dashboard
                   </Link>
                 </li>
                 <li>
-                  <hr class="dropdown-divider" />
+                  <hr className="dropdown-divider" />
                 </li>
                 <Link to={'/'}>
                 <li>
-                  <button class="dropdown-item" onClick={handleLogOut}>
+                  <button className="dropdown-item" onClick={handleLogOut}>
                     LogOut
                   </button>
                 </li>

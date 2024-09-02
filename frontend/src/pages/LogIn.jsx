@@ -4,7 +4,6 @@ import * as yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
 import { useLoginUserMutation } from "../../Redux/auth/auth.api";
 import { useDispatch } from "react-redux";
-import { setUserInfo } from "../../Redux/Feature/auth.slice";
 
 const LogIn = () => {
   const [loginUser,{data,isLoading,error}] = useLoginUserMutation()
@@ -22,8 +21,7 @@ const LogIn = () => {
         password: yup.string().required("Required"),
       }),
       onSubmit: async (v) => {
-        const userdata = await loginUser(v)
-        dispatch(setUserInfo(userdata))
+        await loginUser(v)
         handleReset()
         navigate('/')
       },
@@ -31,12 +29,12 @@ const LogIn = () => {
 
   return (
     <>
-      <div class="container" style={{ width: "400px", padding: "20px" }}>
-        <div class="card">
-          <div class="card-body">
-            <div class="logo">
+      <div className="container" style={{ width: "400px", padding: "20px" }}>
+        <div className="card">
+          <div className="card-body">
+            <div className="logo">
               <i
-                class="fa-solid fa-briefcase"
+                className="fa-solid fa-briefcase"
                 style={{ fontSize: "30px", color: "#2962ff" }}
               ></i>
               &nbsp;&nbsp;
@@ -51,10 +49,10 @@ const LogIn = () => {
               </span>
             </div>
 
-            <h3 class="card-title text-center">Sign In</h3>
+            <h3 className="card-title text-center">Sign In</h3>
             {apimsg && (
           <div
-            class={`alert alert-${
+            className={`alert alert-${
               apimsg && apimsg.success ? "success" : "danger"
             }`}
             role="alert"
@@ -63,14 +61,14 @@ const LogIn = () => {
           </div>
         )}
             <form onSubmit={handleSubmit}>
-              <div class="form-group">
-                <label for="email">Email</label>
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
                 <input
                   type="email"
                   name="email"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  class="form-control"
+                  className="form-control"
                   id="email"
                   value={values.email}
                   placeholder="Email@example.com"
@@ -81,12 +79,12 @@ const LogIn = () => {
                   ""
                 )}
               </div>
-              <div class="form-group">
-                <label for="password">Password</label>
+              <div className="form-group">
+                <label htmlFor="password">Password</label>
                 <input
                   type="password"
                   name="password"
-                  class="form-control"
+                  className="form-control"
                   id="password"
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -100,11 +98,11 @@ const LogIn = () => {
                 )}
               </div>
 
-              <button type="submit" class="btn btn-primary btn-block">
+              <button type="submit" className="btn btn-primary btn-block">
                 LogIn
               </button>
             </form>
-            <div class="text-center">
+            <div className="text-center">
               <p>
                 Don't have an account?{" "}
                 <span style={{ cursor: "pointer", color: "#2962ff" }}>

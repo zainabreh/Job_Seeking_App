@@ -68,9 +68,9 @@ export default function ManageUsers() {
                   <TableCell align="left">{row.company}</TableCell>
                   <TableCell align="left">{row.status}</TableCell>
                   <TableCell align="left">
-                  <span class="badge text-white" style={{backgroundColor:"purple"}}>User</span>
-                <span class="badge text-white" style={{marginInline:"5px",backgroundColor:"orange"}}>Recuiter</span>
-                <span class="badge text-white" style={{backgroundColor:"blue"}}>Admin</span>
+                  <span className="badge text-white" style={{backgroundColor:"purple"}}>User</span>
+                <span className="badge text-white" style={{marginInline:"5px",backgroundColor:"orange"}}>Recuiter</span>
+                <span className="badge text-white" style={{backgroundColor:"blue"}}>Admin</span>
                   </TableCell>
                 </TableRow>
               ))}

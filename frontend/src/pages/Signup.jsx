@@ -91,13 +91,13 @@ const Signup = () => {
   return (
     <>
       <ToastContainer />
-      <div class="container" style={{ width: "800px", padding: "20px" }}>
+      <div className="container" style={{ width: "800px", padding: "20px" }}>
         
-        <div class="card">
-          <div class="card-body">
-            <div class="logo">
+        <div className="card">
+          <div className="card-body">
+            <div className="logo">
               <i
-                class="fa-solid fa-briefcase"
+                className="fa-solid fa-briefcase"
                 style={{ fontSize: "30px", color: "#2962ff" }}
               ></i>
               &nbsp;&nbsp;
@@ -112,10 +112,10 @@ const Signup = () => {
               </span>
             </div>
 
-            <h3 class="card-title text-center">Register</h3>
+            <h3 className="card-title text-center">Register</h3>
             {apimsg && (
           <div
-            class={`alert alert-${
+            className={`alert alert-${
               apimsg && apimsg.success ? "success" : "danger"
             }`}
             role="alert"
@@ -123,14 +123,14 @@ const Signup = () => {
             {apimsg && apimsg.message}
           </div>
         )}
-            <form onSubmit={handleSubmit} className="row g-3 mt-3">
-              <div class="form-group col-md-6">
+            <form onSubmit={handleSubmit} classNameName="row g-3 mt-3">
+              <div className="form-group col-md-6">
                 <input
                   type="text"
                   name="firstname"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  class="form-control"
+                  className="form-control"
                   id="firstname"
                   value={values.firstname}
                   placeholder="Enter First name"
@@ -141,13 +141,13 @@ const Signup = () => {
                   ""
                 )}
               </div>
-              <div class="form-group col-md-6">
+              <div className="form-group col-md-6">
                 <input
                   type="text"
                   name="lastname"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  class="form-control"
+                  className="form-control"
                   id="lastname"
                   value={values.lastname}
                   placeholder="Enter Last name"
@@ -158,13 +158,13 @@ const Signup = () => {
                   ""
                 )}
               </div>
-              <div class="form-group col-md-6">
+              <div className="form-group col-md-6">
                 <input
                   type="text"
                   name="username"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  class="form-control"
+                  className="form-control"
                   id="username"
                   value={values.username}
                   placeholder="Enter Username"
@@ -175,13 +175,13 @@ const Signup = () => {
                   ""
                 )}
               </div>
-              <div class="form-group col-md-6">
+              <div className="form-group col-md-6">
                 <input
                   type="email"
                   name="email"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  class="form-control"
+                  className="form-control"
                   id="email"
                   value={values.email}
                   placeholder="Email@example.com"
@@ -193,10 +193,10 @@ const Signup = () => {
                 )}
               </div>
 
-              {/* <div class="col-md-6">
+              {/* <div className="col-md-6">
                 <select
                   id="inputState"
-                  class="form-select"
+                  className="form-select"
                   type="text"
                   name="roles"
                   onChange={handleChange}
@@ -215,10 +215,10 @@ const Signup = () => {
                 )}
               </div> */}
 
-              <div class="col-md-6">
+              <div className="col-md-6">
                 <select
                   id="inputState"
-                  class="form-select"
+                  className="form-select"
                   type="text"
                   name="gender"
                   onChange={handleChange}
@@ -237,11 +237,11 @@ const Signup = () => {
                 )}
               </div>
 
-              <div class="form-group col-md-6">
+              <div className="form-group col-md-6">
                 <input
                   type="password"
                   name="password"
-                  class="form-control"
+                  className="form-control"
                   id="password"
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -254,14 +254,14 @@ const Signup = () => {
                   ""
                 )}
               </div>
-              <div class="form-group col-md-6">
+              <div className="form-group col-md-6">
                 <input
                   type="password"
                   name="cpassword"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.cpassword}
-                  class="form-control"
+                  className="form-control"
                   id="confirmPassword"
                   placeholder="Confirm Password"
                 />
@@ -272,14 +272,14 @@ const Signup = () => {
                 )}
               </div>
 
-              <div class="form-group col-md-6">
+              <div className="form-group col-md-6">
                 <input
                   type="text"
                   name="phoneNumber"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.phoneNumber}
-                  class="form-control"
+                  className="form-control"
                   id="phoneNumber"
                   placeholder="PhoneNumber"
                 />
@@ -290,37 +290,37 @@ const Signup = () => {
                 )}
               </div>
 
-              <div class="form-group col-md-6">
+              <div className="form-group col-md-6">
                 <input
-                  className="form-control pt-2 "
+                  classNameName="form-control pt-2 "
                   type="file"
                   name="avatar"
                   id="preview-reset"
                   onChange={(e) => handleImgChange(e)}
                 />
               </div>
-              <div class="text-center ">
+              <div className="text-center ">
                 <img
                   src={
                     preview
                       ? preview
                       : "https://www.w3schools.com/howto/img_avatar.png "
                   }
-                  class="rounded mx-auto mt-3"
+                  className="rounded mx-auto mt-3"
                   width={100}
                   alt="..."
                 />
               </div>
-              <div class="text-center ">
+              <div className="text-center ">
                 <button
                   type="submit"
-                  class="btn btn-primary col-md-3 text-center"
+                  className="btn btn-primary col-md-3 text-center"
                 >
                   Register
                 </button>
               </div>
             </form>
-            <div class="text-center">
+            <div className="text-center">
               <p>
                 Already have an account?{" "}
                 <span style={{ cursor: "pointer", color: "#2962ff" }}>
