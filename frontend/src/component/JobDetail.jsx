@@ -1,7 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const JobDetail = () => {
+  const {user,isAuthenticated} = useSelector(v=>v.auth)
+
   return (
     <>
       <div style={{width:"800px",color:"white",padding:"1px",backgroundColor:"#448aff",margin:"20px auto", borderRadius:"10px"}}>
@@ -61,16 +64,13 @@ const JobDetail = () => {
 
             <br />
 
-            <Link to={"/login"}><button type="button" className="btn" style={{marginBottom:"30px",backgroundColor:"white"}}>Apply</button></Link>
+            {
+              isAuthenticated && user?.user?.roles === 'user' ? <><Link to={"/apply"}><button type="button" className="btn" style={{marginBottom:"30px",backgroundColor:"white"}}>Apply</button></Link></> : <div class="alert alert-danger" role="alert" style={{marginBottom:"30px",}}>
+              LogIn or Register to apply for the Job
+            </div>
+            }
+            
 
-
-            {/* <h6 classNameName="mb-3" style={{ textDecoration: "underline", fontWeight: "500" }}>Upload Resume:</h6>
-            <div className="input-group row mb-3">
-                <div classNameName="col-md-8" style={{display:"flex"}}>
-              <input type="file" className="form-control" id="inputGroupFile02" />
-              <button type="button" className="btn"><i className="fa-solid fa-arrow-right" style={{fontSize:"30px",color:"white"}}></i></button>
-              </div>
-            </div> */}
           </div>
         </div>
       </div>

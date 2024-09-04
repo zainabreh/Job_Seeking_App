@@ -46,6 +46,7 @@ const handleLogOut = async ()=>{
           {
             isAuthenticated ?
              <div className="btn-group dropstart">
+               <img src={user?.user?.avatar} alt="" style={{width:"40px",height:"40px",borderRadius:"50%"}}/>
               <button
                 className="btn  dropdown-toggle"
                 type="button"

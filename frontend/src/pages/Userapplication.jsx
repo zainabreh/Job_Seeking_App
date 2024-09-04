@@ -56,6 +56,12 @@ export default function Userapplication() {
               >
                 Status
               </TableCell>
+              <TableCell
+                align="left"
+                sx={{ fontWeight: "700", fontSize: "15px" ,color:"white"}}
+              >
+                Actions
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -70,6 +76,10 @@ export default function Userapplication() {
                 <TableCell align="left">{row.position}</TableCell>
                 <TableCell align="left">{row.company}</TableCell>
                 <TableCell align="left">{row.status}</TableCell>
+                <TableCell align="left">
+                  <i className="fa-solid fa-pen-to-square" style={{fontSize:"20px",padding:"5px",cursor:"pointer",color:"green"}}></i>
+                  <i className="fa-solid fa-trash" style={{fontSize:"20px",padding:"5px",cursor:"pointer",color:"red"}}></i>
+                  </TableCell>
               </TableRow>
             ))}
           </TableBody>

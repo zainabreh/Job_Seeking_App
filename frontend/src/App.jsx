@@ -31,6 +31,7 @@ import UserLayout from "./layout/UserLayout";
 import RecuiterDashBoard from "./pages/RecuiterDashboard";
 import AdminDashBoard from "./pages/AdminDashboard";
 import { useSelector } from "react-redux";
+import JobApplicationForm from "./pages/JobApplicationForm";
 
 function App() {
 
@@ -54,6 +55,7 @@ const {user,isAuthenticated} = useSelector(v=>v.auth)
                 path="usepProfileCard"
                 element={<UsepProfileCard />}
               ></Route>
+              <Route path="apply" element={<JobApplicationForm/>}></Route>
               <Route
                 path="userupdateprofile"
                 element={<Userupdateprofile />}
