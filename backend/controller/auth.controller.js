@@ -42,7 +42,7 @@ export const login = async (req, res, next) => {
 
     let user = await userModel.findOne({ email: loguser.email });
 
-    if (user === null) return next(new Error("Invalid User"));
+    if (user === null) return next(new Error("Invalid Email"));
 
     let logpassword = await bcrypt.compare(loguser.password, user.password);
 
@@ -61,6 +61,7 @@ export const login = async (req, res, next) => {
 
     res.cookie("auth", jwt_key, { maxAge: 90000, httpOnly: true }).json({
       success:true,
+      message: "User LogIn",
       user,
     });
   } catch (error) {

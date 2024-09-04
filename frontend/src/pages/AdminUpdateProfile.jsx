@@ -34,7 +34,7 @@ const AdminUpdateProfile = () => {
           </div>
           
           <div className="col-12" style={{textAlign:"center",marginTop:"40px"}}>
-            <Link to={"/adminprofilecard"}><button type="submit" className="btn" style={{fontSize:"16.5px",backgroundColor:"white"}}>
+            <Link to={"/admin/adminprofilecard"}><button type="submit" className="btn" style={{fontSize:"16.5px",backgroundColor:"white"}}>
              Update Profile
             </button>
             </Link>

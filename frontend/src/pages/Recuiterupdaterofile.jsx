@@ -34,7 +34,7 @@ const Recuiterupdaterofile = () => {
           </div>
           
           <div className="col-12" style={{textAlign:"center",marginTop:"40px"}}>
-            <Link to={"/usepProfileCard"}><button type="submit" className="btn" style={{fontSize:"16.5px",backgroundColor:"white"}}>
+            <Link to={"/recuiter/recuiterProfileCard"}><button type="submit" className="btn" style={{fontSize:"16.5px",backgroundColor:"white"}}>
              Update Profile
             </button>
             </Link>

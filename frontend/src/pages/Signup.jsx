@@ -53,12 +53,9 @@ const Signup = () => {
     }),
     onSubmit: async (v) => {
       delete v.cpassword;
-      console.log(v);
 
       const user = await registerUser(v).unwrap();
-      dispatch(setUserInfo(user));
-      console.log(user);
-      
+      dispatch(setUserInfo(user));      
       // toast.success("User Registered Successfully");
 
       if (user) {
@@ -313,9 +310,9 @@ const Signup = () => {
               <div className="text-center ">
                 <button
                   type="submit"
-                  className="btn btn-primary col-md-3 text-center"
+                  className="btn btn-primary col-md-3 text-center" disabled={isLoading ? true : false}
                 >
-                  Register
+                  {isLoading ? 'isLoading....' : "Register"}
                 </button>
               </div>
             </form>

@@ -6,12 +6,12 @@ const userSchema = new Schema({
     firstname: {
         type: String,
         required: [true,'Provide First Name'],
-        minLength: [5,"First Name should have atleast 5 chars"],
+        minLength: [3,"First Name should have atleast 3 chars"],
     },
     lastname:{
         type: String,
         required: [true,'Provide First Name'],
-        minLength: [5,"Last Name should have atleast 5 chars"],
+        minLength: [3,"Last Name should have atleast 3 chars"],
     },
     username:{
         type: String,
@@ -25,6 +25,11 @@ const userSchema = new Schema({
     email:{
         type:String,
         required: [true,"Provide Email"],
+
+    },
+    gender:{
+        type:String,
+        required: [true,"Provide gender"],
 
     },
     phoneNumber:{

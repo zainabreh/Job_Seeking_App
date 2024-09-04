@@ -60,9 +60,16 @@ const handleLogOut = async ()=>{
                 style={{ width: "20px" }}
               >
                 <li>
-                  <Link to={'userdashboard'} className="dropdown-item">
+                  {
+                    user?.user?.roles === "admin" ? ( <Link to={'/admin/admindashboard'} className="dropdown-item">
+                      Dashboard
+                    </Link>) : (user?.user?.roles === "recuiter" ? (<Link to={'/recuiter/recuiterdashboard'} className="dropdown-item">
+                      Dashboard
+                    </Link>) : (<Link to={'userdashboard'} className="dropdown-item">
                     Dashboard
-                  </Link>
+                  </Link>))
+                  }
+                  
                 </li>
                 <li>
                   <hr className="dropdown-divider" />
@@ -77,11 +84,17 @@ const handleLogOut = async ()=>{
               </ul>
             </div> 
             : 
-          <div>
+          <>
+          <div style={{display:"flex",alignItems:"center",justifyContent:"center",marginInline:"20px"}}>
             <Link to={"/login"}>
-              <h5 style={{ fontWeight: "600", color: "white" }}>LogIn</h5>
+            <button className="btn custom-btn">LogIn</button>
             </Link>
+           <Link to={"/signup"}>
+           <button className="btn custom-btn" style={{marginInline:"10px"}}>SignUp</button>
+           </Link>
           </div>
+           
+          </>
           }
           
         </div>

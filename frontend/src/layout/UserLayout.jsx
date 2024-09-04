@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Navigate, Outlet } from 'react-router-dom'
 
-const AuthLayout = () => {
+const UserLayout = () => {
 const {isAuthenticated} = useSelector(v=>v.auth)
 
 if (!isAuthenticated) {
@@ -18,4 +18,4 @@ if (!isAuthenticated) {
   )
 }
 
-export default AuthLayout
+export default UserLayout

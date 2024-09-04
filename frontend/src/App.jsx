@@ -1,6 +1,7 @@
 import {
   createBrowserRouter,
   createRoutesFromElements,
+  Navigate,
   Route,
   RouterProvider,
 } from "react-router-dom";
@@ -24,38 +25,59 @@ import AdminProfileCard from "./pages/AdminProfileCard";
 import AdminUpdateProfile from "./pages/AdminUpdateProfile";
 import ManageUsers from "./pages/ManageUsers";
 import Admin from "./pages/Admin";
-import AuthLayout from "./layout/authLayout";
 import RecuiterLayout from "./layout/RecuiterLayout";
 import AdminLayout from "./layout/AdminLayout";
+import UserLayout from "./layout/UserLayout";
+import RecuiterDashBoard from "./pages/RecuiterDashboard";
+import AdminDashBoard from "./pages/AdminDashboard";
+import { useSelector } from "react-redux";
 
 function App() {
+
+const {user,isAuthenticated} = useSelector(v=>v.auth)
+
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<Layout />}>
         <Route path="/" element={<Home />}></Route>
-        <Route path="/login" element={<LogIn />}></Route>
-        <Route path="/signup" element={<Signup />}></Route>
+        <Route path="/login" element={isAuthenticated ? null : <LogIn />}></Route>
+        <Route path="/signup" element={isAuthenticated ? null : <Signup />}></Route>
         <Route path="/jobdetail" element={<JobDetail />}></Route>
 
-        <Route element={<AuthLayout />}>
+        <Route path="/" element={<UserLayout/>}>
+        
           <Route element={<Sidebarlayout />}>
             {/* user */}
-            <Route path="userdashboard" element={<UserDashBoard />}></Route>
-            <Route path="usepProfileCard" element={<UsepProfileCard />}></Route>
-            <Route
-              path="userupdateprofile"
-              element={<Userupdateprofile />}
-            ></Route>
-            <Route path="userapplication" element={<Userapplication />}></Route>
-
+            
+              <Route path="userdashboard" element={<UserDashBoard />}></Route>
+              <Route
+                path="usepProfileCard"
+                element={<UsepProfileCard />}
+              ></Route>
+              <Route
+                path="userupdateprofile"
+                element={<Userupdateprofile />}
+              ></Route>
+              <Route
+                path="userapplication"
+                element={<Userapplication />}
+              ></Route>
+            
             {/* Recuiter */}
 
             <Route
               path="/recuiter"
-              element={<RecuiterLayout />}
-              role={"recuiter"}
+              // element={ isAuthenticated && user?.roles === "recuiter" ? (<RecuiterLayout role={"recuiter"}/> ) : (<Navigate to={"/login"}/>)}
+
+              element={<RecuiterLayout role={"recuiter"}/>}
+              
             >
               <Route path="addjob" element={<Addjob />}></Route>
+              <Route
+                path="recuiterdashboard"
+                element={<RecuiterDashBoard />}
+              ></Route>
+
               <Route path="manageJobs" element={<Managejob />}></Route>
               <Route
                 path="recuiterProfileCard"
@@ -73,7 +95,8 @@ function App() {
 
             {/* Admin */}
 
-            <Route path="/admin" element={<AdminLayout />} role={"admin"}>
+            <Route path="/admin" element={<AdminLayout role={"admin"}/>} >
+              <Route path="admindashboard" element={<AdminDashBoard />}></Route>
               <Route
                 path="adminprofilecard"
                 element={<AdminProfileCard />}
@@ -83,7 +106,7 @@ function App() {
                 element={<AdminUpdateProfile />}
               ></Route>
               <Route path="manageUsers" element={<ManageUsers />}></Route>
-              <Route path="admin" element={<Admin />}></Route>
+              <Route path="adminStatus" element={<Admin />}></Route>
             </Route>
           </Route>
         </Route>

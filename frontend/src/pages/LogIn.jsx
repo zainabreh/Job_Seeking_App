@@ -21,7 +21,19 @@ const LogIn = () => {
         password: yup.string().required("Required"),
       }),
       onSubmit: async (v) => {
-        await loginUser(v)
+        try {
+          const user = await loginUser(v);
+          console.log(user);
+          
+          if (user.data.success) {
+            setApimsg(user.data);
+          } else {
+            setApimsg({ success: false, message: user.data.message });
+          }
+        } catch (error) {
+          console.log(error);
+          
+        }
         handleReset()
         navigate('/')
       },
@@ -97,9 +109,8 @@ const LogIn = () => {
                   ""
                 )}
               </div>
-
-              <button type="submit" className="btn btn-primary btn-block">
-                LogIn
+              <button type="submit" className="btn btn-primary btn-block" disabled={isLoading ? true : false}>
+                {isLoading ? 'isLoading....' : "LogIn"}
               </button>
             </form>
             <div className="text-center">

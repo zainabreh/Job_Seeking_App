@@ -5,15 +5,17 @@ import { Navigate, Outlet } from 'react-router-dom'
 const AdminLayout = ({role}) => {
 const {user,isAuthenticated} = useSelector(v=>v.auth)
 
-    if(!isAuthenticated || role !== user.roles){
-       return   <Navigate path={'/login'}/>
-    }
+// console.log("userRoles checking",user.us);
+
+if (!isAuthenticated || user.user.roles !== role) {
+  return <Navigate to="/login" />;
+}
     
 
 
   return (
     <>
-      <Outlet/>
+    <Outlet/>
     </>
   )
 }

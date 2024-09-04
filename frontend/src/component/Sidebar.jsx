@@ -4,75 +4,22 @@ import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const { user, isAuthenticated } = useSelector((v) => v.auth);
-  console.log(user);
 
   return (
     <>
       <div className="sidebar">
         <ul className="nav flex-column short-sidebar">
 
-          {/* user Profile Picture*/}
-          {user?.user?.roles === "user" && (
+          {/* Profile Picture*/}
+          
             <li className="nav-item">
               <div>
-                <i
-                  className="fa-solid fa-user"
-                  style={{
-                    fontSize: "60px",
-                    textAlign: "center",
-                    marginInline: "10px",
-                    marginBlock: "10px",
-                  }}
-                ></i>
-                <p className="nav-list" aria-current="page">
-                  UserName
+                <img src={user?.user?.avatar} alt="" style={{width:"70px",height:"70px",borderRadius:"50%"}}/>
+                <p className="nav-list" aria-current="page" style={{fontSize:"20px",marginBlock:"15px",marginLeft:"15px"}}>
+                  {user?.user?.username}
                 </p>
               </div>
             </li>
-          )}
-          {/* Recuiter Profile Picture*/}
-          {user?.user?.roles === "recuiter" && (
-            <li className="nav-item">
-              <div>
-                <i
-                  className="fa-solid fa-user"
-                  style={{
-                    fontSize: "60px",
-                    textAlign: "center",
-                    marginInline: "10px",
-                    marginBlock: "10px",
-                  }}
-                ></i>
-                <p className="nav-list" aria-current="page">
-                  RecuiterName
-                </p>
-              </div>
-            </li>
-          )}
-
-          {/* Admin Profile Picture*/}
-          {user?.user?.roles === "admin" && (
-            <li className="nav-item">
-              <div>
-                <i
-                  className="fa-solid fa-user"
-                  style={{
-                    fontSize: "60px",
-                    textAlign: "center",
-                    marginInline: "10px",
-                    marginBlock: "10px",
-                  }}
-                ></i>
-                <p className="nav-list" aria-current="page">
-                  AdminName
-                </p>
-              </div>
-            </li>
-          )}
-
-
-
-
           <hr />
 
 
@@ -81,7 +28,7 @@ const Sidebar = () => {
           {/* User */}
           {user?.user?.roles === "user" && (
             <li className="nav-item">
-              <Link to={"/usepProfileCard"}>
+              <Link to={"usepProfileCard"}>
                 <div
                   style={{
                     display: "flex",
@@ -108,7 +55,7 @@ const Sidebar = () => {
 
           {user?.user?.roles === "user" && (
             <li className="nav-item">
-              <Link to={"/userapplication"}>
+              <Link to={"userapplication"}>
                 <div
                   style={{
                     display: "flex",
@@ -163,7 +110,7 @@ const Sidebar = () => {
           {/* Recuiter */}
           {user?.user?.roles === "recuiter" && (
             <li className="nav-item">
-              <Link to={"/recuiterProfileCard"}>
+              <Link to={"/recuiter/recuiterProfileCard"}>
                 <div
                   style={{
                     display: "flex",
@@ -190,7 +137,7 @@ const Sidebar = () => {
 
           {user?.user?.roles === "recuiter" && (
             <li className="nav-item">
-              <Link to={"/recuiterapplication"}>
+              <Link to={"/recuiter/recuiterapplication"}>
                 <div
                   style={{
                     display: "flex",
@@ -217,7 +164,7 @@ const Sidebar = () => {
 
           {user?.user?.roles === "recuiter" && (
             <li className="nav-item">
-              <Link to={"/addjob"}>
+              <Link to={"/recuiter/addjob"}>
                 <div
                   style={{
                     display: "flex",
@@ -244,7 +191,7 @@ const Sidebar = () => {
 
           {user?.user?.roles === "recuiter" && (
             <li className="nav-item">
-              <Link to={"/manageJobs"}>
+              <Link to={"/recuiter/manageJobs"}>
                 <div
                   style={{
                     display: "flex",
@@ -273,7 +220,34 @@ const Sidebar = () => {
 
           {user?.user?.roles === "admin" && (
             <li className="nav-item">
-              <Link to={"/admin"}>
+              <Link to={"/admin/adminprofilecard"}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "10px",
+                    cursor: "pointer",
+                    color: "white",
+                  }}
+                >
+                  <i
+                    className="fa-regular fa-user"
+                    style={{ fontSize: "20px" }}
+                  ></i>
+                  <p
+                    className="nav-list"
+                    style={{ margin: "5px", fontWeight: "700", color: "white" }}
+                  >
+                    Profile
+                  </p>
+                </div>
+              </Link>
+            </li>
+          )}
+
+          {user?.user?.roles === "admin" && (
+            <li className="nav-item">
+              <Link to={"/admin/adminStatus"}>
                 <div
                   style={{
                     display: "flex",
@@ -300,7 +274,7 @@ const Sidebar = () => {
 
           {user?.user?.roles === "admin" && (
             <li className="nav-item">
-              <Link to={"/manageUsers"}>
+              <Link to={"/admin/manageUsers"}>
                 <div
                   style={{
                     display: "flex",
@@ -325,32 +299,7 @@ const Sidebar = () => {
             </li>
           )}
 
-          {user?.user?.roles === "admin" && (
-            <li className="nav-item">
-              <Link to={"/adminprofilecard"}>
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "10px",
-                    cursor: "pointer",
-                    color: "white",
-                  }}
-                >
-                  <i
-                    className="fa-regular fa-user"
-                    style={{ fontSize: "20px" }}
-                  ></i>
-                  <p
-                    className="nav-list"
-                    style={{ margin: "5px", fontWeight: "700", color: "white" }}
-                  >
-                    Profile
-                  </p>
-                </div>
-              </Link>
-            </li>
-          )}
+         
 
         </ul>
       </div>

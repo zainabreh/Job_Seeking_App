@@ -5,9 +5,10 @@ import { Navigate, Outlet } from 'react-router-dom'
 const RecuiterLayout = ({role}) => {
 const {user,isAuthenticated} = useSelector(v=>v.auth)
 
-    if(!isAuthenticated || role !== user.roles){
-      return   <Navigate path={'/login'}/>
-    }
+   
+  if (!isAuthenticated || user.user.roles !== role) {
+    return <Navigate to="/login"  />;
+  }
     
 
 

@@ -144,6 +144,16 @@ form {
   /* border: 5px solid red; */
   gap: 10px;
 }
+.custom-btn{
+  font-weight: "600";
+  color: black;
+ background-color: rgb(255, 255, 255);
+ margin-inline:"10px"
+}
+.custom-btn:hover{
+  background-color: #0033ff;
+  color: white;
+}
 .sidebar{
   width: 17%;
   height: auto;
