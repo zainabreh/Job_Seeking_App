@@ -123,7 +123,7 @@ const Signup = () => {
             {apimsg && apimsg.message}
           </div>
         )}
-            <form onSubmit={handleSubmit} classNameName="row g-3 mt-3">
+            <form onSubmit={handleSubmit} className="row g-3 mt-3">
               <div className="form-group col-md-6">
                 <input
                   type="text"
@@ -225,8 +225,7 @@ const Signup = () => {
                   onBlur={handleBlur}
                   value={values.gender}
                 >
-                  <option selected>Choose...</option>
-                  <option value="male">Male</option>
+                  <option selected value="male">Male</option>
                   <option value="female">Female</option>
                   <option value="other">Other</option>
                 </select>
@@ -292,7 +291,7 @@ const Signup = () => {
 
               <div className="form-group col-md-6">
                 <input
-                  classNameName="form-control pt-2 "
+                  className="form-control pt-2 "
                   type="file"
                   name="avatar"
                   id="preview-reset"

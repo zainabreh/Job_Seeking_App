@@ -24,6 +24,9 @@ import AdminProfileCard from "./pages/AdminProfileCard";
 import AdminUpdateProfile from "./pages/AdminUpdateProfile";
 import ManageUsers from "./pages/ManageUsers";
 import Admin from "./pages/Admin";
+import AuthLayout from "./layout/authLayout";
+import RecuiterLayout from "./layout/RecuiterLayout";
+import AdminLayout from "./layout/AdminLayout";
 
 function App() {
   const router = createBrowserRouter(
@@ -33,45 +36,57 @@ function App() {
         <Route path="/login" element={<LogIn />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/jobdetail" element={<JobDetail />}></Route>
-        <Route  element={<Sidebarlayout />}>
 
-        {/* user */}
-          <Route path="userdashboard" element={<UserDashBoard />}></Route>
-          <Route path="usepProfileCard" element={<UsepProfileCard />}></Route>
-          <Route
-            path="userupdateprofile"
-            element={<Userupdateprofile />}
-          ></Route>
-          <Route path="userapplication" element={<Userapplication />}></Route>
+        <Route element={<AuthLayout />}>
+          <Route element={<Sidebarlayout />}>
+            {/* user */}
+            <Route path="userdashboard" element={<UserDashBoard />}></Route>
+            <Route path="usepProfileCard" element={<UsepProfileCard />}></Route>
+            <Route
+              path="userupdateprofile"
+              element={<Userupdateprofile />}
+            ></Route>
+            <Route path="userapplication" element={<Userapplication />}></Route>
 
+            {/* Recuiter */}
 
+            <Route
+              path="/recuiter"
+              element={<RecuiterLayout />}
+              role={"recuiter"}
+            >
+              <Route path="addjob" element={<Addjob />}></Route>
+              <Route path="manageJobs" element={<Managejob />}></Route>
+              <Route
+                path="recuiterProfileCard"
+                element={<RecuiterProfileCard />}
+              ></Route>
+              <Route
+                path="recuiterupdateprofile"
+                element={<Recuiterupdaterofile />}
+              ></Route>
+              <Route
+                path="recuiterapplication"
+                element={<Recuiterapplication />}
+              ></Route>
+            </Route>
 
+            {/* Admin */}
 
-          {/* Recuiter */}
-          
-          {/* <Route path="recuiterdashboard" element={<RecuiterDashBoard/>}></Route> */}
-          <Route path="addjob" element={<Addjob/>}></Route>
-          <Route path="manageJobs" element={<Managejob/>}></Route>
-          <Route path="recuiterProfileCard" element={<RecuiterProfileCard />}></Route>
-          <Route
-            path="recuiterupdateprofile"
-            element={<Recuiterupdaterofile />}
-          ></Route>
-          <Route path="recuiterapplication" element={<Recuiterapplication />}></Route>
-
-
-          
-        {/* Admin */}
-        <Route path="adminprofilecard" element={<AdminProfileCard />}></Route>
-        <Route path="adminupdateprofile" element={<AdminUpdateProfile />}></Route>
-        <Route path="manageUsers" element={<ManageUsers />}></Route>
-        <Route path="admin" element={<Admin />}></Route>
-
-
-
-
+            <Route path="/admin" element={<AdminLayout />} role={"admin"}>
+              <Route
+                path="adminprofilecard"
+                element={<AdminProfileCard />}
+              ></Route>
+              <Route
+                path="adminupdateprofile"
+                element={<AdminUpdateProfile />}
+              ></Route>
+              <Route path="manageUsers" element={<ManageUsers />}></Route>
+              <Route path="admin" element={<Admin />}></Route>
+            </Route>
+          </Route>
         </Route>
-
       </Route>
     )
   );

@@ -1,7 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const UsepProfileCard = () => {
+  const {user} = useSelector(v=>v.auth)
   return (
     <>
       <div className="Usercontainer" style={{ marginBlock: "80px" }}>

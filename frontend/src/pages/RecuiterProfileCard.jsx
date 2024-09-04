@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const RecuiterProfileCard = () => {
+  const {user} = useSelector(v=>v.auth)
+
   return (
     <>
       <div className="Usercontainer" style={{ marginBlock: "80px" }}>
