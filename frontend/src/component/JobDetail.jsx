@@ -1,9 +1,12 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import {useGetsingleJobQuery } from "../../Redux/auth/job.api";
 
 const JobDetail = () => {
   const {user,isAuthenticated} = useSelector(v=>v.auth)
+  const {data,error,isLoading} = useGetsingleJobQuery() 
+
 
   return (
     <>

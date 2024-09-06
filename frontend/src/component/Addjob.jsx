@@ -1,9 +1,20 @@
 import {  useFormik } from "formik";
 import * as yup from "yup";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/ReactToastify.css";
 
 import React from "react";
+import { useCreateJobMutation } from "../../Redux/auth/job.api";
+import { useDispatch } from "react-redux";
+import { setjob } from "../../Redux/Feature/job.slice";
 
 const Addjob = () => {
+
+  const [createJob,{data,error,isLoading}] = useCreateJobMutation()
+  
+  const dispatch = useDispatch()
+
+
   const {
     handleChange,
     handleSubmit,
@@ -46,13 +57,21 @@ const Addjob = () => {
       description: yup.string().required("Job Description is required"),
     }),
     onSubmit: async (v) => {
-      console.log(v);
+      const job = await createJob(v).unwrap()  
+      console.log(job);
+          
+      dispatch(setjob(job.job))
+      if (job.success === true) {
+        toast.success(job.message);
+      } else {
+        toast.error(job.message)
+      }
     },
   });
 
   return (
     <>
-    
+       <ToastContainer />
       <div className="container">
         <h2
           style={{

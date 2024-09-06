@@ -26,7 +26,9 @@ const LogIn = () => {
           console.log(user);
           
           if (user.data.success) {
-            setApimsg(user.data);
+            setApimsg(user.data.message);
+            
+            navigate('/')
           } else {
             setApimsg({ success: false, message: user.data.message });
           }
@@ -35,7 +37,6 @@ const LogIn = () => {
           
         }
         handleReset()
-        navigate('/')
       },
     });
 

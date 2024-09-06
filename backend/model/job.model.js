@@ -13,6 +13,10 @@ const jobSchema = new Schema({
   location: String,
   status:String,
   type:String,
+  recuiterId : {
+    type:mongoose.Schema.Types.ObjectId,
+    ref:"user"
+  }
 
 });
 

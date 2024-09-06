@@ -59,7 +59,7 @@ export const login = async (req, res, next) => {
       { expiresIn: "2h" }
     );
 
-    res.cookie("auth", jwt_key, { maxAge: 90000, httpOnly: true }).json({
+    res.cookie("auth", jwt_key, { maxAge: 9000000, httpOnly: true }).json({
       success:true,
       message: "User LogIn",
       user,
