@@ -1,15 +1,19 @@
 import mongoose, { Schema } from "mongoose";
 
 const jobSchema = new Schema({
-  title: String,
-  postedBy: String,
+  position: String,
+  company: String,
   description: String,
   deadline: Date,
-  jobVacancy: Number,
-  requirements: [String],
-  facilities: [String],
+  vacancy: Number,
+  requiredSkill: String,
+  facilities: String,
   salary: Number,
   email: String,
+  location: String,
+  status:String,
+  type:String,
+
 });
 
 export default mongoose.model("job", jobSchema);

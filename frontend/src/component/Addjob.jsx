@@ -1,132 +1,397 @@
+import {  useFormik } from "formik";
+import * as yup from "yup";
+
 import React from "react";
 
 const Addjob = () => {
+  const {
+    handleChange,
+    handleSubmit,
+    handleBlur,
+    handleReset,
+    touched,
+    values,
+    errors,
+  } = useFormik({
+    initialValues: {
+      position: "",
+      company: "",
+      location: "",
+      status: "",
+      type: "",
+      vacancy: "",
+      deadline: "",
+      salary: "",
+      email: "",
+      facilities: "",
+      requiredSkill: "",
+      description: "",
+    },
+    validationSchema: yup.object({
+      position: yup.string().required("Position is required"),
+      company: yup.string().required("Company is required"),
+      location: yup.string().required("Location is required"),
+      status: yup.string().required("Job Status is required"),
+      type: yup.string().required("Job Type is required"),
+      vacancy: yup.number().required("Vacancy is required"),
+      salary: yup.string().required("Salary is required"),
+      deadline: yup.date().required("Deadline is required"),
+      email: yup
+        .string()
+        .email("Invalid email")
+        .required("Contact Mail is required"),
+      facilities: yup.string(),
+      requiredSkill: yup.string().required("Skill is required")
+      ,
+      description: yup.string().required("Job Description is required"),
+    }),
+    onSubmit: async (v) => {
+      console.log(v);
+    },
+  });
+
   return (
     <>
+    
       <div className="container">
-        <h2 style={{textAlign:"center",marginBlock:"20px",fontWeight:"600",color:"white"}}>Create New Job</h2>
-        <form className="row g-3" style={{  color: "white"
-}}>
+        <h2
+          style={{
+            textAlign: "center",
+            marginBlock: "20px",
+            fontWeight: "600",
+            color: "white",
+          }}
+        >
+          Create New Job
+        </h2>
+        <form className="row g-3" onSubmit={handleSubmit} style={{ color: "white" }}>
           <div className="col-md-4">
             <label for="inputEmail4" className="form-label">
               Position
             </label>
-            <input type="text" className="form-control" id="inputEmail4" placeholder="Job Position"/>
+            <input
+              type="text"
+              name="position"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.position}
+              className="form-control"
+              id="inputEmail4"
+              placeholder="Job Position"
+            />
+            {touched.position && errors.position ? (
+              <div style={{ color: "red" }}>{errors.position}</div>
+            ) : (
+              ""
+            )}
           </div>
           <div className="col-md-4">
             <label for="inputPassword4" className="form-label">
               Company
             </label>
             <input
+              name="company"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.company}
               type="text"
               className="form-control"
               id="inputPassword4"
               placeholder="Company Name"
             />
+            {touched.company && errors.company ? (
+              <div style={{ color: "red" }}>{errors.company}</div>
+            ) : (
+              ""
+            )}
           </div>
           <div className="col-md-4">
             <label for="inputAddress" className="form-label">
               Location
             </label>
             <input
+              name="location"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.location}
               type="text"
               className="form-control"
               id="inputAddress"
               placeholder="Job Location"
             />
+            {touched.location && errors.location ? (
+              <div style={{ color: "red" }}>{errors.location}</div>
+            ) : (
+              ""
+            )}
           </div>
           <div className="col-md-4">
             <label for="inputEmail4" className="form-label">
               Job Status
             </label>
-            <select id="inputState" className="form-select" >
+            <select
+              id="inputState"
+              className="form-select"
+              name="status"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.status}
+            >
               <option selected>Select a Job Status</option>
-              <option>...</option>
+              <option value={"full-time"}>Full-Time</option>
+              <option value={"part-time"}>Part-Time</option>
+              <option value={"internship"}>Internship</option>
             </select>
+            {touched.status && errors.status ? (
+              <div style={{ color: "red" }}>{errors.status}</div>
+            ) : (
+              ""
+            )}
           </div>
           <div className="col-md-4">
             <label for="inputPassword4" className="form-label">
               Job Type
             </label>
-            <select id="inputState" className="form-select" >
+            <select
+              id="inputState"
+              className="form-select"
+              name="type"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.type}
+            >
               <option selected>Select a Job Type</option>
-              <option>...</option>
+
+              <option value="Software Engineer">Software Engineer</option>
+              <option value="Mobile App Developer">Mobile App Developer</option>
+              <option value="Web Developer">Web Developer</option>
+              <option value="DevOps Engineer">DevOps Engineer</option>
+              <option value="Quality Assurance (QA) Engineer">
+                Quality Assurance (QA) Engineer
+              </option>
+              <option value="Data Scientist">Data Scientist</option>
+              <option value="Data Analyst">Data Analyst</option>
+              <option value="Business Intelligence Developer">
+                Business Intelligence Developer
+              </option>
+              <option value="Machine Learning Engineer">
+                Machine Learning Engineer
+              </option>
+              <option value="Data Visualization Specialist">
+                Data Visualization Specialist
+              </option>
+              <option value="Network Administrator">
+                Network Administrator
+              </option>
+              <option value="Network Architect">Network Architect</option>
+              <option value="Cybersecurity Engineer">
+                Cybersecurity Engineer
+              </option>
+              <option value="Penetration Tester">Penetration Tester</option>
+              <option value="Information Security Manager">
+                Information Security Manager
+              </option>
+              <option value="Database Administrator (DBA)">
+                Database Administrator (DBA)
+              </option>
+              <option value="Database Developer">Database Developer</option>
+              <option value="Data Architect">Data Architect</option>
+              <option value="Database Performance Tuner">
+                Database Performance Tuner
+              </option>
+              <option value="Data Warehouse Architect">
+                Data Warehouse Architect
+              </option>
+              <option value="AI/ML Engineer">AI/ML Engineer</option>
+              <option value="Natural Language Processing (NLP) Engineer">
+                Natural Language Processing (NLP) Engineer
+              </option>
+              <option value="Computer Vision Engineer">
+                Computer Vision Engineer
+              </option>
+              <option value="Robotics Engineer">Robotics Engineer</option>
+              <option value="AI Researcher">AI Researcher</option>
+              <option value="Help Desk Technician">Help Desk Technician</option>
+              <option value="Technical Support Specialist">
+                Technical Support Specialist
+              </option>
+              <option value="IT Project Manager">IT Project Manager</option>
+              <option value="System Administrator">System Administrator</option>
+              <option value="Desktop Support Technician">
+                Desktop Support Technician
+              </option>
+              <option value="Web Designer">Web Designer</option>
+              <option value="UI/UX Designer">UI/UX Designer</option>
+              <option value="Mobile App Designer">Mobile App Designer</option>
+              <option value="Front-end Developer">Front-end Developer</option>
+              <option value="Graphic Designer">Graphic Designer</option>
+              <option value="Computer Hardware Engineer">
+                Computer Hardware Engineer
+              </option>
+              <option value="Embedded Systems Engineer">
+                Embedded Systems Engineer
+              </option>
+              <option value="System Administrator">System Administrator</option>
+              <option value="IT Consultant">IT Consultant</option>
+              <option value="Technical Sales Representative">
+                Technical Sales Representative
+              </option>
             </select>
+            {touched.type && errors.type ? (
+              <div style={{ color: "red" }}>{errors.type}</div>
+            ) : (
+              ""
+            )}
           </div>
           <div className="col-md-4">
             <label for="inputAddress" className="form-label">
               Vacancy
             </label>
             <input
+            name="vacancy"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.vacancy}
               type="text"
               className="form-control"
               id="inputAddress"
               placeholder="Job Vacancy"
             />
+            {touched.vacancy && errors.vacancy ? (
+              <div style={{ color: "red" }}>{errors.vacancy}</div>
+            ) : (
+              ""
+            )}
           </div>
           <div className="col-md-4">
             <label for="inputEmail4" className="form-label">
               Salary
             </label>
-            <input type="email" className="form-control" id="inputEmail4" placeholder="Job Salary"/>
+            <input
+            name="salary"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.salary}
+              type="text"
+              className="form-control"
+              id="inputEmail4"
+              placeholder="Job Salary"
+            />
+            {touched.salary && errors.salary ? (
+              <div style={{ color: "red" }}>{errors.salary}</div>
+            ) : (
+              ""
+            )}
           </div>
           <div className="col-md-4">
             <label for="inputPassword4" className="form-label">
               Deadline
             </label>
             <input
+            name="deadline"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.deadline}
               type="date"
               className="form-control"
               id="inputPassword4"
               placeholder="Company Name"
             />
+             {touched.deadline && errors.deadline ? (
+              <div style={{ color: "red" }}>{errors.deadline}</div>
+            ) : (
+              ""
+            )}
           </div>
           <div className="col-md-4">
             <label for="inputAddress" className="form-label">
               Contact Mail
             </label>
             <input
-              type="text"
+            name="email"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.email}
+              type="email"
               className="form-control"
               id="inputAddress"
               placeholder="Job Contact"
             />
+             {touched.email && errors.email ? (
+              <div style={{ color: "red" }}>{errors.email}</div>
+            ) : (
+              ""
+            )}
           </div>
-
-
-
 
           <div className="col-md-6">
             <label for="inputCity" className="form-label">
               Job Facilities
             </label>
-            <input type="text" className="form-control" id="inputCity" placeholder="Type Here"/>
+            <input
+            name="facilities"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.facilities}
+              type="text"
+              className="form-control"
+              id="inputCity"
+              placeholder="Type Here"
+            />
+            {touched.facilities && errors.facilities ? (
+              <div style={{ color: "red" }}>{errors.facilities}</div>
+            ) : (
+              ""
+            )}
           </div>
           <div className="col-md-6">
             <label for="inputState" className="form-label">
               Required Skill
             </label>
-            <input type="text" className="form-control" id="inputCity" placeholder="HTML,CSS"/>
+            <input
+            name="requiredSkill"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.requiredSkill}
+              type="text"
+              className="form-control"
+              id="inputCity"
+              placeholder="HTML,CSS"
+            />
+            {touched.requiredSkill && errors.requiredSkill ? (
+              <div style={{ color: "red" }}>{errors.requiredSkill}</div>
+            ) : (
+              ""
+            )}
           </div>
-          
-
-
 
           <div className="col-12">
-            
-          <label for="inputState" className="form-label">
+            <label for="inputState" className="form-label">
               Job Description
             </label>
-            <textarea type="text" rows="50" className="form-control" id="inputCity"></textarea>
-           
-            
+            <textarea
+            name="description"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.description}
+              type="text"
+              rows="50"
+              className="form-control"
+              id="inputCity"
+            ></textarea>
+             {touched.description && errors.description ? (
+              <div style={{ color: "red" }}>{errors.description}</div>
+            ) : (
+              ""
+            )}
           </div>
 
-
-
-
           <div className="col-12">
-            <button type="submit" className="btn" style={{marginTop:"20px",backgroundColor:"white"}}>
+            <button
+              type="submit"
+              className="btn"
+              style={{ marginTop: "20px", backgroundColor: "white" }}
+            >
               Submit
             </button>
           </div>

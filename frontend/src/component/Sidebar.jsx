@@ -122,7 +122,7 @@ const Sidebar = () => {
                 >
                   <i
                     className="fa-regular fa-user"
-                    style={{ fontSize: "20px" }}
+                    style={{ fontSize: "15px" }}
                   ></i>
                   <p
                     className="nav-list"
@@ -149,7 +149,7 @@ const Sidebar = () => {
                 >
                   <i
                     className="fa-solid fa-briefcase"
-                    style={{ fontSize: "20px" }}
+                    style={{ fontSize: "15px" }}
                   ></i>
                   <p
                     className="nav-list"
@@ -176,7 +176,7 @@ const Sidebar = () => {
                 >
                   <i
                     className="fa-regular fa-square-plus"
-                    style={{ fontSize: "20px" }}
+                    style={{ fontSize: "15px" }}
                   ></i>
                   <p
                     className="nav-list"
@@ -203,7 +203,7 @@ const Sidebar = () => {
                 >
                   <i
                     className="fa-solid fa-user-gear"
-                    style={{ fontSize: "20px" }}
+                    style={{ fontSize: "15px" }}
                   ></i>
                   <p
                     className="nav-list"

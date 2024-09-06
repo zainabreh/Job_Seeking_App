@@ -1,3 +1,5 @@
+import jobModel from "../model/job.model.js"
+
 export const getAlljobs = (req,res,next)=>{
     try {
         
@@ -12,9 +14,11 @@ export const getjobByid = (req,res,next)=>{
         next(error)
     }
 }
-export const createJob = (req,res,next)=>{
+export const createJob = async (req,res,next)=>{
     let data = req.body
+    
     try {
+        await jobModel.create(data)
         res.json({
             message:"job posted successfully",
             data

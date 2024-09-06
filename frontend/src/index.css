@@ -155,14 +155,18 @@ form {
   color: white;
 }
 .sidebar{
-  width: 17%;
+  width: 18%;
   height: auto;
   padding: 30px;
   background-color: #116ec0;
   color: white !important;
 }
 .nav-item{
-  padding: 8px;
+  padding: 4px;
+  /* font-size: 10px; */
+}
+.nav-item p{
+  font-size: 13px;
 }
 .dashboard-container{
   width:80%;

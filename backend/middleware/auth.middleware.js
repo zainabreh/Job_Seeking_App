@@ -10,6 +10,8 @@ export const isAuthenticated = (req,res,next)=>{
     try {
         let authuser = jwt.verify(auth,process.env.TOKEN)
         req.user = authuser
+        console.log("checking role",req.user);
+        
         
         next()
     } catch (error) {
@@ -18,7 +20,7 @@ export const isAuthenticated = (req,res,next)=>{
 }
 
 export const isAuthorized = (...roles)=>{
-    return (res,req,next)=>{
+    return (req,res,next)=>{
         if(!roles.includes(req.user.role)) return next(new Error("Not Allowed to access this resource"))
 
             next()
