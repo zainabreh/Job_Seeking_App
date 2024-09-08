@@ -75,7 +75,14 @@ export default function JobCard() {
             >
               <i className="fa-solid fa-location-dot"></i> {info.location}
             </Typography>
-            <Typography variant="h5" component="div">
+            <Typography variant="h5" component="div"  sx={{
+                textOverflow: 'ellipsis',
+                overflow: 'hidden',
+                // whiteSpace: 'nowrap',
+                display: "-webkit-box",
+                WebkitLineClamp: 1 ,
+                WebkitBoxOrient: "vertical",
+              }}>
               {info.position}
             </Typography>
             <Typography sx={{ mb: 1.5 }} color="text.secondary">
@@ -103,7 +110,7 @@ export default function JobCard() {
           </CardActions>
         </Card>
       </Box>
-    ))) : (<div><h1 style={{textAlign:"center"}}>Data Not Found</h1></div>)
+    ))) : (<div><h1 style={{textAlign:"center",marginInline:"50px"}}>Data Not Found</h1></div>)
 }
     </>
   );

@@ -16,8 +16,9 @@ const jobSchema = new Schema({
   recuiterId : {
     type:mongoose.Schema.Types.ObjectId,
     ref:"user"
-  }
+  },
 
-});
+},
+{timestamps:true});
 
 export default mongoose.model("job", jobSchema);

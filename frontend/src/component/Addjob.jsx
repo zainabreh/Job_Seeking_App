@@ -57,7 +57,18 @@ const Addjob = () => {
       description: yup.string().required("Job Description is required"),
     }),
     onSubmit: async (v) => {
-      const job = await createJob(v).unwrap()            
+
+      const facilitiesArray = v.facilities.split(",");
+      const requiredSkillsArray = v.requiredSkill.split(",");
+  
+      const formData = {
+        ...v,
+        facilities: facilitiesArray.map((facility) => facility.trim()),
+        requiredSkill: requiredSkillsArray.map((skill) => skill.trim()),
+      };
+
+
+      const job = await createJob(formData).unwrap()            
       dispatch(setjob(job.job))
       if (job.success === true) {
         toast.success(job.message);
