@@ -8,6 +8,8 @@ import Typography from "@mui/material/Typography";
 import { createSvgIcon } from "@mui/material/utils";
 import { Link } from "react-router-dom";
 import { useGetallJobsQuery } from "../../Redux/auth/job.api";
+import { useDispatch, useSelector } from "react-redux";
+import { setjob } from "../../Redux/Feature/job.slice";
 
 const bull = (
   <Box
@@ -39,13 +41,31 @@ const PlusIcon = createSvgIcon(
 export default function JobCard() {
 
   const {data,error,isLoading} = useGetallJobsQuery() 
+  const [userdata,setUserData] = React.useState()
+  const dispatch = useDispatch()
 
+  React.useEffect(()=>{
+    const gettingData = async ()=>{
+        const info = await data
+
+        setUserData(info)
+    }
+    gettingData()
+    if(userdata){
+        dispatch(setjob(userdata))
+    }
+  },[data,userdata,dispatch])
+
+  const { job } = useSelector((v) => v.job);
+  const jobs = job && job.jobs;
+  
 
   return (
     <>
-    {data.jobs.map((info)=>(
+    {jobs && Array.isArray(jobs) ? (
+        jobs.map((info) => (
 
-      <Box sx={{ maxWidth: 280 }}>
+      <Box sx={{ maxWidth: 280 }} key={info._id}>
         <Card variant="elevation">
           <CardContent>
             <Typography
@@ -56,7 +76,6 @@ export default function JobCard() {
               <i className="fa-solid fa-location-dot"></i> {info.location}
             </Typography>
             <Typography variant="h5" component="div">
-              {/* be{bull}nev{bull}o{bull}lent */}
               {info.position}
             </Typography>
             <Typography sx={{ mb: 1.5 }} color="text.secondary">
@@ -68,15 +87,15 @@ export default function JobCard() {
                 overflow: "hidden",
                 textOverflow: "ellipsis",
                 display: "-webkit-box",
-                WebkitLineClamp: 2 /* show only 2 lines */,
+                WebkitLineClamp: 2 ,
                 WebkitBoxOrient: "vertical",
               }}
             >
               {info.description}
             </Typography>
           </CardContent>
-          <CardActions>
-            <Link to={"/jobdetail"}>
+         <CardActions>
+            <Link to={`/jobdetail/${info._id}`}>
               <Button startIcon={<PlusIcon />} sx={{ marginBlock: "5px" }}>
                 Details
               </Button>
@@ -84,7 +103,8 @@ export default function JobCard() {
           </CardActions>
         </Card>
       </Box>
-    ))}
+    ))) : (<div><h1 style={{textAlign:"center"}}>Data Not Found</h1></div>)
+}
     </>
   );
 }

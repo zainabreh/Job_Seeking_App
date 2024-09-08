@@ -14,9 +14,9 @@ export const jobApi = createApi({
       }),
     }),
     getsingleJob: builder.query({
-      query: () => ({
-        url: "/job/singleJob",
-        methid: "GET",
+      query: (id) => ({
+        url: `/job/singleJob/${id}`,
+        method: "GET",
       }),
     }),
     createJob: builder.mutation({

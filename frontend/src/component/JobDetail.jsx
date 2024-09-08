@@ -1,24 +1,52 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import {  useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
 import {useGetsingleJobQuery } from "../../Redux/auth/job.api";
 
 const JobDetail = () => {
   const {user,isAuthenticated} = useSelector(v=>v.auth)
-  const {data,error,isLoading} = useGetsingleJobQuery() 
+  const [singleJob,setSingleJob] = useState()
+  const {id} = useParams()
+  const {data,error,isLoading} = useGetsingleJobQuery(id) 
+
+  // useEffect(()=>{
+  //   const singleJob = async ()=>{
+  //     const job = await data
+
+  //     setSingleJob(job)
+  //   }
+
+  //   singleJob()
+  // },[data])
+
+  useEffect(() => {
+    if (data) {
+      setSingleJob(data.job);
+    }
+  }, [data]);
+  
+  console.log(singleJob);
+  
+  const date = singleJob && new Date(singleJob.deadline)
+  const formattedDate = date && date.toLocaleString('en-US',{
+    month:'long',
+    year:"numeric",
+    day:"numeric"
+  })
 
 
   return (
-    <>
-      <div style={{width:"800px",color:"white",padding:"1px",backgroundColor:"#448aff",margin:"20px auto", borderRadius:"10px"}}>
+    <>{
+      singleJob && ( <div style={{width:"800px",color:"white",padding:"1px",backgroundColor:"#448aff",margin:"20px auto", borderRadius:"10px"}}>
         <div className="row mt-5">
           <div className="col-md-8 offset-md-2">
-            <h1 className="text-center">Job Title: Software Engineer</h1>
+            <h2 className="text-center">Job Title: {singleJob.position}</h2>
             <div className="text-center mb-3">
               <span className="badge bg-primary" style={{ padding: "10px" }}>
-                Posted By: Tesla
+                Posted By: {singleJob.company}
               </span>
-              <span className="ms-2">Jan 3rd, 2024</span>
+              <span className="ms-2">Jan 3rd, 2024</span> <br/><br/>
+              <span className="ms-2">Location: {singleJob.location}</span>
             </div>
             <h5
               className="mb-2"
@@ -27,16 +55,12 @@ const JobDetail = () => {
               Description
             </h5>
             <p>
-              Software engineering is the branch of computer science that deals
-              with the design, development, testing, and maintenance of software
-              applications. Software engineers apply engineering principles and
-              knowledge of programming languages to build software solutions for
-              end users.
+              {singleJob.description}
             </p>
             <h6 className="mb-2" style={{ fontWeight: "bolder" }}>
-              Deadline: Jan 25th, 2024
+              Deadline: {formattedDate}
             </h6>
-            <p className="mb-3">Job Vacancy: 1</p>
+            <p className="mb-3">Job Vacancy: {singleJob.vacancy} </p>
             <h5
               className="mb-2"
               style={{ textDecoration: "underline", fontWeight: "bolder" }}
@@ -44,7 +68,7 @@ const JobDetail = () => {
               Requirements
             </h5>
             <ul>
-              <li>Python</li>
+              <li>{singleJob.requiredSkill}</li>
             </ul>
             <h5
               className="mb-2"
@@ -53,18 +77,16 @@ const JobDetail = () => {
               Facilities
             </h5>
             <ul>
-              <li>Food</li>
+              <li>{singleJob.facilities}</li>
             </ul>
-            <h6 className="mb-2">Salary: 500 TK</h6>
+            <h6 className="mb-2">Salary:{singleJob.salary} TK</h6>
             <h6 className="mt-3" style={{ fontWeight: "bolder" }}>
               To Apply
             </h6>
             <p>
               Send Your CV/Resume <br />{" "}
-              <span style={{ fontWeight: "500" }}>Email: </span>jobs@tesla.com
+              <span style={{ fontWeight: "500" }}>Email: </span>{singleJob.email}
             </p>
-            {/* <p>Email: jobs@tesla.com</p> */}
-
             <br />
 
             {
@@ -76,7 +98,9 @@ const JobDetail = () => {
 
           </div>
         </div>
-      </div>
+      </div>)
+    }
+     
     </>
   );
 };

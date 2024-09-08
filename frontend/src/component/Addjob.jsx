@@ -7,13 +7,13 @@ import React from "react";
 import { useCreateJobMutation } from "../../Redux/auth/job.api";
 import { useDispatch } from "react-redux";
 import { setjob } from "../../Redux/Feature/job.slice";
+import { useNavigate } from "react-router-dom";
 
 const Addjob = () => {
 
   const [createJob,{data,error,isLoading}] = useCreateJobMutation()
-  
+  const navigate = useNavigate()
   const dispatch = useDispatch()
-
 
   const {
     handleChange,
@@ -34,8 +34,8 @@ const Addjob = () => {
       deadline: "",
       salary: "",
       email: "",
-      facilities: "",
-      requiredSkill: "",
+      facilities: [],
+      requiredSkill: [],
       description: "",
     },
     validationSchema: yup.object({
@@ -57,15 +57,14 @@ const Addjob = () => {
       description: yup.string().required("Job Description is required"),
     }),
     onSubmit: async (v) => {
-      const job = await createJob(v).unwrap()  
-      console.log(job);
-          
+      const job = await createJob(v).unwrap()            
       dispatch(setjob(job.job))
       if (job.success === true) {
         toast.success(job.message);
       } else {
         toast.error(job.message)
       }
+      navigate("/")
     },
   });
 

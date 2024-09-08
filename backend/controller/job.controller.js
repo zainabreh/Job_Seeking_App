@@ -13,13 +13,21 @@ export const getAlljobs = async (req,res,next)=>{
 }
 export const getjobByid = async (req,res,next)=>{
     try {
-        const {id} = req.body
-        const job = await jobModel.findOne(id)
-        res.json({
-            job,
-            success:true,
-            message:"Single user"
-        })
+        const {id} = req.params
+        const job = await jobModel.findById(id)
+
+        if(!job){
+            res.json({
+                success:false,
+                message:"Job not found"
+            })
+        }else{
+            res.json({
+                job,
+                success:true,
+                message:"job found"
+            })
+        }
     } catch (error) {
         next(error)
     }

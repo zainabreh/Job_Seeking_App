@@ -11,6 +11,7 @@ const jobSlice = createSlice({
         setjob:(state,action)=>{
             state.job = action.payload
         },
+       
     }
 })
 

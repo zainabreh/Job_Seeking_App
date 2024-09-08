@@ -35,21 +35,21 @@
 
 
 
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { authApi } from "../auth/auth.api.js";
 import authReducer from "../Feature/auth.slice.js";
 import jobReducer from "../Feature/job.slice.js"
 import { jobApi } from "../auth/job.api.js";
 
 const store = configureStore({
-  reducer: {  
+  reducer: {
     auth: authReducer,
     job: jobReducer,
-  [authApi.reducerPath]: authApi.reducer,
-  [jobApi.reducerPath]: jobApi.reducer
-},
+    [authApi.reducerPath]: authApi.reducer,
+    [jobApi.reducerPath]: jobApi.reducer,
+  },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat([authApi.middleware],[jobApi.middleware]),
+    getDefaultMiddleware().concat([authApi.middleware, jobApi.middleware]),
 });
 
 export default store

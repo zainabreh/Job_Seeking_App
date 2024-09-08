@@ -43,7 +43,7 @@ const {user,isAuthenticated} = useSelector(v=>v.auth)
         <Route path="/" element={<Home />}></Route>
         <Route path="/login" element={isAuthenticated ? null : <LogIn />}></Route>
         <Route path="/signup" element={isAuthenticated ? null : <Signup />}></Route>
-        <Route path="/jobdetail" element={<JobDetail />}></Route>
+        <Route path="/jobdetail/:id" element={<JobDetail />}></Route>
 
         <Route path="/" element={<UserLayout/>}>
         
