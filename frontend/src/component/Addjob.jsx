@@ -29,7 +29,7 @@ const Addjob = () => {
       company: "",
       location: "",
       status: "",
-      type: "",
+      category: "",
       vacancy: "",
       deadline: "",
       salary: "",
@@ -43,7 +43,7 @@ const Addjob = () => {
       company: yup.string().required("Company is required"),
       location: yup.string().required("Location is required"),
       status: yup.string().required("Job Status is required"),
-      type: yup.string().required("Job Type is required"),
+      category: yup.string().required("Job category is required"),
       vacancy: yup.number().required("Vacancy is required"),
       salary: yup.string().required("Salary is required"),
       deadline: yup.date().required("Deadline is required"),
@@ -179,17 +179,17 @@ const Addjob = () => {
           </div>
           <div className="col-md-4">
             <label for="inputPassword4" className="form-label">
-              Job Type
+            Category
             </label>
             <select
               id="inputState"
               className="form-select"
-              name="type"
+              name="category"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.type}
+              value={values.category}
             >
-              <option selected>Select a Job Type</option>
+              <option selected>Select a Job category</option>
 
               <option value="Software Engineer">Software Engineer</option>
               <option value="Mobile App Developer">Mobile App Developer</option>
@@ -266,8 +266,8 @@ const Addjob = () => {
                 Technical Sales Representative
               </option>
             </select>
-            {touched.type && errors.type ? (
-              <div style={{ color: "red" }}>{errors.type}</div>
+            {touched.category && errors.category ? (
+              <div style={{ color: "red" }}>{errors.category}</div>
             ) : (
               ""
             )}

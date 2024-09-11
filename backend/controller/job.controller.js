@@ -33,7 +33,7 @@ export const getjobByid = async (req,res,next)=>{
     }
 }
 export const createJob = async (req,res,next)=>{
-    let {position,company,type} = req.body
+    let {position,company,type} = req.body    
     
     try {
 
@@ -43,22 +43,40 @@ export const createJob = async (req,res,next)=>{
             return next(new Error("Job already exists"))
         }
 
-        const job = await jobModel.create(req.body)
+        const job = await jobModel.create({...req.body,postedBy:req.user.id})
         res.json({
             message:"Job created successfully",
-            success:true,
+          success:true,
             job
-        })
+        })  
     } catch (error) {
         next(error)
     }
 }
+export const getMyJobs = async (req,res,next) => {
+    try {
+        const myjobs = await jobModel.find({postedBy:req.user.id})
+        res.json({
+            success:true,
+            myjobs
+        })
+    } catch (error) {
+        next(new Error(error))
+    }
+}
 export const updateJob = (req,res,next)=>{
     try {
-        
+        const {id} = req.params
+        const newBody = req.body  
+        const updateJob = await jobModel.findByIdAndUpdate(id,newBody,{new:true})      
     } catch (error) {
         next(error)
     }
+    res.json({
+        success:true,
+        message:"Job Updated Successfully",
+        updateJob
+    })
 }
 export const deleteJob = (req,res,next)=>{
     try {

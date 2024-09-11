@@ -12,10 +12,11 @@ const jobSchema = new Schema({
   email: String,
   location: String,
   status:String,
-  type:String,
-  recuiterId : {
-    type:mongoose.Schema.Types.ObjectId,
-    ref:"user"
+  category:String,
+  postedBy : {
+    type:mongoose.Schema.ObjectId,
+    ref:"user",
+    required:true
   },
 
 },
