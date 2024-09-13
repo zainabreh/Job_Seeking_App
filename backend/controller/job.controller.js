@@ -64,24 +64,59 @@ export const getMyJobs = async (req,res,next) => {
         next(new Error(error))
     }
 }
-export const updateJob = (req,res,next)=>{
+export const updateJob = async (req,res,next)=>{
+    let updateoldJob;
     try {
-        const {id} = req.params
-        const newBody = req.body  
-        const updateJob = await jobModel.findByIdAndUpdate(id,newBody,{new:true})      
-    } catch (error) {
-        next(error)
-    }
-    res.json({
-        success:true,
-        message:"Job Updated Successfully",
-        updateJob
-    })
-}
-export const deleteJob = (req,res,next)=>{
-    try {
+        const user = req.user.id
+        const {id} = req.params 
+       
+        const job = await jobModel.findById(id)
+
+        if(!job){
+            return next(new Error("Job not Found"))
+        }
+
+
+        if(job.postedBy.toString() !==  user){
+            return next(new Error("YOur are not allowed to update this job"))
+        }
+
+            updateoldJob = await jobModel.findByIdAndUpdate(id,req.body,{new:true})   
+               
+            res.json({
+                success:true,
+                updateoldJob,
+                message:"Job Updated Successfully",
+            })
         
     } catch (error) {
         next(error)
     }
+}
+export const deleteJob = async (req,res,next)=>{
+    let deleteJob
+    try {
+        const user = req.user.id
+        const {id} = req.params
+
+        const job = await jobModel.findById(id)
+
+        if(!job){
+            return next(new Error("Job not Found"))
+        }
+
+        if(job.postedBy.toString() !== user){
+            return next(new Error("You'r not allowed to delete this job"))
+        }
+
+
+        deleteJob = await jobModel.findByIdAndDelete(id)
+    } catch (error) {
+        next(error)
+    }
+    res.json({
+        message:"Deleted successfully",
+        deleteJob,
+        success:true
+    })
 }
