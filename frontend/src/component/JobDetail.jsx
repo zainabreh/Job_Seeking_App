@@ -44,7 +44,7 @@ const JobDetail = () => {
   return (
     <>{
       singleJob && ( <div style={{width:"800px",color:"black",padding:"1px",backgroundColor:"white",margin:"20px auto", borderRadius:"10px"}}>
-        <div className="row mt-5">
+        <div className="row mt-5" key={singleJob._id}>
           <div className="col-md-8 offset-md-2">
             <h2 className="text-center">Job Title: {singleJob.position}</h2>
             <div className="text-center mb-3">
@@ -102,7 +102,7 @@ const JobDetail = () => {
             <br />
 
             {
-              isAuthenticated && user?.user?.roles === 'user' ? <><Link to={"/apply"}><button type="button" className="btn" style={{marginBottom:"30px",backgroundColor:"white"}}>Apply</button></Link></> : isAuthenticated && user?.user?.roles === 'recuiter' || 'admin' ? "" : <div class="alert alert-danger" role="alert" style={{marginBottom:"30px",}}>
+              isAuthenticated && user?.user?.roles === 'user' ? <><Link to={`/apply/${singleJob._id}`}><button type="button" className="btn" style={{marginBottom:"30px",backgroundColor:"white"}}>Apply</button></Link></> : isAuthenticated && user?.user?.roles === 'recuiter' || 'admin' ? "" : <div class="alert alert-danger" role="alert" style={{marginBottom:"30px",}}>
               LogIn or Register to apply for the Job
             </div>
             }

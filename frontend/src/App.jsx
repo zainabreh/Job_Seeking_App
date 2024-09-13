@@ -55,6 +55,7 @@ const {user,isAuthenticated} = useSelector(v=>v.auth)
                 path="usepProfileCard"
                 element={<UsepProfileCard />}
               ></Route>
+              <Route path="apply/:id" element={<JobApplicationForm/>}></Route>
               <Route path="apply" element={<JobApplicationForm/>}></Route>
               <Route
                 path="userupdateprofile"
