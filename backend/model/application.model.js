@@ -28,11 +28,6 @@ const applicationSchema = new Schema({
             type:mongoose.Schema.Types.ObjectId,
             ref:"user",
             required:true
-        },
-        role:{
-            type:String,
-            enum:["user"],
-            required: true
         }
     },
     recuiter_id:{
@@ -40,12 +35,7 @@ const applicationSchema = new Schema({
             type:mongoose.Schema.Types.ObjectId,
             ref:"user",
             required:true
-        },
-        role:{
-            type:String,
-            enum:["recuiter"],
-            required: true
-        }
+        }      
     },
     status:{
         type:String,
