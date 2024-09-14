@@ -31,7 +31,9 @@ const JobApplicationForm = () => {
       coverLetter: yup.string(),
       resume: yup.mixed().required("Required"),
     }),
-    onSubmit: (values, { setSubmitting }) => {      
+    onSubmit: (values, { setSubmitting }) => {  
+      console.log("bbbbbbbbbbbbbbbbbbb",values);
+          
       setSubmitting(false);
       navigate("/userapplication")
     },

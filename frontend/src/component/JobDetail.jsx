@@ -24,9 +24,7 @@ const JobDetail = () => {
       setSingleJob(data.job);
     }
   }, [data]);
-  
-  console.log(singleJob);
-  
+    
   const deadline = singleJob && new Date(singleJob.deadline)
   const formattedDeadline = deadline && deadline.toLocaleString('en-US',{
     month:'long',

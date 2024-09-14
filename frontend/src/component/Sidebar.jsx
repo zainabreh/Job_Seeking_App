@@ -81,32 +81,6 @@ const Sidebar = () => {
           )}
 
 
-          {user?.user?.roles === "user" && (
-            <li className="nav-item">
-              <Link to={"/apply"}>
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "10px",
-                    cursor: "pointer",
-                    color: "white",
-                  }}
-                >
-                  <i class="fa-solid fa-location-arrow" style={{ fontSize: "20px" }}></i>
-                  
-                  <p
-                    className="nav-list"
-                    style={{ margin: "5px", fontWeight: "700", color: "white" }}
-                  >
-                    Apply
-                  </p>
-                </div>
-              </Link>
-            </li>
-          )}
-
-
           {/* Recuiter */}
           {user?.user?.roles === "recuiter" && (
             <li className="nav-item">
