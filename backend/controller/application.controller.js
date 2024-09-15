@@ -1,11 +1,21 @@
 import applicationModel from "../model/application.model.js";
+import { v2 as cloudinary } from "cloudinary";
+import jobModel from "../model/job.model.js"
+
 
 export const getRecuiterApplication = async (req, res, next) => {
   try {
     const { id } = req.user;
 
-    const applications = await applicationModel.find({ recuiter_id: id });
+    console.log("recuiter id",id);
 
+    if(!id){
+      next(new Error("Not Allowed"))
+    }
+    
+    const applications = await applicationModel.find({ "recuiter_id.user": id });
+    
+    console.log("recuiter application",applications);
     res.json({
       success: true,
       applications,
@@ -16,9 +26,9 @@ export const getRecuiterApplication = async (req, res, next) => {
 };
 export const getEmployerApplication = async (req, res, next) => {
   try {
-    const { id } = req.user;
+    const { id } = req.user;    
 
-    const applications = await applicationModel.find({ applicant_id: id });
+    const applications = await applicationModel.find({ "applicant_id.user": id });    
 
     res.json({
       success: true,
@@ -32,7 +42,7 @@ export const getEmployerApplication = async (req, res, next) => {
 export const createApplication = async (req, res, next) => {
   try {
     const { id } = req.user;
-    const appBody = req.body;
+    const appBody = req.body;    
 
     const uploadResult = await cloudinary.uploader.upload(req.body.resume, {
       folder: "job-finding-app",
@@ -43,10 +53,10 @@ export const createApplication = async (req, res, next) => {
     }
 
     const applicant = {
-        user: req.user.id
+        user:id
     }
 
-    const jobDetails = await applicationModel.findById(appBody.id)
+    const jobDetails = await jobModel.findById(appBody.id)    
 
     if(!jobDetails){
         return next(new Error("Job not Found"))
@@ -60,7 +70,7 @@ export const createApplication = async (req, res, next) => {
       ...appBody,
       applicant_id: applicant,
       recuiter_id:recuiter
-    });
+    });    
 
     res.json({
       success: true,

@@ -29,7 +29,7 @@ const JobApplicationForm = () => {
     },
     validationSchema: yup.object({
       coverLetter: yup.string(),
-      resume: yup.mixed().required("Required"),
+      resume: yup.string(),
     }),
     onSubmit: (values, { setSubmitting }) => {  
       console.log("bbbbbbbbbbbbbbbbbbb",values);
@@ -39,9 +39,15 @@ const JobApplicationForm = () => {
     },
   });
 
-  const handleResumeChange = (event) => {
-    setResumeFile(event.target.files[0]);
-    formik.setFieldValue("resume", event.target.files[0]);
+  const handleImgChange = (e) => {
+    const read = new FileReader();
+    read.onload = () => {
+      if (read.readyState === 2) {
+        console.log("inside ready state");
+        setFieldValue("resume", read.result);
+      }
+    };
+    read.readAsDataURL(e.target.files[0]);
   };
 
   return (
@@ -134,7 +140,7 @@ const JobApplicationForm = () => {
                   name="resume"
                   className="form-control"
                   id="resume"
-                  onChange={handleResumeChange}
+                  onChange={(e) => handleImgChange(e)}
                 />
                 {formik.touched.resume && formik.errors.resume ? (
                   <div style={{ color: "red" }}>{formik.errors.resume}</div>

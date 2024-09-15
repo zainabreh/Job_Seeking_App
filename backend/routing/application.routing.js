@@ -4,8 +4,8 @@ import { isAuthenticated, isAuthorized } from '../middleware/auth.middleware.js'
 
 const router = express.Router()
 
-router.route('/applications/employerAll').get(isAuthenticated,getEmployerApplication)
-router.route('/applications/recuiterAll').get(isAuthenticated,getRecuiterApplication)
+router.route('/applications/employerAll').get(isAuthenticated,isAuthorized("user"),getEmployerApplication)
+router.route('/applications/recuiterAll').get(isAuthenticated,isAuthorized("recuiter"),getRecuiterApplication)
 router.route('/application/create').post(isAuthenticated,isAuthorized("user"),createApplication)
 router.route('/application/update/:id').put(isAuthenticated,isAuthorized("user"),updateApplication)
 router.route('/application/delete/:id').delete(isAuthenticated,isAuthorized("user",'admin'),deleteApplication)
