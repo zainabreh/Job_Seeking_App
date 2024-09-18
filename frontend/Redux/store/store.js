@@ -40,6 +40,7 @@ import { authApi } from "../auth/auth.api.js";
 import authReducer from "../Feature/auth.slice.js";
 import jobReducer from "../Feature/job.slice.js"
 import { jobApi } from "../auth/job.api.js";
+import { applicationApi } from "../auth/application.api.js";
 
 const store = configureStore({
   reducer: {
@@ -47,9 +48,10 @@ const store = configureStore({
     job: jobReducer,
     [authApi.reducerPath]: authApi.reducer,
     [jobApi.reducerPath]: jobApi.reducer,
+    [applicationApi.reducerPath]: applicationApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat([authApi.middleware, jobApi.middleware]),
+    getDefaultMiddleware().concat([authApi.middleware, jobApi.middleware, applicationApi.middleware]),
 });
 
 export default store

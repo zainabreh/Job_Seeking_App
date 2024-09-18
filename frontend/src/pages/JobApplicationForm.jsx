@@ -4,14 +4,16 @@ import * as yup from "yup";
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetsingleJobQuery } from "../../Redux/auth/job.api";
 import { useSelector } from "react-redux";
+import { useCreateApplicationMutation } from "../../Redux/auth/application.api";
 
 const JobApplicationForm = () => {
+
+  const [createApplication,{isLoading}] = useCreateApplicationMutation()
   
-  const [resumeFile, setResumeFile] = useState(null);
   const navigate = useNavigate()
   const {id} = useParams()
 
-  const {data,error,isLoading} = useGetsingleJobQuery(id)
+  const {data} = useGetsingleJobQuery(id)
 
   const {user} = useSelector((v)=>v.auth.user)
   
@@ -31,7 +33,9 @@ const JobApplicationForm = () => {
       coverLetter: yup.string(),
       resume: yup.string(),
     }),
-    onSubmit: (values, { setSubmitting }) => {  
+    onSubmit: async (values, { setSubmitting }) => {  
+      
+      await createApplication({...values,id})
       console.log("bbbbbbbbbbbbbbbbbbb",values);
           
       setSubmitting(false);
@@ -44,7 +48,7 @@ const JobApplicationForm = () => {
     read.onload = () => {
       if (read.readyState === 2) {
         console.log("inside ready state");
-        setFieldValue("resume", read.result);
+        formik.setFieldValue("resume", read.result);
       }
     };
     read.readAsDataURL(e.target.files[0]);
@@ -168,9 +172,15 @@ const JobApplicationForm = () => {
               </div>
               
               <div className="col-md-12 text-center">
-              <button type="submit" className="btn btn-primary ">
+                {
+                  isLoading ? <button type="submit" disabled className="btn btn-primary ">
+                  Submitting...
+                </button> : <button type="submit" className="btn btn-primary ">
                 Submit Application
               </button>
+                }
+              
+              
               </div>
             </form>
           </div>

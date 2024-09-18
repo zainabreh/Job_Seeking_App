@@ -14,14 +14,7 @@ const applicationSchema = new Schema({
         type: String,
     },
     resume: {
-        public_id: {
-            type:String,
-            // required: true
-        },
-        url: {
-            type: String,
-            // required:true
-        }
+        type:String
     },
     applicant_id:{
         user:{

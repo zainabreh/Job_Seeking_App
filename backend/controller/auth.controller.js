@@ -16,7 +16,6 @@ export const signup = async (req, res, next) => {
 
     if (uploadResult) {
       user.avatar = uploadResult.secure_url;
-      console.log(user.avatar);
       
       let userPassword = user.password;
       user.password = await bcrypt.hash(userPassword, 10);

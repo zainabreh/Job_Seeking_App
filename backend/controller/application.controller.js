@@ -42,14 +42,15 @@ export const getEmployerApplication = async (req, res, next) => {
 export const createApplication = async (req, res, next) => {
   try {
     const { id } = req.user;
-    const appBody = req.body;    
+    const appBody = req.body; 
+    
 
-    const uploadResult = await cloudinary.uploader.upload(req.body.resume, {
+    const uploadResult = await cloudinary.uploader.upload(appBody.resume, {
       folder: "job-finding-app",
     });
 
     if (uploadResult) {
-      appBody.resume = uploadResult.secure_url;
+      appBody.resume = uploadResult.secure_url
     }
 
     const applicant = {
@@ -57,6 +58,7 @@ export const createApplication = async (req, res, next) => {
     }
 
     const jobDetails = await jobModel.findById(appBody.id)    
+    
 
     if(!jobDetails){
         return next(new Error("Job not Found"))
@@ -66,17 +68,19 @@ export const createApplication = async (req, res, next) => {
         user : jobDetails.postedBy
     }
 
-    const application = await applicationModel.create({
-      ...appBody,
-      applicant_id: applicant,
-      recuiter_id:recuiter
-    });    
-
-    res.json({
-      success: true,
-      message: "Application created successfully",
-      application,
-    });
+      const application = await applicationModel.create({
+        ...appBody,
+        applicant_id: applicant,
+        recuiter_id:recuiter
+      });         
+  
+      res.json({
+        success: true,
+        message: "Application created successfully",
+        application,
+      });
+   
+  
   } catch (error) {
     next(error);
   }
