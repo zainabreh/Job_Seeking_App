@@ -30,6 +30,15 @@ const applicationSchema = new Schema({
             required:true
         }      
     },
+    companyEmail:{
+        type:String
+    },
+    companyName:{
+        type:String
+    },
+    position:{
+        type:String
+    },
     status:{
         type:String,
         default: 'pending',

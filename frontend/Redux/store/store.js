@@ -39,6 +39,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { authApi } from "../auth/auth.api.js";
 import authReducer from "../Feature/auth.slice.js";
 import jobReducer from "../Feature/job.slice.js"
+import applicationReducer from "../Feature/application.slice.js"
 import { jobApi } from "../auth/job.api.js";
 import { applicationApi } from "../auth/application.api.js";
 
@@ -46,6 +47,7 @@ const store = configureStore({
   reducer: {
     auth: authReducer,
     job: jobReducer,
+    application:applicationReducer,
     [authApi.reducerPath]: authApi.reducer,
     [jobApi.reducerPath]: jobApi.reducer,
     [applicationApi.reducerPath]: applicationApi.reducer,

@@ -16,8 +16,20 @@ export const applicationApi = createApi({
                 method:"POST",
                 body: data
             })
+        }),
+        getUserApplication: builder.query({
+            query: ()=>({
+                url:"/applications/employerAll",
+                method:"GET"
+            })
+        }),
+        getRecuiterApplication: builder.query({
+            query: ()=>({
+                url:"/applications/recuiterAll",
+                method:"GET"
+            })
         })
     })
 })
 
-export const {useCreateApplicationMutation} = applicationApi
+export const {useCreateApplicationMutation,useGetUserApplicationQuery,useGetRecuiterApplicationQuery} = applicationApi

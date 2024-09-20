@@ -6,19 +6,41 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { useGetUserApplicationQuery } from "../../Redux/auth/application.api";
+import { useGetprofileQuery } from "../../Redux/auth/auth.api";
+import { useSelector } from "react-redux";
 
 function createData(No, position, company, status) {
   return { No, position, company, status };
 }
 
-const rows = [
-  createData(0o1, "Web Developer", "Microsoft", "Pending"),
-  createData(0o2, "Software Engineering", "Tesla", "Pending"),
-];
-
 export default function Userapplication() {
+  const {data,error,isLoading} = useGetUserApplicationQuery()
+  const {data:profile} = useGetprofileQuery() 
+  const [valid,setValid] = React.useState()
+  const [nothing,setNothing] = React.useState()
+
+  const applications = useSelector((v)=>v.application.userApplication)
+  console.log("Applications...",applications);
+  
+  
+  if(isLoading){
+    return <h1>Loading....</h1>
+  }
+
+  // const currentUserId = profile.user._id;
+  // const filteredApplications = Array.isArray(data.applications) 
+  //   ? data.applications.filter(application => application.applicant_id.user === currentUserId) 
+  //   : [];
+
+  // if (filteredApplications.length === 0) {
+  //   return <h1>No Applications Found</h1>;
+  // }
+
+  
   return (
     <div className="table-container container" style={{color:"white"}}>
+      
       <h3 style={{ marginBlock: "15px" }}>
         <span
           style={{
@@ -65,23 +87,26 @@ export default function Userapplication() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <TableRow
-                key={row.No}
+
+            {/* {
+              filteredApplications.map((v,index)=>(
+                <TableRow
+                key={v.id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  {row.No}
+                  {index++}
                 </TableCell>
-                <TableCell align="left">{row.position}</TableCell>
-                <TableCell align="left">{row.company}</TableCell>
-                <TableCell align="left">{row.status}</TableCell>
+                <TableCell align="left">{v.position}</TableCell>
+                <TableCell align="left">{v.companyName}</TableCell>
+                <TableCell align="left">{v.status}</TableCell>
                 <TableCell align="left">
                   <i className="fa-solid fa-pen-to-square" style={{fontSize:"20px",padding:"5px",cursor:"pointer",color:"green"}}></i>
                   <i className="fa-solid fa-trash" style={{fontSize:"20px",padding:"5px",cursor:"pointer",color:"red"}}></i>
                   </TableCell>
               </TableRow>
-            ))}
+              ))
+            } */}
           </TableBody>
         </Table>
       </TableContainer>

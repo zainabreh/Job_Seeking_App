@@ -3,8 +3,9 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetsingleJobQuery } from "../../Redux/auth/job.api";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useCreateApplicationMutation } from "../../Redux/auth/application.api";
+import { addApplication } from "../../Redux/Feature/application.slice";
 
 const JobApplicationForm = () => {
 
@@ -12,6 +13,8 @@ const JobApplicationForm = () => {
   
   const navigate = useNavigate()
   const {id} = useParams()
+  const dispatch = useDispatch()    
+
 
   const {data} = useGetsingleJobQuery(id)
 
@@ -35,9 +38,9 @@ const JobApplicationForm = () => {
     }),
     onSubmit: async (values, { setSubmitting }) => {  
       
-      await createApplication({...values,id})
-      console.log("bbbbbbbbbbbbbbbbbbb",values);
-          
+      const application = await createApplication({...values,id})
+      
+      dispatch(addApplication(application))
       setSubmitting(false);
       navigate("/userapplication")
     },
