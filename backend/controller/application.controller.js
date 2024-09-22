@@ -57,8 +57,7 @@ export const createApplication = async (req, res, next) => {
         user:id
     }
 
-    const jobDetails = await jobModel.findById(appBody.id)    
-    
+    const jobDetails = await jobModel.findById(appBody.id)        
 
     if(!jobDetails){
         return next(new Error("Job not Found"))

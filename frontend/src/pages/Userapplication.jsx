@@ -15,28 +15,34 @@ function createData(No, position, company, status) {
 }
 
 export default function Userapplication() {
-  const {data,error,isLoading} = useGetUserApplicationQuery()
   const {data:profile} = useGetprofileQuery() 
-  const [valid,setValid] = React.useState()
-  const [nothing,setNothing] = React.useState()
+  const {data,error,isLoading} = useGetUserApplicationQuery()
 
   const applications = useSelector((v)=>v.application.userApplication)
-  console.log("Applications...",applications);
-  
+  console.log("Applications...",applications);  
   
   if(isLoading){
     return <h1>Loading....</h1>
   }
 
-  // const currentUserId = profile.user._id;
-  // const filteredApplications = Array.isArray(data.applications) 
-  //   ? data.applications.filter(application => application.applicant_id.user === currentUserId) 
-  //   : [];
+  const currentUserId = profile.user._id;
+  const filteredApplications = Array.isArray(applications) 
+    ? applications.filter(application => application.data.application.applicant_id.user === currentUserId) 
+    : [];
+    
 
-  // if (filteredApplications.length === 0) {
-  //   return <h1>No Applications Found</h1>;
-  // }
-
+  if (filteredApplications.length === 0) {
+    return <h1 style={{
+      textAlign: "center",
+      marginTop: "40%",
+      fontSize: "36px",
+      fontWeight: "bold",
+      color: "#333",
+      textShadow: "2px 2px 4px #ccc",
+      cursor: "pointer",
+      transition: "all 0.3s ease-in-out"
+    }}>No Applications Found</h1>
+  }
   
   return (
     <div className="table-container container" style={{color:"white"}}>
@@ -88,25 +94,25 @@ export default function Userapplication() {
           </TableHead>
           <TableBody>
 
-            {/* {
+             {
               filteredApplications.map((v,index)=>(
                 <TableRow
-                key={v.id}
+                key={v.data.application._id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
                   {index++}
                 </TableCell>
-                <TableCell align="left">{v.position}</TableCell>
-                <TableCell align="left">{v.companyName}</TableCell>
-                <TableCell align="left">{v.status}</TableCell>
+                <TableCell align="left">{v.data.application.position}</TableCell>
+                <TableCell align="left">{v.data.application.companyName}</TableCell>
+                <TableCell align="left">{v.data.application.status}</TableCell>
                 <TableCell align="left">
                   <i className="fa-solid fa-pen-to-square" style={{fontSize:"20px",padding:"5px",cursor:"pointer",color:"green"}}></i>
                   <i className="fa-solid fa-trash" style={{fontSize:"20px",padding:"5px",cursor:"pointer",color:"red"}}></i>
                   </TableCell>
               </TableRow>
               ))
-            } */}
+            } 
           </TableBody>
         </Table>
       </TableContainer>

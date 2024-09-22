@@ -12,8 +12,6 @@ const applicationSlice = createSlice({
             state.userApplication.push(action.payload)
         },
         removeApplication: (state,action)=>{
-            // state.userApplication.filter(action.payload)
-            // state.recuiterApplication.filter(action.payload)
 
         }
     }

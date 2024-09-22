@@ -41,11 +41,18 @@ export const jobApi = createApi({
         body: data,
       }),
     }),
+    getMyJobs: builder.query({
+      query: () => ({
+        url: "/job/getmyJobs",
+        method: "GET"
+      })
+    })
   }),
 });
 
 export const {
   useGetallJobsQuery,
+  useGetMyJobsQuery,
   useGetsingleJobQuery,
   useCreateJobMutation,
   useDeleteJobMutation,

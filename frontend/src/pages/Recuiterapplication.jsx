@@ -6,17 +6,22 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { useGetRecuiterApplicationQuery } from "../../Redux/auth/application.api";
+import { useGetprofileQuery } from "../../Redux/auth/auth.api";
 
-function createData(No, position, company, status) {
-  return { No, position, company, status };
-}
 
-const rows = [
-  createData(0o1, "Web Developer", "Microsoft", "Pending"),
-  createData(0o2, "Software Engineering", "Tesla", "Pending"),
-];
 
 export default function Recuiterapplication() {
+
+  const {data,isLoading} = useGetRecuiterApplicationQuery()
+  const {data:profile} = useGetprofileQuery() 
+  console.log("recuiter",data); 
+  
+  if(isLoading){
+    return <h1>Loading....</h1>
+  }
+
+
   return (
     <div className="table-container container" style={{color:"white"}}>
       <h3 style={{ marginBlock: "15px" }}>
@@ -66,17 +71,17 @@ export default function Recuiterapplication() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <TableRow
-                key={row.No}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {row.No}
-                </TableCell>
-                <TableCell align="left">{row.position}</TableCell>
-                <TableCell align="left">{row.company}</TableCell>
-                <TableCell align="left">{row.status}</TableCell>
+          {data.applications.map((row,index) => (
+                <TableRow
+                  key={row._id}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {index++}
+                  </TableCell>
+                  <TableCell align="left"><i className="fa-regular fa-eye" style={{fontSize:"20px",padding:"5px",cursor:"pointer",color:"blue"}}></i>   {row.position}</TableCell>
+                  <TableCell align="left">{row.companyName}</TableCell>
+                  <TableCell align="left">{row.status}</TableCell>
                 <TableCell align="left">
                 <span className="badge text-bg-success">Accept</span>
                 <span className="badge text-bg-danger" style={{marginInline:"5px"}}>Reject</span>
