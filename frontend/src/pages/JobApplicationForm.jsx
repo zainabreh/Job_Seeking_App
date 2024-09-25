@@ -41,7 +41,7 @@ const JobApplicationForm = () => {
       const application = await createApplication({...values,id})
       
       dispatch(addApplication(application))
-      setSubmitting(false);
+      // setSubmitting(false);
       navigate("/userapplication")
     },
   });

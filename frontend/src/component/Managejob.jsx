@@ -10,10 +10,22 @@ import { useGetMyJobsQuery } from "../../Redux/auth/job.api";
 
 export default function Managejob() {
   const {data,isLoading} = useGetMyJobsQuery()
-  console.log("recuiter",data); 
   
   if(isLoading){
     return <h1>Loading....</h1>
+  }
+
+  if(data.myjobs.length === 0 ){
+    return <h1 style={{
+      textAlign: "center",
+      marginTop: "30%",
+      fontSize: "36px",
+      fontWeight: "bold",
+      color: "#333",
+      textShadow: "2px 2px 4px #ccc",
+      cursor: "pointer",
+      transition: "all 0.3s ease-in-out"
+    }}>You have Not Posted Any Jobs</h1>
   }
   
   return (

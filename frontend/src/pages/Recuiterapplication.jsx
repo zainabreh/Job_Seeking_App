@@ -15,11 +15,24 @@ export default function Recuiterapplication() {
 
   const {data,isLoading} = useGetRecuiterApplicationQuery()
   const {data:profile} = useGetprofileQuery() 
-  console.log("recuiter",data); 
-  
+
   if(isLoading){
     return <h1>Loading....</h1>
   }
+
+  if(data.applications.length === 0 ){
+    return <h1 style={{
+      textAlign: "center",
+      marginTop: "30%",
+      fontSize: "36px",
+      fontWeight: "bold",
+      color: "#333",
+      textShadow: "2px 2px 4px #ccc",
+      cursor: "pointer",
+      transition: "all 0.3s ease-in-out"
+    }}>No Application Available</h1>
+  }
+  
 
 
   return (
