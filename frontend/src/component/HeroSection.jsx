@@ -8,12 +8,11 @@ import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 
-/**
- * Design credit: https://flutter.dev/
- */
 
 export default function HeroSection() {
   const [color, setColor] = React.useState("primary");
+  
+
   return (
     <>
       <Sheet

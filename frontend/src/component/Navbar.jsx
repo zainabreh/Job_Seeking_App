@@ -1,17 +1,23 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useGetprofileQuery, useLazyLogoutUserQuery } from "../../Redux/auth/auth.api";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { resetjob } from "../../Redux/Feature/job.slice";
 
 const Navbar = () => {
 
   const {isLoading} = useGetprofileQuery()
   const {user,isAuthenticated} = useSelector((v)=>v.auth)
+  const dispatch = useDispatch()
   
   const [logoutUser,{data}] = useLazyLogoutUserQuery()
 
 const handleLogOut = async ()=>{
   await logoutUser()
+}
+
+const handleReset = ()=>{
+  dispatch(resetjob())
 }
 
 
@@ -42,6 +48,7 @@ const handleLogOut = async ()=>{
             >
               Jobs
             </span>
+            <button onClick={handleReset}>reset</button>
           </div></Link>
           {
             isAuthenticated ?

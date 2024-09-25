@@ -34,7 +34,7 @@ export default function Userapplication() {
   if (filteredApplications.length === 0) {
     return <h1 style={{
       textAlign: "center",
-      marginTop: "40%",
+      marginTop: "30%",
       fontSize: "36px",
       fontWeight: "bold",
       color: "#333",
