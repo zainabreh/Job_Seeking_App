@@ -4,16 +4,18 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/ReactToastify.css";
 
 import React from "react";
-import { useCreateJobMutation } from "../../Redux/auth/job.api";
+import { useCreateJobMutation, useUpdateJobMutation } from "../../Redux/auth/job.api";
 import { useDispatch } from "react-redux";
 import { setjob } from "../../Redux/Feature/job.slice";
 import { useNavigate } from "react-router-dom";
 
-const Addjob = () => {
+const Addjob = ({job,mode}) => {
 
-  const [createJob,{data,error,isLoading}] = useCreateJobMutation()
+  const [createJob,{data:createData,error:createError,isLoading}] = useCreateJobMutation()
   const navigate = useNavigate()
   const dispatch = useDispatch()
+
+  const [updateJob,{data:updateData,error:updateError}] = useUpdateJobMutation()
 
   const {
     handleChange,

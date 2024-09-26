@@ -7,12 +7,15 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { useGetMyJobsQuery } from "../../Redux/auth/job.api";
+import { useNavigate } from "react-router-dom";
+import Addjob from "./Addjob";
 
 export default function Managejob() {
+  const navigate = useNavigate()
   const {data,isLoading} = useGetMyJobsQuery()
   
   if(isLoading){
-    return <h1>Loading....</h1>
+    return <h1>Loading.....</h1>
   }
 
   if(data.myjobs.length === 0 ){
@@ -26,6 +29,13 @@ export default function Managejob() {
       cursor: "pointer",
       transition: "all 0.3s ease-in-out"
     }}>You have Not Posted Any Jobs</h1>
+  }
+
+  const handleUpdateJob = (newJob)=>{
+    return (
+      <Addjob mode="updatejob" job={newJob}/>
+    )
+    
   }
   
   return (
@@ -73,7 +83,10 @@ export default function Managejob() {
                   <TableCell align="left">{row.company}</TableCell>
                   <TableCell align="left">
                   <i className="fa-regular fa-eye" style={{fontSize:"20px",padding:"5px",cursor:"pointer",color:"blue"}}></i>
-                  <i className="fa-solid fa-pen-to-square" style={{fontSize:"20px",padding:"5px",cursor:"pointer",color:"green"}}></i>
+                  <i className="fa-solid fa-pen-to-square" style={{fontSize:"20px",padding:"5px",cursor:"pointer",color:"green"}} onClick={()=>{
+                    handleUpdateJob(row)
+                    navigate('/recuiter/addjob')                    
+                    }}></i>
                   <i className="fa-solid fa-trash" style={{fontSize:"20px",padding:"5px",cursor:"pointer",color:"red"}}></i>
                   </TableCell>
                 </TableRow>
