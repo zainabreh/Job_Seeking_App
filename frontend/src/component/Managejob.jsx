@@ -13,6 +13,8 @@ import Addjob from "./Addjob";
 export default function Managejob() {
   const navigate = useNavigate()
   const {data,isLoading} = useGetMyJobsQuery()
+  console.log("MY JOBS",data);
+  
   
   if(isLoading){
     return <h1>Loading.....</h1>
@@ -71,7 +73,7 @@ export default function Managejob() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {data.myjobs.map((row,index) => (
+              {data?.myjobs?.map((row,index) => (
                 <TableRow
                   key={row._id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}

@@ -3,43 +3,44 @@ import * as yup from "yup";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/ReactToastify.css";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useCreateJobMutation, useUpdateJobMutation } from "../../Redux/auth/job.api";
 import { useDispatch } from "react-redux";
-import { setjob } from "../../Redux/Feature/job.slice";
+import { setjob, updatejob } from "../../Redux/Feature/job.slice";
 import { useNavigate } from "react-router-dom";
+const Addjob = ({ job, mode }) => {
+  const [createJob, { data: createData, error: createError, isLoading }] = useCreateJobMutation();
+  const [updateJob, { data: updateData, error: updateError }] = useUpdateJobMutation();
 
-const Addjob = ({job,mode}) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const [createJob,{data:createData,error:createError,isLoading}] = useCreateJobMutation()
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-
-  const [updateJob,{data:updateData,error:updateError}] = useUpdateJobMutation()
+ const initialValues = job || {
+    position: "",
+    company: "",
+    location: "",
+    status: "",
+    category: "",
+    vacancy: "",
+    deadline: "",
+    salary: "",
+    email: "",
+    facilities: [],
+    requiredSkill: [],
+    description: "",
+  }
 
   const {
     handleChange,
     handleSubmit,
     handleBlur,
     handleReset,
+    setFieldValue,
     touched,
     values,
     errors,
   } = useFormik({
-    initialValues: {
-      position: "",
-      company: "",
-      location: "",
-      status: "",
-      category: "",
-      vacancy: "",
-      deadline: "",
-      salary: "",
-      email: "",
-      facilities: [],
-      requiredSkill: [],
-      description: "",
-    },
+    initialValues,
     validationSchema: yup.object({
       position: yup.string().required("Position is required"),
       company: yup.string().required("Company is required"),
@@ -54,38 +55,61 @@ const Addjob = ({job,mode}) => {
         .email("Invalid email")
         .required("Contact Mail is required"),
       facilities: yup.string(),
-      requiredSkill: yup.string().required("Skill is required")
-      ,
+      requiredSkill: yup.string().required("Skill is required"),
       description: yup.string().required("Job Description is required"),
     }),
     onSubmit: async (v) => {
-
       const facilitiesArray = v.facilities.split(",");
       const requiredSkillsArray = v.requiredSkill.split(",");
-  
+
       const formData = {
         ...v,
         facilities: facilitiesArray.map((facility) => facility.trim()),
         requiredSkill: requiredSkillsArray.map((skill) => skill.trim()),
       };
 
-
-      const job = await createJob(formData).unwrap()            
-      dispatch(setjob(job.job))
-      if (job.success === true) {
-        toast.success(job.message);
-      } else {
-        toast.error(job.message)
+      if (mode === "addjob") {
+        const newJob = await createJob(formData).unwrap();
+        dispatch(setjob(newJob.job));
+        if (newJob.success === true) {
+          toast.success(newJob.message);
+        } else {
+          toast.error(newJob.message);
+        }
+        navigate("/");
+      } else if (mode === "updatejob") {
+        const updatedJob = await updateJob({ ...formData, id: job.id }).unwrap();
+        dispatch(updatejob(updatedJob.job));
+        if (updatedJob.success === true) {
+          toast.success(updatedJob.message);
+        } else {
+          toast.error(updatedJob.message);
+        }
+        navigate("/");
       }
-      navigate("/")
-    },
+    }
   });
+
+  useEffect(() => {
+    if (job) {
+      Object.keys(job).forEach((key) => {
+        setFieldValue(key, job[key]);
+      });
+    } else {
+      Object.keys(initialValues).forEach((key) => {
+        setFieldValue(key, initialValues[key]);
+      });
+    }
+  }, [job, setFieldValue]);
+
+  
 
   return (
     <>
        <ToastContainer />
       <div className="container">
-        <h2
+        {
+          job ? <h2
           style={{
             textAlign: "center",
             marginBlock: "20px",
@@ -93,8 +117,17 @@ const Addjob = ({job,mode}) => {
             color: "white",
           }}
         >
-          Create New Job
-        </h2>
+      
+          Update Job
+        </h2> : <h2
+          style={{
+            textAlign: "center",
+            marginBlock: "20px",
+            fontWeight: "600",
+            color: "white",
+          }}
+        >Create New Job</h2>
+      }
         <form className="row g-3" onSubmit={handleSubmit} style={{ color: "white" }}>
           <div className="col-md-4">
             <label for="inputEmail4" className="form-label">
