@@ -5,7 +5,7 @@ import "react-toastify/ReactToastify.css";
 import React, { useEffect } from "react";
 import { useCreateJobMutation, useUpdateJobMutation } from "../../Redux/auth/job.api";
 import { useDispatch, useSelector } from "react-redux";
-import { setjob, updatejob } from "../../Redux/Feature/job.slice";
+import { setjob } from "../../Redux/Feature/job.slice";
 import { useNavigate } from "react-router-dom";
 
 

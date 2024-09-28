@@ -2,10 +2,10 @@ import {  useFormik } from "formik";
 import * as yup from "yup";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/ReactToastify.css";
-import React, { useEffect } from "react";
-import { useUpdateJobMutation } from "../../Redux/auth/job.api";
+import React, { useEffect, useState } from "react";
+import { useGetsingleJobQuery, useUpdateJobMutation } from "../../Redux/auth/job.api";
 import { useDispatch, useSelector } from "react-redux";
-import { setjob, updatejob } from "../../Redux/Feature/job.slice";
+import { setjob } from "../../Redux/Feature/job.slice";
 import { useNavigate, useParams } from "react-router-dom";
 
 
@@ -14,29 +14,33 @@ import { useNavigate, useParams } from "react-router-dom";
 const Updatejob = () => {
 
     const {id} = useParams()
+    console.log(id);
+    
 
-  const [updateJob, { data: createData, error: createError, isLoading }] = useUpdateJobMutation(id);
+  const [updateJob, { data: createData, error: createError, isLoading }] = useUpdateJobMutation();
 
-  console.log("update",id);
-  console.log("update",updateJob);
-  
+  const {data} =useGetsingleJobQuery(id)  
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();  
+  const dispatch = useDispatch(); 
 
- const initialValues =  {
-    position: "",
-    company: "",
-    location: "",
-    status: "",
-    category: "",
-    vacancy: "",
-    deadline: "",
-    salary: "",
-    email: "",
-    facilities: [],
-    requiredSkill: [],
-    description: "",
+  if (!data || !data.job) {
+    return <div>Loading...</div>;
+  }
+  
+ const initialValues =  data && data.job && {
+    position: data.job.position,
+    company: data.job.company,
+    location: data.job.location,
+    status: data.job.status,
+    category: data.job.category,
+    vacancy: data.job.vacancy,
+    deadline: data.job.deadline,
+    salary: data.job.salary,
+    email: data.job.email,
+    facilities: data.job.facilities.toString(),
+    requiredSkill: data.job.requiredSkill.toString(),
+    description: data.job.description,
   }
 
   const {
@@ -77,13 +81,15 @@ const Updatejob = () => {
         facilities: facilitiesArray.map((facility) => facility.trim()),
         requiredSkill: requiredSkillsArray.map((skill) => skill.trim()),
       };
-        // const newJob = await createJob(formData).unwrap();
-        // dispatch(updateJob(newJob.job));
-        // if (newJob.success === true) {
-        //   toast.success(newJob.message);
-        // } else {
-        //   toast.error(newJob.message);
-        // }
+        const newJob = await updateJob({_id:id,formData:formData}).unwrap();
+        console.log("newjob........",newJob);
+        
+        dispatch(setjob(newJob.job));        
+        if (newJob.success === true) {
+          toast.success(newJob.message);
+        } else {
+          toast.error(newJob.message);
+        }
         navigate("/");
       }
      

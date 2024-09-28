@@ -14,12 +14,10 @@ const jobSlice = createSlice({
         resetjob:(state,action)=>{
             state.job = null
         },
-        updatejob:(state,action)=>{
-            state.job = action.payload
-        }
+        
        
     }
 })
 
-export const {setjob,resetjob,updatejob} = jobSlice.actions
+export const {setjob,resetjob} = jobSlice.actions
 export default jobSlice.reducer

@@ -69,10 +69,16 @@ export const getMyJobs = async (req,res,next) => {
     }
 }
 export const updateJob = async (req,res,next)=>{
-    let updateoldJob;
+    
     try {
         const user = req.user.id
-        const {id} = req.params 
+        const {id} = req.params  
+        
+        console.log(id);
+        
+        
+        console.log("OLD Data....",req.body);
+        
        
         const job = await jobModel.findById(id)
 
@@ -85,7 +91,10 @@ export const updateJob = async (req,res,next)=>{
             return next(new Error("YOur are not allowed to update this job"))
         }
 
-            updateoldJob = await jobModel.findByIdAndUpdate(id,req.body,{new:true})   
+        let updateoldJob = await jobModel.findByIdAndUpdate({_id:id},req.body,{new:true}) 
+        
+        console.log("NEW Data....",updateoldJob);
+        
                
             res.json({
                 success:true,

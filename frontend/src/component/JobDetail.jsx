@@ -7,20 +7,14 @@ const JobDetail = () => {
   const {user,isAuthenticated} = useSelector(v=>v.auth)
   const [singleJob,setSingleJob] = useState()
   const {id} = useParams()
-  const {data,error,isLoading} = useGetsingleJobQuery(id) 
+  const {data,error,isLoading,refetch} = useGetsingleJobQuery(id) 
 
-  // useEffect(()=>{
-  //   const singleJob = async ()=>{
-  //     const job = await data
-
-  //     setSingleJob(job)
-  //   }
-
-  //   singleJob()
-  // },[data])
+  console.log("single data api................",data);
+  
 
   useEffect(() => {
     if (data) {
+      refetch()
       setSingleJob(data.job);
     }
   }, [data]);

@@ -35,10 +35,10 @@ export const jobApi = createApi({
       }),
     }),
     updateJob: builder.mutation({
-      query: (data,id) => ({
-        url: `/job/updateJob/${id}`,
+      query: (data) => ({
+        url: `/job/updateJob/${data._id}`,
         method: "PUT",
-        body: data,
+        body: data.formData,
       }),
     }),
     getMyJobs: builder.query({
