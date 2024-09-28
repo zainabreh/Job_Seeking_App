@@ -3,18 +3,23 @@ import * as yup from "yup";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/ReactToastify.css";
 import React, { useEffect } from "react";
-import { useCreateJobMutation, useUpdateJobMutation } from "../../Redux/auth/job.api";
+import { useUpdateJobMutation } from "../../Redux/auth/job.api";
 import { useDispatch, useSelector } from "react-redux";
 import { setjob, updatejob } from "../../Redux/Feature/job.slice";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 
 
-const Addjob = () => {
+const Updatejob = () => {
 
+    const {id} = useParams()
 
-  const [createJob, { data: createData, error: createError, isLoading }] = useCreateJobMutation();
+  const [updateJob, { data: createData, error: createError, isLoading }] = useUpdateJobMutation(id);
+
+  console.log("update",id);
+  console.log("update",updateJob);
+  
 
   const navigate = useNavigate();
   const dispatch = useDispatch();  
@@ -72,13 +77,13 @@ const Addjob = () => {
         facilities: facilitiesArray.map((facility) => facility.trim()),
         requiredSkill: requiredSkillsArray.map((skill) => skill.trim()),
       };
-        const newJob = await createJob(formData).unwrap();
-        dispatch(setjob(newJob.job));
-        if (newJob.success === true) {
-          toast.success(newJob.message);
-        } else {
-          toast.error(newJob.message);
-        }
+        // const newJob = await createJob(formData).unwrap();
+        // dispatch(updateJob(newJob.job));
+        // if (newJob.success === true) {
+        //   toast.success(newJob.message);
+        // } else {
+        //   toast.error(newJob.message);
+        // }
         navigate("/");
       }
      
@@ -96,7 +101,7 @@ const Addjob = () => {
             fontWeight: "600",
             color: "white",
           }}
-        >Create New Job</h2>
+        >Update Job</h2>
         <form className="row g-3" onSubmit={handleSubmit} style={{ color: "white" }}>
           <div className="col-md-4">
             <label for="inputEmail4" className="form-label">
@@ -434,4 +439,4 @@ const Addjob = () => {
   );
 };
 
-export default Addjob;
+export default Updatejob;

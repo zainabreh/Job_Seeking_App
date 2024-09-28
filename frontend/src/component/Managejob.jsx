@@ -7,14 +7,11 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { useGetMyJobsQuery } from "../../Redux/auth/job.api";
-import { useNavigate } from "react-router-dom";
-import Addjob from "./Addjob";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Managejob() {
   const navigate = useNavigate()
   const {data,isLoading} = useGetMyJobsQuery()
-  console.log("MY JOBS",data);
-  
   
   if(isLoading){
     return <h1>Loading.....</h1>
@@ -32,15 +29,10 @@ export default function Managejob() {
       transition: "all 0.3s ease-in-out"
     }}>You have Not Posted Any Jobs</h1>
   }
-
-  const handleUpdateJob = (newJob)=>{
-    return (
-      <Addjob mode="updatejob" job={newJob}/>
-    )
-    
-  }
   
   return (
+
+    
     <div className="container">
       
       <h2 style={{textAlign:"center",marginBlock:"20px",fontWeight:"600",color:"white"}}>Manage Job</h2>
@@ -84,12 +76,9 @@ export default function Managejob() {
                   <TableCell align="left">{row.position}</TableCell>
                   <TableCell align="left">{row.company}</TableCell>
                   <TableCell align="left">
-                  <i className="fa-regular fa-eye" style={{fontSize:"20px",padding:"5px",cursor:"pointer",color:"blue"}}></i>
-                  <i className="fa-solid fa-pen-to-square" style={{fontSize:"20px",padding:"5px",cursor:"pointer",color:"green"}} onClick={()=>{
-                    handleUpdateJob(row)
-                    navigate('/recuiter/addjob')                    
-                    }}></i>
-                  <i className="fa-solid fa-trash" style={{fontSize:"20px",padding:"5px",cursor:"pointer",color:"red"}}></i>
+                  <i className="fa-regular fa-eye" style={{fontSize:"20px",padding:"5px",cursor:"pointer",color:"blue"}}>S</i>
+                  <Link to={`/recuiter/updatejob/${row._id}`}><i className="fa-solid fa-pen-to-square" style={{fontSize:"20px",padding:"5px",cursor:"pointer",color:"green"}}>E</i></Link>
+                  <i className="fa-solid fa-trash" style={{fontSize:"20px",padding:"5px",cursor:"pointer",color:"red"}}>D</i>
                   </TableCell>
                 </TableRow>
               ))} 
