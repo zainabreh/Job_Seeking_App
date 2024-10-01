@@ -41,25 +41,26 @@ const PlusIcon = createSvgIcon(
 export default function JobCard() {
 
   const {data,error,isLoading} = useGetallJobsQuery() 
-  const [userdata,setUserData] = React.useState()
-  const dispatch = useDispatch()
 
-  React.useEffect(()=>{
-    const gettingData = async ()=>{
-        const info = await data
-
-        setUserData(info)
-    }
-    gettingData()
-    if(userdata){
-        dispatch(setjob(userdata))
-    }
-  },[data,userdata,dispatch])
-
-  const { job } = useSelector((v) => v.job);
-  const jobs = job && job.jobs;
+  const dispatch = useDispatch();
   
+  React.useEffect(() => {
+    if (data && data.jobs) {
+      dispatch(setjob(data.jobs));
+    }
+  }, [data, dispatch]);
+  
+  const { job } = useSelector((v) => v.job);
+  const jobs = job
 
+  if(isLoading){
+    return <h1>Loading</h1>
+  }
+
+  if(error){
+    return <h1>Something went wrong</h1>
+  }
+  
   return (
     <>
     {jobs && Array.isArray(jobs) ? (

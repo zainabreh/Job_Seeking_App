@@ -28,10 +28,9 @@ export const jobApi = createApi({
     }),
 
     deleteJob: builder.mutation({
-      query: (data) => ({
-        url: "/job/deleteJob",
-        method: "POST",
-        body: data,
+      query: (id) => ({
+        url: `/job/deleteJob/${id}`,
+        method: "DELETE",
       }),
     }),
     updateJob: builder.mutation({
@@ -47,6 +46,7 @@ export const jobApi = createApi({
         method: "GET"
       })
     }),
+   
   }),
 });
 

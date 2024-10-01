@@ -6,17 +6,28 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { useGetMyJobsQuery } from "../../Redux/auth/job.api";
+import { useDeleteJobMutation, useGetMyJobsQuery } from "../../Redux/auth/job.api";
 import { Link, useNavigate } from "react-router-dom";
+import { removejob } from "../../Redux/Feature/job.slice";
+import { useDispatch } from "react-redux";
 
 export default function Managejob() {
   const navigate = useNavigate()
-  const {data,isLoading} = useGetMyJobsQuery()
+  const {data,isLoading,error,refetch} = useGetMyJobsQuery()
+  const [deleteJob] = useDeleteJobMutation()
+
+  const dispatch = useDispatch()
   
   if(isLoading){
     return <h1>Loading.....</h1>
   }
 
+  if(error){
+    return <h1>Somthing went wrong</h1>
+  }
+
+  console.log("my jobs...............",data.myjobs);
+  
   if(data.myjobs.length === 0 ){
     return <h1 style={{
       textAlign: "center",
@@ -28,6 +39,12 @@ export default function Managejob() {
       cursor: "pointer",
       transition: "all 0.3s ease-in-out"
     }}>You have Not Posted Any Jobs</h1>
+  }
+
+  const handleDelete = async(id)=>{
+    await deleteJob(id).unwrap()
+    dispatch(removejob(id))
+    refetch()
   }
   
   return (
@@ -76,9 +93,9 @@ export default function Managejob() {
                   <TableCell align="left">{row.position}</TableCell>
                   <TableCell align="left">{row.company}</TableCell>
                   <TableCell align="left">
-                  <i className="fa-regular fa-eye" style={{fontSize:"20px",padding:"5px",cursor:"pointer",color:"blue"}}>S</i>
-                  <Link to={`/recuiter/updatejob/${row._id}`}><i className="fa-solid fa-pen-to-square" style={{fontSize:"20px",padding:"5px",cursor:"pointer",color:"green"}}>E</i></Link>
-                  <i className="fa-solid fa-trash" style={{fontSize:"20px",padding:"5px",cursor:"pointer",color:"red"}}>D</i>
+                  <Link to={`/jobdetail/${row._id}`}><i className="fa-regular fa-eye" style={{fontSize:"20px",padding:"5px",cursor:"pointer",color:"blue"}}></i></Link>
+                  <Link to={`/recuiter/updatejob/${row._id}`}><i className="fa-solid fa-pen-to-square" style={{fontSize:"20px",padding:"5px",cursor:"pointer",color:"green"}}></i></Link>
+                  <i className="fa-solid fa-trash" style={{fontSize:"20px",padding:"5px",cursor:"pointer",color:"red"}} onClick={()=>handleDelete(row._id)}></i>
                   </TableCell>
                 </TableRow>
               ))} 

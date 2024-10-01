@@ -4,6 +4,8 @@ export const getAlljobs = async (req,res,next)=>{
     try {
         // const reqId = req.user.id
         const jobs = await jobModel.find()
+        console.log("Getting all jobs from database",jobs);
+        
         res.json({
             jobs
         })
@@ -53,12 +55,9 @@ export const createJob = async (req,res,next)=>{
         next(error)
     }
 }
-export const getMyJobs = async (req,res,next) => {
-    console.log("getMyJobs called");
-    
+export const getMyJobs = async (req,res,next) => {    
     try {
         const myjobs = await jobModel.find({postedBy:req.user.id})
-        console.log("getMyJobs",myjobs);
         
         res.json({
             success:true,
@@ -68,6 +67,7 @@ export const getMyJobs = async (req,res,next) => {
         next(new Error(error))
     }
 }
+
 export const updateJob = async (req,res,next)=>{
     
     try {
@@ -121,15 +121,13 @@ export const deleteJob = async (req,res,next)=>{
         if(job.postedBy.toString() !== user){
             return next(new Error("You'r not allowed to delete this job"))
         }
-
-
         deleteJob = await jobModel.findByIdAndDelete(id)
+        console.log("job deleted successfully");
     } catch (error) {
         next(error)
     }
     res.json({
         message:"Deleted successfully",
-        deleteJob,
         success:true
     })
 }

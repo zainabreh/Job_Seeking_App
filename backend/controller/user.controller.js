@@ -23,10 +23,8 @@ export const getSingleUser = async (req,res,next)=>{
 }
 export const getProfile = async (req,res,next)=>{
     let id = req.user.id
-    console.log("getProfile",id)
     try {
        let user = await userModel.findById(id)
-       console.log("get profile middleware, user data from DB ",user);
        
         res.json({
             success:true,
