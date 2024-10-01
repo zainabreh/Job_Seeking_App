@@ -7,10 +7,7 @@ const JobDetail = () => {
   const {user,isAuthenticated} = useSelector(v=>v.auth)
   const [singleJob,setSingleJob] = useState()
   const {id} = useParams()
-  const {data,error,isLoading,refetch} = useGetsingleJobQuery(id) 
-
-  console.log("single data api................",data);
-  
+  const {data,error,isLoading,refetch} = useGetsingleJobQuery(id)   
 
   useEffect(() => {
     if (data) {

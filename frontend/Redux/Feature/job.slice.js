@@ -14,7 +14,10 @@ const jobSlice = createSlice({
         resetjob:(state,action)=>{
             state.job = null
         },
-        
+        deletejob:(state,action)=>{
+            
+
+        }
        
     }
 })
