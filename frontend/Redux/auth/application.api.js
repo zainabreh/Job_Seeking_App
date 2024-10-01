@@ -17,6 +17,12 @@ export const applicationApi = createApi({
                 body: data
             })
         }),
+        updateApplicationStatus: builder.mutation({            
+            query: (data)=>({
+                url:`/application/update/${data.id}/${data.status}`,
+                method:"PUT",
+            })
+        }),
         getUserApplication: builder.query({
             query: ()=>({
                 url:"/applications/employerAll",
@@ -32,4 +38,4 @@ export const applicationApi = createApi({
     })
 })
 
-export const {useCreateApplicationMutation,useGetUserApplicationQuery,useGetRecuiterApplicationQuery} = applicationApi
+export const {useCreateApplicationMutation,useUpdateApplicationStatusMutation,useGetUserApplicationQuery,useGetRecuiterApplicationQuery} = applicationApi

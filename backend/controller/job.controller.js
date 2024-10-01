@@ -3,9 +3,7 @@ import jobModel from "../model/job.model.js"
 export const getAlljobs = async (req,res,next)=>{
     try {
         // const reqId = req.user.id
-        const jobs = await jobModel.find()
-        console.log("Getting all jobs from database",jobs);
-        
+        const jobs = await jobModel.find()        
         res.json({
             jobs
         })
@@ -57,7 +55,10 @@ export const createJob = async (req,res,next)=>{
 }
 export const getMyJobs = async (req,res,next) => {    
     try {
+        
         const myjobs = await jobModel.find({postedBy:req.user.id})
+        console.log("My jobs id..........",req.user.id);
+        console.log("My jobs..........",myjobs);
         
         res.json({
             success:true,

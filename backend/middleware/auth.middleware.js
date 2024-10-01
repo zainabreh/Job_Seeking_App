@@ -9,9 +9,7 @@ export const isAuthenticated = (req,res,next)=>{
 
     try {
         let authuser = jwt.verify(auth,process.env.TOKEN)
-        req.user = authuser
-        console.log("checking role",req.user);
-        
+        req.user = authuser        
         
         next()
     } catch (error) {

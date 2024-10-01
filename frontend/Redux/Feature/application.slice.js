@@ -13,10 +13,17 @@ const applicationSlice = createSlice({
         },
         removeApplication: (state,action)=>{
 
+        },
+        statusUpdation: (state,action)=>{
+                const {id,status} = action.payload
+                const application = state.userApplication.find(v=>v._id === id)
+                if(application){
+                    application.status = status
+                }
         }
     }
 
 })
 
-export const {addApplication,removeApplication} = applicationSlice.actions
+export const {addApplication,removeApplication,statusUpdation} = applicationSlice.actions
 export default applicationSlice.reducer

@@ -123,3 +123,28 @@ export const updateApplication = async (req, res, next) => {
     next(error);
   }
 };
+
+export const updateApplicationStatus = async (req, res, next) => {
+  try {
+    const { id, status } = req.params;
+    
+    if (!["pending", "accept", "reject"].includes(status)) {
+      return next(new Error("Invalid status"));
+    }
+
+    const updateApplication = await jobModel.findByIdAndUpdate(id, { status }, { new: true });
+
+    if (!updateApplication) {
+      return next(new Error("Application not found"));
+    }
+
+    res.json({
+      success: true,
+      message: "Application status updated successfully",
+      updateApplication,
+    });
+  } catch (error) {
+    next(new Error(error));
+  }
+};
+

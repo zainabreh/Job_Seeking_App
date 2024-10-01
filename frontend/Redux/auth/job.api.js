@@ -46,7 +46,6 @@ export const jobApi = createApi({
         method: "GET"
       })
     }),
-   
   }),
 });
 
