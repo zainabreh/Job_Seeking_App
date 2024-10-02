@@ -1,6 +1,7 @@
 import applicationModel from "../model/application.model.js";
 import { v2 as cloudinary } from "cloudinary";
 import jobModel from "../model/job.model.js"
+import mongoose from "mongoose";
 
 
 export const getRecuiterApplication = async (req, res, next) => {
@@ -126,14 +127,24 @@ export const updateApplication = async (req, res, next) => {
 
 export const updateApplicationStatus = async (req, res, next) => {
   try {
-    const { id, status } = req.params;
+    const { id, status } = req.params; 
+
+    console.log(id,status);
     
+
     if (!["pending", "accept", "reject"].includes(status)) {
       return next(new Error("Invalid status"));
     }
 
-    const updateApplication = await jobModel.findByIdAndUpdate(id, { status }, { new: true });
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return next(new Error("Invalid application ID"));
+    }
 
+    const updateApplication = await applicationModel.findByIdAndUpdate(
+      id,                 
+      { status: status },  
+      { new: true }        
+    );
     if (!updateApplication) {
       return next(new Error("Application not found"));
     }
@@ -147,4 +158,5 @@ export const updateApplicationStatus = async (req, res, next) => {
     next(new Error(error));
   }
 };
+
 

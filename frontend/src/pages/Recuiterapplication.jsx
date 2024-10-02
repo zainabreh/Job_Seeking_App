@@ -17,9 +17,9 @@ import "react-toastify/ReactToastify.css";
 
 export default function Recuiterapplication() {
 
-  const {data,isLoading} = useGetRecuiterApplicationQuery()
+  const {data,isLoading,refetch} = useGetRecuiterApplicationQuery()
   const {data:profile} = useGetprofileQuery() 
-  const [updateApplicationStatus,{refetch}] = useUpdateApplicationStatusMutation()
+  const [updateApplicationStatus] = useUpdateApplicationStatusMutation()
   const dispatch = useDispatch()
 
   if(isLoading){
@@ -43,9 +43,11 @@ export default function Recuiterapplication() {
     console.log("id",id,"newstatus",newstatus);
     
     try {
-      const updatejob = await updateApplicationStatus({id:id,status:newstatus})
-      dispatch(statusUpdation({id:id,status:newstatus}))
+      const updatejob = await updateApplicationStatus({id:id,status:newstatus}).unwrap()
       console.log("status updation",updatejob);
+      
+      console.log("application array",data.applications);
+      dispatch(statusUpdation({ id: id, status: newstatus }))
       refetch()
 
       if(updatejob.data.success === false){

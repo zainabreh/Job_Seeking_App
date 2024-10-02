@@ -15,10 +15,10 @@ const applicationSlice = createSlice({
 
         },
         statusUpdation: (state,action)=>{
-                const {id,status} = action.payload
-                const application = state.userApplication.find(v=>v._id === id)
+                 
+                const application = state.userApplication.find(v=>v._id === action.payload.id)
                 if(application){
-                    application.status = status
+                    application.status = action.payload.status
                 }
         }
     }
