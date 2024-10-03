@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useGetprofileQuery, useLazyLogoutUserQuery } from "../../Redux/auth/auth.api";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { clearApplicationHistory } from "../../Redux/Feature/application.slice";
 
 const Navbar = () => {
 
@@ -14,10 +15,17 @@ const handleLogOut = async ()=>{
   await logoutUser()
 }
 
+const dispatch = useDispatch();
+
+  const handleClearHistory = () => {
+    dispatch(clearApplicationHistory());
+  };
+
 
   return (
     <>
       <nav className="navbar bg-primary" data-bs-theme="dark">
+      <button onClick={handleClearHistory}>Clear Application History</button>
         <div className="container-fluid">
           <Link to={'/'}><div
             className="logo"

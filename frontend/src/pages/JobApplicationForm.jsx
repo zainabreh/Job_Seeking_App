@@ -39,6 +39,7 @@ const JobApplicationForm = () => {
     onSubmit: async (values, { setSubmitting }) => {  
       
       const application = await createApplication({...values,id})
+      console.log("form data",application.data?.application);
       
       dispatch(addApplication(application))
       // setSubmitting(false);

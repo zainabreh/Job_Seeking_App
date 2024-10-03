@@ -26,7 +26,19 @@ export default function Recuiterapplication() {
     return <h1>Loading....</h1>
   }
 
-  if(data.applications.length === 0 ){
+  console.log("recuiter data..........",Array.isArray(data.applications));
+  
+
+  const currentUserId = profile.user._id;
+  const filteredApplications = Array.isArray(data.applications) 
+    ? data.applications.filter(application => application.recuiter_id.user === currentUserId) 
+    : []; 
+    
+    console.log("recuitervvvvvvvvvvv",filteredApplications);
+    
+    
+
+  if (filteredApplications.length === 0) {
     return <h1 style={{
       textAlign: "center",
       marginTop: "30%",
@@ -36,29 +48,30 @@ export default function Recuiterapplication() {
       textShadow: "2px 2px 4px #ccc",
       cursor: "pointer",
       transition: "all 0.3s ease-in-out"
-    }}>No Application Available</h1>
+    }}>No Applications Found</h1>
   }
 
-  const handleStatusUpdation = async(id,newstatus)=>{
-    console.log("id",id,"newstatus",newstatus);
+  // const handleStatusUpdation = async(id,newstatus)=>{
+  //   console.log("id",id,"newstatus",newstatus);
     
-    try {
-      const updatejob = await updateApplicationStatus({id:id,status:newstatus}).unwrap()
-      console.log("status updation",updatejob);
-      
-      console.log("application array",data.applications);
-      dispatch(statusUpdation({ id: id, status: newstatus }))
-      refetch()
+  //   try {
+  //     const updatejob = await updateApplicationStatus({id:id,status:newstatus})
+  //     console.log("status updation",updatejob.data.updateApplication);
+  //     dispatch(statusUpdation(updatejob.data.updateApplication))
+  //     refetch()
 
-      if(updatejob.data.success === false){
-        toast.error(updatejob.data.message)
-      }
+  //     if(updatejob.data.success === false){
+  //       toast.error(updatejob.data.message)
+  //     }
       
-    } catch (error) {
-      console.error("Failed to update status")
-    }
-  }
+  //   } catch (error) {
+  //     console.error("Failed to update status")
+  //   }
+  // }
   
+  React.useEffect(()=>{
+    refetch()
+  },[])
 
 
   return (

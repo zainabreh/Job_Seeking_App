@@ -18,10 +18,10 @@ export const applicationApi = createApi({
             })
         }),
         updateApplicationStatus: builder.mutation({            
-            query: (data)=>({
-                url:`/application/update/${data.id}/${data.status}`,
-                method:"PUT",
-            })
+            // query: (data)=>({
+            //     url:`/application/update/${data.id}/${data.status}`,
+            //     method:"PUT",
+            // })
         }),
         getUserApplication: builder.query({
             query: ()=>({

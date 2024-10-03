@@ -30,6 +30,7 @@ export const getEmployerApplication = async (req, res, next) => {
     const { id } = req.user;    
 
     const applications = await applicationModel.find({ "applicant_id.user": id });    
+console.log("user application",applications);
 
     res.json({
       success: true,

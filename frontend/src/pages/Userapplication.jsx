@@ -8,7 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { useGetUserApplicationQuery } from "../../Redux/auth/application.api";
 import { useGetprofileQuery } from "../../Redux/auth/auth.api";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 function createData(No, position, company, status) {
   return { No, position, company, status };
@@ -16,19 +16,32 @@ function createData(No, position, company, status) {
 
 export default function Userapplication() {
   const {data:profile} = useGetprofileQuery() 
-  const {data,error,isLoading} = useGetUserApplicationQuery()
+  const {data,error,isLoading,refetch} = useGetUserApplicationQuery()
+
+  console.log("useGetUserApplicationQuery.........",data);
+  
 
   const applications = useSelector((v)=>v.application.userApplication)
-  console.log("Applications...",applications);  
+
+  console.log("Applications...",applications[1].data.application);  
   
   if(isLoading){
     return <h1>Loading....</h1>
   }
-
+  
   const currentUserId = profile.user._id;
+
+
+  console.log("Applications...checking equality",applications[1].data.application.applicant_id.user === currentUserId);
+  
+  console.log("Applications...",applications.filter(application => application.data.application.applicant_id.user === currentUserId));  
+
   const filteredApplications = Array.isArray(applications) 
     ? applications.filter(application => application.data.application.applicant_id.user === currentUserId) 
-    : [];
+    : [];  
+    
+    console.log("filteredApplications.........",filteredApplications);
+    
     
 
   if (filteredApplications.length === 0) {
@@ -44,6 +57,9 @@ export default function Userapplication() {
     }}>No Applications Found</h1>
   }
   
+  React.useEffect(()=>{
+    refetch()
+  },[])
   return (
     <div className="table-container container" style={{color:"white"}}>
       

@@ -25,8 +25,6 @@ export default function Managejob() {
   if(error){
     return <h1>Somthing went wrong</h1>
   }
-
-  console.log("my jobs...............",data.myjobs);
   
   if(data.myjobs.length === 0 ){
     return <h1 style={{
