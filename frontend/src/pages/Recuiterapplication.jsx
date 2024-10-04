@@ -8,7 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { useGetRecuiterApplicationQuery, useUpdateApplicationStatusMutation } from "../../Redux/auth/application.api";
 import { useGetprofileQuery } from "../../Redux/auth/auth.api";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { statusUpdation } from "../../Redux/Feature/application.slice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/ReactToastify.css";
@@ -22,20 +22,23 @@ export default function Recuiterapplication() {
   const [updateApplicationStatus] = useUpdateApplicationStatusMutation()
   const dispatch = useDispatch()
 
+  const applications = useSelector((v)=>v.application.userApplication)
+  
   if(isLoading){
     return <h1>Loading....</h1>
-  }
+  }  
 
-  console.log("recuiter data..........",Array.isArray(data.applications));
-  
-
-  const currentUserId = profile.user._id;
-  const filteredApplications = Array.isArray(data.applications) 
-    ? data.applications.filter(application => application.recuiter_id.user === currentUserId) 
-    : []; 
+  const currentUserId = profile?.user?._id;
+  const filteredApplications = Array.isArray(applications) 
+    ? applications.filter(application => application.data.application.recuiter_id.user === currentUserId) 
+    : [];
+    React.useEffect(() => {
+      const intervalId = setInterval(() => {
+        refetch();
+      }, 10000); // Refetch every 10 seconds
     
-    console.log("recuitervvvvvvvvvvv",filteredApplications);
-    
+      return () => clearInterval(intervalId);
+    }, [refetch]);
     
 
   if (filteredApplications.length === 0) {
@@ -68,10 +71,6 @@ export default function Recuiterapplication() {
   //     console.error("Failed to update status")
   //   }
   // }
-  
-  React.useEffect(()=>{
-    refetch()
-  },[])
 
 
   return (
@@ -124,7 +123,7 @@ export default function Recuiterapplication() {
             </TableRow>
           </TableHead>
           <TableBody>
-          {data.applications.map((row,index) => (
+          {filteredApplications.map((row,index) => (
                 <TableRow
                   key={row._id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -132,9 +131,9 @@ export default function Recuiterapplication() {
                   <TableCell component="th" scope="row">
                     {index++}
                   </TableCell>
-                  <TableCell align="left"><i className="fa-regular fa-eye" style={{fontSize:"20px",padding:"5px",cursor:"pointer",color:"blue"}}></i>   {row.position}</TableCell>
-                  <TableCell align="left">{row.companyName}</TableCell>
-                  <TableCell align="left">{row.status}</TableCell>
+                  <TableCell align="left"><i className="fa-regular fa-eye" style={{fontSize:"20px",padding:"5px",cursor:"pointer",color:"blue"}}></i>   {row.data.application.position}</TableCell>
+                  <TableCell align="left">{row.data.application.companyName}</TableCell>
+                  <TableCell align="left">{row.data.application.status}</TableCell>
                 <TableCell align="left">
                 <span className="badge text-bg-success" onClick={()=>handleStatusUpdation(row._id,'accept')}>Accept</span>
                 <span className="badge text-bg-danger" style={{marginInline:"5px"}}onClick={()=>handleStatusUpdation(row._id,'reject')}>Reject</span>

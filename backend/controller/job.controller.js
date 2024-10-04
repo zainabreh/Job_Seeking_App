@@ -56,9 +56,9 @@ export const createJob = async (req,res,next)=>{
 export const getMyJobs = async (req,res,next) => {    
     try {
         
-        console.log("My jobs id..........",req.user.id);
+        // console.log("My jobs id..........",req.user.id);
         const myjobs = await jobModel.find({postedBy:req.user.id})
-        console.log("My jobs..........",myjobs);
+        // console.log("My jobs..........",myjobs);
         
         res.json({
             success:true,

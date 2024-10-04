@@ -44,6 +44,10 @@ export default function Managejob() {
     dispatch(removejob(id))
     refetch()
   }
+
+  React.useEffect(()=>{
+    refetch()
+  },[data])
   
   return (
 

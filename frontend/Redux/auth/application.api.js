@@ -34,8 +34,14 @@ export const applicationApi = createApi({
                 url:"/applications/recuiterAll",
                 method:"GET"
             })
+        }),
+        delteApplication: builder.mutation({
+            query: (id)=>({
+                url:`/application/delete/${id}`,
+                method:'DELETE'
+            })
         })
     })
 })
 
-export const {useCreateApplicationMutation,useUpdateApplicationStatusMutation,useGetUserApplicationQuery,useGetRecuiterApplicationQuery} = applicationApi
+export const {useCreateApplicationMutation,useUpdateApplicationStatusMutation,useGetUserApplicationQuery,useGetRecuiterApplicationQuery,useDelteApplicationMutation} = applicationApi

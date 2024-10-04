@@ -9,13 +9,12 @@ const applicationSlice = createSlice({
     initialState,
     reducers: {
         addApplication: (state,action)=>{
-            console.log("applia",current(state));
+            console.log("appliaSLICE",current(state));
         
             state.userApplication.push(action.payload)
         },
-        clearApplicationHistory: (state) => {
-            // Reset userApplication back to an empty array
-            state.userApplication = [];
+        removeApplication: (state,action) => {            
+            state.userApplication = state.userApplication.filter((v)=>v?.data?.application?._id !== action.payload);
           },
         statusUpdation: (state,action)=>{
                 // const {id,status} = action.payload
@@ -28,5 +27,5 @@ const applicationSlice = createSlice({
 
 })
 
-export const {addApplication,clearApplicationHistory,removeApplication,statusUpdation} = applicationSlice.actions
+export const {addApplication,removeApplication,statusUpdation} = applicationSlice.actions
 export default applicationSlice.reducer

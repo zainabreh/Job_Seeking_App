@@ -4,11 +4,9 @@ import jobModel from "../model/job.model.js"
 import mongoose from "mongoose";
 
 
-export const getRecuiterApplication = async (req, res, next) => {
+export const getRecuiterApplication = async (req, res, next) => {  
   try {
     const { id } = req.user;
-
-    console.log("recuiter id",id);
 
     if(!id){
       next(new Error("Not Allowed"))
@@ -16,7 +14,6 @@ export const getRecuiterApplication = async (req, res, next) => {
     
     const applications = await applicationModel.find({ "recuiter_id.user": id });
     
-    console.log("recuiter application",applications);
     res.json({
       success: true,
       applications,
@@ -28,6 +25,7 @@ export const getRecuiterApplication = async (req, res, next) => {
 export const getEmployerApplication = async (req, res, next) => {
   try {
     const { id } = req.user;    
+console.log("user id",id);
 
     const applications = await applicationModel.find({ "applicant_id.user": id });    
 console.log("user application",applications);

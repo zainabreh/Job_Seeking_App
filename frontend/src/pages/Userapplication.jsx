@@ -6,43 +6,34 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { useGetUserApplicationQuery } from "../../Redux/auth/application.api";
+import { useDelteApplicationMutation, useGetUserApplicationQuery } from "../../Redux/auth/application.api";
 import { useGetprofileQuery } from "../../Redux/auth/auth.api";
 import { useDispatch, useSelector } from "react-redux";
+import { removeApplication } from "../../Redux/Feature/application.slice";
 
 function createData(No, position, company, status) {
   return { No, position, company, status };
 }
 
 export default function Userapplication() {
+
   const {data:profile} = useGetprofileQuery() 
   const {data,error,isLoading,refetch} = useGetUserApplicationQuery()
-
-  console.log("useGetUserApplicationQuery.........",data);
+  console.log("data",data);
   
-
+  const [delteApplication] = useDelteApplicationMutation()
+  const {user} = useSelector((v)=>v.auth.user)
   const applications = useSelector((v)=>v.application.userApplication)
-
-  console.log("Applications...",applications[1].data.application);  
-  
+  const dispatch = useDispatch()
   if(isLoading){
     return <h1>Loading....</h1>
   }
   
-  const currentUserId = profile.user._id;
-
-
-  console.log("Applications...checking equality",applications[1].data.application.applicant_id.user === currentUserId);
+  const currentUserId = user._id
   
-  console.log("Applications...",applications.filter(application => application.data.application.applicant_id.user === currentUserId));  
-
   const filteredApplications = Array.isArray(applications) 
-    ? applications.filter(application => application.data.application.applicant_id.user === currentUserId) 
-    : [];  
-    
-    console.log("filteredApplications.........",filteredApplications);
-    
-    
+  ? applications.filter(application => application.data.application.applicant_id.user === currentUserId) 
+  : [];   
 
   if (filteredApplications.length === 0) {
     return <h1 style={{
@@ -56,10 +47,16 @@ export default function Userapplication() {
       transition: "all 0.3s ease-in-out"
     }}>No Applications Found</h1>
   }
-  
-  React.useEffect(()=>{
+
+  const handleDelete = async (id)=>{
+    await delteApplication(id)
+    dispatch(removeApplication(id))
     refetch()
-  },[])
+  }
+  // React.useEffect(()=>{
+  //   refetch()
+  // },[])
+  
   return (
     <div className="table-container container" style={{color:"white"}}>
       
@@ -124,7 +121,7 @@ export default function Userapplication() {
                 <TableCell align="left">{v.data.application.status}</TableCell>
                 <TableCell align="left">
                   <i className="fa-solid fa-pen-to-square" style={{fontSize:"20px",padding:"5px",cursor:"pointer",color:"green"}}></i>
-                  <i className="fa-solid fa-trash" style={{fontSize:"20px",padding:"5px",cursor:"pointer",color:"red"}}></i>
+                  <i className="fa-solid fa-trash" style={{fontSize:"20px",padding:"5px",cursor:"pointer",color:"red"}} onClick={()=>handleDelete(v.data.application._id)}></i>
                   </TableCell>
               </TableRow>
               ))
