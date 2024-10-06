@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { statusUpdation } from "../../Redux/Feature/application.slice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/ReactToastify.css";
+import { Link } from "react-router-dom";
 
 
 
@@ -131,7 +132,7 @@ export default function Recuiterapplication() {
                   <TableCell component="th" scope="row">
                     {index++}
                   </TableCell>
-                  <TableCell align="left"><i className="fa-regular fa-eye" style={{fontSize:"20px",padding:"5px",cursor:"pointer",color:"blue"}}></i>   {row.data.application.position}</TableCell>
+                  <TableCell align="left"><Link to={`/applicationview/${row._id}`}><i className="fa-regular fa-eye" style={{fontSize:"15px",padding:"5px",cursor:"pointer",color:"blue"}}></i></Link>{row.data.application.position}</TableCell>
                   <TableCell align="left">{row.data.application.companyName}</TableCell>
                   <TableCell align="left">{row.data.application.status}</TableCell>
                 <TableCell align="left">

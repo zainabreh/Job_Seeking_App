@@ -6,6 +6,9 @@
 a{
   text-decoration: none;
 }
+ul{
+  list-style: none;
+}
 .filter-container{
   margin: auto;
   padding: 5px;

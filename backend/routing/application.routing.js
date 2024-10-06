@@ -8,7 +8,7 @@ router.route('/applications/employerAll').get(isAuthenticated,isAuthorized("user
 
 router.route('/applications/recuiterAll').get(isAuthenticated,isAuthorized("recuiter"),getRecuiterApplication)
 
-router.route('/applications/:id').get(isAuthenticated,getSingleApplication)
+router.route('/applications/:id').get(isAuthenticated,isAuthorized("user","recuiter"),getSingleApplication)
 
 router.route('/application/create').post(isAuthenticated,isAuthorized("user"),createApplication)
 
