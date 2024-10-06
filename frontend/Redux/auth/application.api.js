@@ -17,6 +17,13 @@ export const applicationApi = createApi({
                 body: data
             })
         }),
+        updateApplication: builder.mutation({
+            query: (data)=>({
+                url:`/application/update/${data.id}`,
+                method:"PUT",
+                body: data.values
+            })
+        }),
         updateApplicationStatus: builder.mutation({            
             // query: (data)=>({
             //     url:`/application/update/${data.id}/${data.status}`,
@@ -35,6 +42,12 @@ export const applicationApi = createApi({
                 method:"GET"
             })
         }),
+        getSingleApplication: builder.query({
+            query: (id)=>({
+                url:`/applications/${id}`,
+                method:"GET"
+            })
+        }),
         delteApplication: builder.mutation({
             query: (id)=>({
                 url:`/application/delete/${id}`,
@@ -44,4 +57,4 @@ export const applicationApi = createApi({
     })
 })
 
-export const {useCreateApplicationMutation,useUpdateApplicationStatusMutation,useGetUserApplicationQuery,useGetRecuiterApplicationQuery,useDelteApplicationMutation} = applicationApi
+export const {useCreateApplicationMutation,useUpdateApplicationStatusMutation,useGetUserApplicationQuery,useGetRecuiterApplicationQuery,useUpdateApplicationMutation,useDelteApplicationMutation,useGetSingleApplicationQuery} = applicationApi

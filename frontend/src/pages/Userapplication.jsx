@@ -10,6 +10,7 @@ import { useDelteApplicationMutation, useGetUserApplicationQuery } from "../../R
 import { useGetprofileQuery } from "../../Redux/auth/auth.api";
 import { useDispatch, useSelector } from "react-redux";
 import { removeApplication } from "../../Redux/Feature/application.slice";
+import { Link } from "react-router-dom";
 
 function createData(No, position, company, status) {
   return { No, position, company, status };
@@ -23,7 +24,7 @@ export default function Userapplication() {
   
   const [delteApplication] = useDelteApplicationMutation()
   const {user} = useSelector((v)=>v.auth.user)
-  const applications = useSelector((v)=>v.application.userApplication)
+  const applications = useSelector((v)=>v.application?.userApplication)
   const dispatch = useDispatch()
   if(isLoading){
     return <h1>Loading....</h1>
@@ -32,8 +33,8 @@ export default function Userapplication() {
   const currentUserId = user._id
   
   const filteredApplications = Array.isArray(applications) 
-  ? applications.filter(application => application.data.application.applicant_id.user === currentUserId) 
-  : [];   
+  ? applications.filter(app => app.data?.application?.applicant_id.user === currentUserId) 
+  : [];     
 
   if (filteredApplications.length === 0) {
     return <h1 style={{
@@ -116,11 +117,13 @@ export default function Userapplication() {
                 <TableCell component="th" scope="row">
                   {index++}
                 </TableCell>
-                <TableCell align="left">{v.data.application.position}</TableCell>
+                <TableCell align="left"><Link to={'/'}><i className="fa-regular fa-eye" style={{fontSize:"15px",padding:"5px",cursor:"pointer",color:"blue"}}></i></Link>{v.data.application.position}</TableCell>
                 <TableCell align="left">{v.data.application.companyName}</TableCell>
                 <TableCell align="left">{v.data.application.status}</TableCell>
                 <TableCell align="left">
+                <Link to={`/UpdateUserApplication/${v.data.application._id}`}>
                   <i className="fa-solid fa-pen-to-square" style={{fontSize:"20px",padding:"5px",cursor:"pointer",color:"green"}}></i>
+                  </Link>
                   <i className="fa-solid fa-trash" style={{fontSize:"20px",padding:"5px",cursor:"pointer",color:"red"}} onClick={()=>handleDelete(v.data.application._id)}></i>
                   </TableCell>
               </TableRow>

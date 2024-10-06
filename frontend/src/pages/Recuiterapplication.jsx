@@ -22,7 +22,7 @@ export default function Recuiterapplication() {
   const [updateApplicationStatus] = useUpdateApplicationStatusMutation()
   const dispatch = useDispatch()
 
-  const applications = useSelector((v)=>v.application.userApplication)
+  const applications = useSelector((v)=>v.application?.userApplication)
   
   if(isLoading){
     return <h1>Loading....</h1>
@@ -30,7 +30,7 @@ export default function Recuiterapplication() {
 
   const currentUserId = profile?.user?._id;
   const filteredApplications = Array.isArray(applications) 
-    ? applications.filter(application => application.data.application.recuiter_id.user === currentUserId) 
+    ? applications.filter(application => application?.data?.application?.recuiter_id.user === currentUserId) 
     : [];
     React.useEffect(() => {
       const intervalId = setInterval(() => {

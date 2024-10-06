@@ -13,9 +13,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 const Updatejob = () => {
 
-    const {id} = useParams()
-    console.log(id);
-    
+  const {id} = useParams()    
 
   const [updateJob, { data: createData, error: createError, isLoading }] = useUpdateJobMutation();
 
@@ -82,7 +80,6 @@ const Updatejob = () => {
         requiredSkill: requiredSkillsArray.map((skill) => skill.trim()),
       };
         const newJob = await updateJob({_id:id,formData:formData}).unwrap();
-        console.log("newjob........",newJob);
         
         dispatch(setjob(newJob.job));        
         if (newJob.success === true) {

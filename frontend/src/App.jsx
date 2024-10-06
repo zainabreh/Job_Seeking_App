@@ -33,6 +33,7 @@ import AdminDashBoard from "./pages/AdminDashboard";
 import { useSelector } from "react-redux";
 import JobApplicationForm from "./pages/JobApplicationForm";
 import Updatejob from "./component/Updatejob";
+import UpdateUserApplication from "./pages/UpdateUserApplication";
 
 function App() {
 
@@ -64,6 +65,10 @@ const {user,isAuthenticated} = useSelector(v=>v.auth)
               <Route
                 path="userapplication"
                 element={<Userapplication />}
+              ></Route>
+              <Route
+                path="UpdateUserApplication/:id"
+                element={<UpdateUserApplication />}
               ></Route>
             
             {/* Recuiter */}

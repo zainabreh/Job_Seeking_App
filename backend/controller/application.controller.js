@@ -22,13 +22,26 @@ export const getRecuiterApplication = async (req, res, next) => {
     next(error);
   }
 };
+
 export const getEmployerApplication = async (req, res, next) => {
   try {
     const { id } = req.user;    
-console.log("user id",id);
 
     const applications = await applicationModel.find({ "applicant_id.user": id });    
-console.log("user application",applications);
+
+    res.json({
+      success: true,
+      applications,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+export const getSingleApplication = async (req, res, next) => {
+  try {
+    const { id } = req.params;    
+
+    const applications = await applicationModel.findById(id);    
 
     res.json({
       success: true,
@@ -104,11 +117,12 @@ export const deleteApplication = async (req, res, next) => {
     next(error);
   }
 };
+
 export const updateApplication = async (req, res, next) => {
   try {
     const { id } = req.params;
 
-    const updateApplication = await applicationModel.findByIdAndUpdate(id);
+    const updateApplication = await applicationModel.findByIdAndUpdate({_id:id},req.body,{new:true});
 
     if (!updateApplication) {
       return next(new Error("Application Not Found"));
