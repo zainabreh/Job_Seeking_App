@@ -18,7 +18,10 @@ const jobSchema = new Schema({
     ref:"user",
     required:true
   },
-
+  category: {
+    type:mongoose.Schema.Types.ObjectId,
+    ref:'category'
+  }
 },
 {timestamps:true});
 

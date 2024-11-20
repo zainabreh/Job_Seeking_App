@@ -4,6 +4,7 @@ import { connectDB } from './config/connectdb.js'
 import userRouter from "./routing/user.routing.js"
 import authRouter from "./routing/auth.routing.js"
 import jobRouter from "./routing/job.routing.js"
+import categoryRouter from "./routing/category.routing.js"
 import applicationRouter from "./routing/application.routing.js"
 import { errorHandler } from './middleware/error.middleware.js'
 // import bodyParser from 'body-parser'
@@ -43,6 +44,7 @@ app.use("/",userRouter)
 app.use("/",authRouter)
 app.use("/",jobRouter)
 app.use("/",applicationRouter)
+app.use("/",categoryRouter)
 
 
 app.use(errorHandler)
