@@ -17,6 +17,10 @@ export default function Managejob() {
   const [deleteJob] = useDeleteJobMutation()
 
   const dispatch = useDispatch()
+
+  React.useEffect(()=>{
+    refetch()
+  },[data])
   
   if(isLoading){
     return <h1>Loading.....</h1>
@@ -44,10 +48,6 @@ export default function Managejob() {
     dispatch(removejob(id))
     refetch()
   }
-
-  React.useEffect(()=>{
-    refetch()
-  },[data])
   
   return (
 

@@ -20,7 +20,6 @@ export default function Userapplication() {
 
   const {data:profile} = useGetprofileQuery() 
   const {data,error,isLoading,refetch} = useGetUserApplicationQuery()
-  console.log("data",data);
   
   const [delteApplication] = useDelteApplicationMutation()
   const {user} = useSelector((v)=>v.auth.user)

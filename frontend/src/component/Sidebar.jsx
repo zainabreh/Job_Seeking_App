@@ -273,6 +273,32 @@ const Sidebar = () => {
             </li>
           )}
 
+          {user?.user?.roles === "admin" && (
+            <li className="nav-item">
+              <Link to={"/admin/addcategory"}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "10px",
+                    cursor: "pointer",
+                    color: "white",
+                  }}
+                >
+                  
+                    <i class="fa-solid fa-list" style={{ fontSize: "20px" }}></i>
+                    
+                  <p
+                    className="nav-list"
+                    style={{ margin: "5px", fontWeight: "700", color: "white" }}
+                  >
+                    Add Category
+                  </p>
+                </div>
+              </Link>
+            </li>
+          )}
+
          
 
         </ul>

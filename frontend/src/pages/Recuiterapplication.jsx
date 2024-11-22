@@ -23,11 +23,7 @@ export default function Recuiterapplication() {
   const [updateApplicationStatus] = useUpdateApplicationStatusMutation()
   const dispatch = useDispatch()
 
-  const applications = useSelector((v)=>v.application?.userApplication)
-  
-  if(isLoading){
-    return <h1>Loading....</h1>
-  }  
+  const applications = useSelector((v)=>v.application?.userApplication)  
 
   const currentUserId = profile?.user?._id;
   const filteredApplications = Array.isArray(applications) 
@@ -41,6 +37,9 @@ export default function Recuiterapplication() {
       return () => clearInterval(intervalId);
     }, [refetch]);
     
+    if(isLoading){
+      return <h1>Loading....</h1>
+    }
 
   if (filteredApplications.length === 0) {
     return <h1 style={{
