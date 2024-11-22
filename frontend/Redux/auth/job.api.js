@@ -10,7 +10,7 @@ export const jobApi = createApi({
     getallJobs: builder.query({
       query: () => ({
         url: "/job/all",
-        methid: "GET",
+        method: "GET",
       }),
     }),
     getsingleJob: builder.query({

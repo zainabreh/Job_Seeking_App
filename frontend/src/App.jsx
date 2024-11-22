@@ -121,7 +121,7 @@ const {user,isAuthenticated} = useSelector(v=>v.auth)
                 element={<AdminUpdateProfile />}
               ></Route>
               <Route path="manageUsers" element={<ManageUsers />}></Route>
-              <Route path="addcategory" element={<AddCategory />}></Route>
+              <Route path="addcategory/" element={<AddCategory />}></Route>
               <Route path="adminStatus" element={<Admin />}></Route>
             </Route>
           </Route>

@@ -37,8 +37,7 @@ export const createCategory = async (req,res,next)=>{
         const newCategory = await categoryModel.create(data)
 
         res.json({
-            success:true,
-            message:"Category Created successfully"
+            newCategory
         })
 
     } catch (error) {

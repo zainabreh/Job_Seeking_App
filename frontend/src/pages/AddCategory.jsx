@@ -1,8 +1,15 @@
 import { useFormik } from 'formik';
 import React from 'react'
 import * as yup from "yup";
+import { useCreateCategoryMutation } from '../../Redux/auth/category.api';
+import { useDispatch } from 'react-redux';
+import { setCategory } from '../../Redux/Feature/category.slice';
 
 const AddCategory = () => {
+
+    const [createCategory] = useCreateCategoryMutation()
+    const dispatch = useDispatch()
+
     const { handleChange, handleSubmit,handleReset, handleBlur, touched, values, errors } =
     useFormik({
       initialValues: {
@@ -13,6 +20,11 @@ const AddCategory = () => {
       }),
       onSubmit: async (v) => {
         console.log("category......",v);
+
+        const newCategory = await createCategory(v).unwrap()
+        console.log("newCategory..........",newCategory);
+        dispatch(setCategory(newCategory))
+        
         
         // try {
         //   const user = await loginUser(v);
