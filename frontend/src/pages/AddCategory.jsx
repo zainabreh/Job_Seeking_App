@@ -2,13 +2,13 @@ import { useFormik } from 'formik';
 import React from 'react'
 import * as yup from "yup";
 import { useCreateCategoryMutation } from '../../Redux/auth/category.api';
-import { useDispatch } from 'react-redux';
-import { setCategory } from '../../Redux/Feature/category.slice';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearCategory, setCategory } from '../../Redux/Feature/category.slice';
 
 const AddCategory = () => {
 
     const [createCategory] = useCreateCategoryMutation()
-    const dispatch = useDispatch()
+    const dispatch = useDispatch()   
 
     const { handleChange, handleSubmit,handleReset, handleBlur, touched, values, errors } =
     useFormik({
@@ -19,10 +19,7 @@ const AddCategory = () => {
         categoryName: yup.string().required("Reqiured"),
       }),
       onSubmit: async (v) => {
-        console.log("category......",v);
-
         const newCategory = await createCategory(v).unwrap()
-        console.log("newCategory..........",newCategory);
         dispatch(setCategory(newCategory))
         
         
@@ -48,7 +45,6 @@ const AddCategory = () => {
     <>
       <div className="container" style={{width:"90%",margin:"40px",color:"white"}}>
         <h3 style={{marginBlock:"15px"}}><span style={{ textDecoration:"underline", textDecorationColor:"white",textDecorationThickness:"3px"}}>Add</span> Category</h3>
-
         <form className="row g-3" onSubmit={handleSubmit}>
           <div>
             <label for="inputEmail4" className="form-label">

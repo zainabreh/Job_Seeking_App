@@ -41,6 +41,8 @@ const PlusIcon = createSvgIcon(
 export default function JobCard() {
 
   const {data,error,isLoading} = useGetallJobsQuery() 
+  console.log("jobs.........",data);
+  
 
   const dispatch = useDispatch();
   

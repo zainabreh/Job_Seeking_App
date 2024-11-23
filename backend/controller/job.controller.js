@@ -1,3 +1,4 @@
+import categoryModel from "../model/category.model.js"
 import jobModel from "../model/job.model.js"
 
 export const getAlljobs = async (req,res,next)=>{
@@ -33,9 +34,26 @@ export const getjobByid = async (req,res,next)=>{
     }
 }
 export const createJob = async (req,res,next)=>{
-    let {position,company,type} = req.body    
+    // let {position,company,type,category} = req.body  
+    let data = req.body  
+    
+    console.log("data............",data);
+    
     
     try {
+
+        const newcategory = await categoryModel.findOne({_id:category._id})
+
+        console.log("category..........",newcategory);
+        
+
+        if(!newcategory){
+            return res.json({
+                success:false,
+                message: "Category not Found"
+            })
+        }
+
 
         const existedjob = await jobModel.findOne({position,company,type})
 
@@ -43,12 +61,17 @@ export const createJob = async (req,res,next)=>{
             return next(new Error("Job already exists"))
         }
 
-        const job = await jobModel.create({...req.body,postedBy:req.user.id})
+        const job = await jobModel.create({...req.body,postedBy:req.user.id,category: newcategory._id,}) 
+
+        newcategory.jobs.push(job._id)
+        await newcategory.save()
+
         res.json({
             message:"Job created successfully",
-          success:true,
-            job
-        })  
+            success:true,
+            job,
+        })
+
     } catch (error) {
         next(error)
     }

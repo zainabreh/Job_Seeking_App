@@ -32,9 +32,7 @@ export const getCategoryById = async (req,res,next)=>{
 
 export const createCategory = async (req,res,next)=>{
     try {
-        const data = req.body
-
-        const newCategory = await categoryModel.create(data)
+        const newCategory = await categoryModel.create({...req.body})
 
         res.json({
             newCategory

@@ -18,6 +18,8 @@ const Addjob = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();  
+  const {category} = useSelector((v)=>v.category) 
+  
 
  const initialValues =  {
     position: "",
@@ -64,15 +66,19 @@ const Addjob = () => {
       description: yup.string().required("Job Description is required"),
     }),
     onSubmit: async (v) => {
+      console.log("formdata.........",v);
+      
       const facilitiesArray = v.facilities.split(",");
       const requiredSkillsArray = v.requiredSkill.split(",");
-
+      
       const formData = {
         ...v,
         facilities: facilitiesArray.map((facility) => facility.trim()),
         requiredSkill: requiredSkillsArray.map((skill) => skill.trim()),
       };
-        const newJob = await createJob(formData).unwrap();
+      const newJob = await createJob(formData).unwrap();
+      console.log("db data.........",newJob);
+
         dispatch(setjob(newJob.job));
         if (newJob.success === true) {
           toast.success(newJob.message);
@@ -194,9 +200,15 @@ const Addjob = () => {
               value={values.category}
             >
               <option selected>Select a Job category</option>
+              {
+                category.map((cat)=>(
+                  <option value={cat.newCategory._id}>{cat.newCategory.categoryName}</option>
+                ))
+              }
+              
 
-              <option value="Software Engineer">Software Engineer</option>
-              <option value="Mobile App Developer">Mobile App Developer</option>
+              
+              {/* <option value="Mobile App Developer">Mobile App Developer</option>
               <option value="Web Developer">Web Developer</option>
               <option value="DevOps Engineer">DevOps Engineer</option>
               <option value="Quality Assurance (QA) Engineer">
@@ -268,7 +280,7 @@ const Addjob = () => {
               <option value="IT Consultant">IT Consultant</option>
               <option value="Technical Sales Representative">
                 Technical Sales Representative
-              </option>
+              </option> */}
             </select>
             {touched.category && errors.category ? (
               <div style={{ color: "red" }}>{errors.category}</div>

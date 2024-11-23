@@ -3,7 +3,8 @@ import mongoose, { Schema } from "mongoose";
 const categorySchema = new Schema({
     categoryName: {
         type: String,
-        unique: true
+        unique: true,
+        required:true
     },
     jobs: [
         {

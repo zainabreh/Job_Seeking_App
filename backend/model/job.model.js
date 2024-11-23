@@ -12,7 +12,6 @@ const jobSchema = new Schema({
   email: String,
   location: String,
   status:String,
-  category:String,
   postedBy : {
     type:mongoose.Schema.ObjectId,
     ref:"user",
@@ -20,7 +19,8 @@ const jobSchema = new Schema({
   },
   category: {
     type:mongoose.Schema.Types.ObjectId,
-    ref:'category'
+    ref:'category',
+    required:true
   }
 },
 {timestamps:true});
