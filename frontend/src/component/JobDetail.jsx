@@ -62,11 +62,11 @@ const JobDetail = () => {
             >
               Requirements
             </h5>
+            <ul style={{listStyle:"initial"}}>
             {singleJob.requiredSkill.map((req)=>(
-              <ul>
               <li>{req}</li>
-            </ul>
             ))}
+            </ul>
             
             <h5
               className="mb-2"
@@ -74,11 +74,11 @@ const JobDetail = () => {
             >
               Facilities
             </h5>
+            <ul style={{listStyle:"initial"}}>
             {singleJob.facilities.map((fac)=>(
-              <ul>
               <li>{fac}</li>
-            </ul>
             ))}
+            </ul>
             
             <h6 className="mb-2">Salary:{singleJob.salary} TK</h6>
             <h6 className="mt-3" style={{ fontWeight: "bolder" }}>

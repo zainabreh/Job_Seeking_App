@@ -5,7 +5,7 @@ import "react-toastify/ReactToastify.css";
 import React, { useEffect } from "react";
 import { useCreateJobMutation, useUpdateJobMutation } from "../../Redux/auth/job.api";
 import { useDispatch, useSelector } from "react-redux";
-import { setjob } from "../../Redux/Feature/job.slice";
+import { clearJob, setjob } from "../../Redux/Feature/job.slice";
 import { useNavigate } from "react-router-dom";
 
 
@@ -79,7 +79,7 @@ const Addjob = () => {
       const newJob = await createJob(formData).unwrap();
       console.log("db data.........",newJob);
 
-        dispatch(setjob(newJob.job));
+        // dispatch(setjob(newJob.job));
         if (newJob.success === true) {
           toast.success(newJob.message);
         } else {
@@ -89,6 +89,9 @@ const Addjob = () => {
       }
      
   });
+  const clear = ()=>{
+    dispatch(clearJob())
+  }
   
 
   return (
@@ -103,6 +106,7 @@ const Addjob = () => {
             color: "white",
           }}
         >Create New Job</h2>
+        <button onClick={clear}>clear</button>
         <form className="row g-3" onSubmit={handleSubmit} style={{ color: "white" }}>
           <div className="col-md-4">
             <label for="inputEmail4" className="form-label">

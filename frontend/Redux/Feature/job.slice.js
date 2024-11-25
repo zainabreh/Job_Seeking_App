@@ -16,10 +16,13 @@ const jobSlice = createSlice({
         removejob:(state,action)=>{
             state.job = state.job.filter((job) => job._id !== action.payload.id);
             
+        },
+        clearJob:(state,action)=>{
+            state.job = []
         }
        
     }
 })
 
-export const {setjob,removejob} = jobSlice.actions
+export const {setjob,removejob,clearJob} = jobSlice.actions
 export default jobSlice.reducer
