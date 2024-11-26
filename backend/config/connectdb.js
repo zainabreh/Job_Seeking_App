@@ -6,7 +6,7 @@ export const connectDB = async () => {
 
         console.log("Attempting to connect to MongoDB...");
 
-        await mongoose.connect(`mongodb+srv://zainabrd93:mPQVP3YAImDoSBUv@cluster0.rep2s.mongodb.net/job-finding-app`);
+        await mongoose.connect(`mongodb+srv://${process.env.DBUSER}:${process.env.DBPASSWORD}@cluster0.rep2s.mongodb.net/job-finding-app`);
 
         console.log("Database connection successful");
     } catch (error) {
