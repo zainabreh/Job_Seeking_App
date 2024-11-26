@@ -79,7 +79,7 @@ const Addjob = () => {
       const newJob = await createJob(formData).unwrap();
       console.log("db data.........",newJob);
 
-        // dispatch(setjob(newJob.job));
+        dispatch(setjob(newJob.job));
         if (newJob.success === true) {
           toast.success(newJob.message);
         } else {

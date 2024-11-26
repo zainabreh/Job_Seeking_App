@@ -42,12 +42,20 @@ export const createJob = async (req, res, next) => {
     });
 
     const categoryId = job.category;
+    const jobId = job._id;
 
-    await categoryModel.findByIdAndUpdate(
-      categoryId,
-      { $push: { jobs: job._id} },
-      { new: true } 
-    );  
+    const category = await categoryModel.findById(categoryId)
+
+    const newfield = [...category.jobs,jobId]
+    category.jobs = newfield
+
+    const updatedcategory = await categoryModel.findByIdAndUpdate(categoryId,category)    
+
+    // await categoryModel.findByIdAndUpdate(
+    //   categoryId,
+    //   { $push: { jobs: job._id} },
+    //   { new: true } 
+    // );  
 
     res.json({
       message: "Job created successfully",
