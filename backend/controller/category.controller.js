@@ -2,7 +2,7 @@ import categoryModel from '../model/category.model.js'
 
 export const gettAllCategory = async (req,res,next)=>{
     try {
-        const jobs = await categoryModel.find()
+        const jobs = await categoryModel.find({}).populate('jobs')
 
         res.json({
             allJobs:jobs
