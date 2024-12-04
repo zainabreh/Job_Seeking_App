@@ -7,9 +7,15 @@ import Button from "@mui/material/Button";
 import { Box } from "@mui/material";
 import JobCard from "./JobCard";
 import Pagination from "@mui/material/Pagination";
+import { useSelector } from "react-redux";
 
 export default function JobContainer() {
-  const [category, setCategory] = React.useState("");
+
+  const {category} = useSelector((v)=>v.category) 
+
+
+
+  const [categories, setCategories] = React.useState("");
   const [categoryOpen, setCategoryOpen] = React.useState(false);
 
   const [types, setTypes] = React.useState("");
@@ -19,7 +25,7 @@ export default function JobContainer() {
   const [locationOpen, setLocationOpen] = React.useState(false);
 
   const handleCategoryChange = (event) => {
-    setCategory(event.target.value);
+    setCategories(event.target.value);
   };
 
   const handleCategoryOpen = () => {
@@ -76,16 +82,18 @@ export default function JobContainer() {
                 open={categoryOpen}
                 onClose={handleCategoryClose}
                 onOpen={handleCategoryOpen}
-                value={category}
+                value={categories}
                 label="category"
                 onChange={handleCategoryChange}
               >
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
+                {
+                category.map((cat)=>(
+                  <MenuItem value={cat.newCategory._id}>{cat.newCategory.categoryName}</MenuItem>
+                ))
+              }
               </Select>
             </FormControl>
           </Box>
@@ -97,7 +105,7 @@ export default function JobContainer() {
             </Button>
             <FormControl sx={{ m: 1, minWidth: 200 }}>
               <InputLabel id="demo-controlled-open-select-label">
-                Types
+                Status
               </InputLabel>
               <Select
                 labelId="demo-controlled-open-select-label"
