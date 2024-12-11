@@ -8,21 +8,31 @@ import { Box } from "@mui/material";
 import JobCard from "./JobCard";
 import Pagination from "@mui/material/Pagination";
 import { useSelector } from "react-redux";
+import { useGetallJobsQuery } from "../../Redux/auth/job.api";
+import { setjob } from "../../Redux/Feature/job.slice";
 
 export default function JobContainer() {
-
-  const {category} = useSelector((v)=>v.category) 
-
-
-
+  const [products, setProducts] = React.useState([]);
   const [categories, setCategories] = React.useState("");
-  const [categoryOpen, setCategoryOpen] = React.useState(false);
-
   const [types, setTypes] = React.useState("");
-  const [typesOpen, setTypesOpen] = React.useState(false);
-
   const [location, setLocation] = React.useState("");
+  const [search, setSearch] = React.useState("");
+  const [page, setPage] = React.useState(1);
+  const [limit, setLimit] = React.useState(10);
+  const [totalPages, setTotalPages] = React.useState(0);
+
+  const [categoryOpen, setCategoryOpen] = React.useState(false);
+  const [typesOpen, setTypesOpen] = React.useState(false);
   const [locationOpen, setLocationOpen] = React.useState(false);
+
+  const { category } = useSelector((v) => v.category);
+  const {data,error,isLoading} = useGetallJobsQuery({search,limit,page,types,location}) 
+
+  React.useEffect(() => {
+    if (data) {
+      setProducts(data)
+    }
+  }, [data, dispatch]);
 
   const handleCategoryChange = (event) => {
     setCategories(event.target.value);
@@ -89,11 +99,11 @@ export default function JobContainer() {
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
-                {
-                category.map((cat)=>(
-                  <MenuItem value={cat.newCategory._id}>{cat.newCategory.categoryName}</MenuItem>
-                ))
-              }
+                {category.map((cat) => (
+                  <MenuItem value={cat.newCategory._id}>
+                    {cat.newCategory.categoryName}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </Box>
@@ -152,9 +162,26 @@ export default function JobContainer() {
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
-                <MenuItem value={"fullTime"}>Full-Time</MenuItem>
-                <MenuItem value={"partTime"}>Part-Time</MenuItem>
-                <MenuItem value={"internship"}>Internship</MenuItem>
+                <MenuItem value={"Karachi"}>Karachi</MenuItem>
+                <MenuItem value={"Lahore"}>Lahore</MenuItem>
+                <MenuItem value={"Islamabad"}>Islamabad</MenuItem>
+                <MenuItem value={"Faisalabad"}>Faisalabad</MenuItem>
+                <MenuItem value={"Rawalpindi"}>Rawalpindi</MenuItem>
+                <MenuItem value={"Peshawar"}>Peshawar</MenuItem>
+                <MenuItem value={"Quetta"}>Quetta</MenuItem>
+                <MenuItem value={"Multan"}>Multan</MenuItem>
+                <MenuItem value={"Hyderabad"}>Hyderabad</MenuItem>
+                <MenuItem value={"Gujranwala"}>Gujranwala</MenuItem>
+                <MenuItem value={"Sialkot"}>Sialkot</MenuItem>
+                <MenuItem value={"Bahawalpur"}>Bahawalpur</MenuItem>
+                <MenuItem value={"Sukkur"}>Sukkur</MenuItem>
+                <MenuItem value={"Jhelum"}>Jhelum</MenuItem>
+                <MenuItem value={"Abottabad"}>Abottabad</MenuItem>
+                <MenuItem value={"Sargodha"}>Sargodha</MenuItem>
+                <MenuItem value={"Rahim Yar Khan"}>Rahim Yar Khan</MenuItem>
+                <MenuItem value={"Mardan"}>Mardan</MenuItem>
+                <MenuItem value={"Dera Ghazi Khan"}>Dera Ghazi Khan</MenuItem>
+                <MenuItem value={"Mirpur"}>Mirpur</MenuItem>
               </Select>
             </FormControl>
           </Box>
