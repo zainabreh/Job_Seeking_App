@@ -4,7 +4,8 @@ import jobModel from "../model/job.model.js";
 export const getAlljobs = async (req, res, next) => {
   try {
     // const reqId = req.user.id
-    const jobs = await jobModel.find();
+    const jobs = await jobModel.find({});
+    
     res.json({
       jobs,
     });

@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import { Box } from "@mui/material";
 import JobCard from "./JobCard";
 import Pagination from "@mui/material/Pagination";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useGetallJobsQuery } from "../../Redux/auth/job.api";
 import { setjob } from "../../Redux/Feature/job.slice";
 
@@ -26,13 +26,24 @@ export default function JobContainer() {
   const [locationOpen, setLocationOpen] = React.useState(false);
 
   const { category } = useSelector((v) => v.category);
-  const {data,error,isLoading} = useGetallJobsQuery({search,limit,page,types,location}) 
+  const {data,error,isLoading} = useGetallJobsQuery() 
 
+  if(isLoading){
+    return <h1>Loading</h1>
+  }
+
+  if(error){
+    return <h1>Something went wrong</h1>
+  }
+   
+  const dispatch = useDispatch();
+  
   React.useEffect(() => {
-    if (data) {
-      setProducts(data)
+    if (data && data.jobs) {
+      dispatch(setjob(data.jobs));  
+      setProducts(data.jobs)  
     }
-  }, [data, dispatch]);
+  }, [data, dispatch]); 
 
   const handleCategoryChange = (event) => {
     setCategories(event.target.value);
@@ -188,7 +199,7 @@ export default function JobContainer() {
         </div>
 
         <div className="card-container">
-          <JobCard />
+          <JobCard products={products}/>
         </div>
       </div>
       {/* pagination */}

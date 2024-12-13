@@ -7,9 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { createSvgIcon } from "@mui/material/utils";
 import { Link } from "react-router-dom";
-import { useGetallJobsQuery } from "../../Redux/auth/job.api";
-import { useDispatch, useSelector } from "react-redux";
-import { setjob } from "../../Redux/Feature/job.slice";
+import { useSelector } from "react-redux";
 
 const bull = (
   <Box
@@ -38,33 +36,16 @@ const PlusIcon = createSvgIcon(
   "Plus"
 );
 
-export default function JobCard() {
+export default function JobCard({products}) {  
 
-  
-
-  const dispatch = useDispatch();
-  
-  React.useEffect(() => {
-    if (data && data.jobs) {
-      dispatch(setjob(data.jobs));
-    }
-  }, [data, dispatch]);
-  
-  const { job } = useSelector((v) => v.job);
+  const { job } = useSelector((v) => v.job);  
   const jobs = job
 
-  if(isLoading){
-    return <h1>Loading</h1>
-  }
 
-  if(error){
-    return <h1>Something went wrong</h1>
-  }
-  
   return (
     <>
-    {jobs && Array.isArray(jobs) ? (
-        jobs.map((info) => (
+    {products && Array.isArray(products) ? (
+        products.map((info) => (
 
       <Box sx={{ maxWidth: 280 }} key={info._id}>
         <Card variant="elevation">
