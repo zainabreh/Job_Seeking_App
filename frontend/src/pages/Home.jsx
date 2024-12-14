@@ -4,15 +4,14 @@ import HeroSection from '../component/HeroSection'
 import Footer from '../component/Footer'
 import JobContainer from '../component/JobContainer'
 
-const Home = () => {
+const Home = ({search,setSearch}) => {
   return (
     <>
   
      
 
-      <HeroSection/>
-
-     <JobContainer/>
+      <HeroSection search={search} setSearch={setSearch}/>
+     <JobContainer search={search}/>
 
    
 

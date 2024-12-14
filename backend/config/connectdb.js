@@ -7,8 +7,9 @@ export const connectDB = async () => {
     console.log("Attempting to connect to MongoDB...");
 
     await mongoose.connect(
-      `mongodb+srv://${process.env.DBUSER}:${process.env.DBPASSWORD}@cluster0.rep2s.mongodb.net/job-finding-app?retryWrites=true&w=majority`,
-      {serverSelectionTimeoutMS: 50000,
+      `mongodb+srv://${process.env.DBUSER}:${process.env.DBPASSWORD}@cluster0.rep2s.mongodb.net/job-finding-app?retryWrites=true&w=majority&ssl=true`,
+      {
+        serverSelectionTimeoutMS: 50000,
         socketTimeoutMS: 45000,
         tls: true, // Ensure TLS is used
         tlsInsecure: true
@@ -31,3 +32,18 @@ export const connectDB = async () => {
     }
   }
 };
+
+
+// import mongoose from 'mongoose';
+// import 'dotenv/config'
+
+// export const connectDB = async () => {  
+
+//     try {
+//         const res = await mongoose.connect(`mongodb+srv://zainabrd93:mPQVP3YAImDoSBUv@cluster0.rep2s.mongodb.net/job-finding-app?retryWrites=true&w=majority&ssl=true`);
+//         console.log('Database connected', res.connection.port)
+//     } catch (error) {
+//         console.log("Connection error", error);
+//     }
+// }
+

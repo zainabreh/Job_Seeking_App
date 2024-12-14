@@ -11,12 +11,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useGetallJobsQuery } from "../../Redux/auth/job.api";
 import { setjob } from "../../Redux/Feature/job.slice";
 
-export default function JobContainer() {
+export default function JobContainer({search}) {
   const [products, setProducts] = React.useState([]);
   const [categories, setCategories] = React.useState("");
   const [types, setTypes] = React.useState("");
   const [location, setLocation] = React.useState("");
-  const [search, setSearch] = React.useState("");
   const [page, setPage] = React.useState(1);
   const [limit, setLimit] = React.useState(10);
   const [totalPages, setTotalPages] = React.useState(0);
@@ -27,6 +26,7 @@ export default function JobContainer() {
 
   const { category } = useSelector((v) => v.category);
   const {data,error,isLoading} = useGetallJobsQuery() 
+  console.log("usegetallljobs................",data.jobs,"error.......",error,"isloading.....",isLoading);
 
   if(isLoading){
     return <h1>Loading</h1>
@@ -34,52 +34,57 @@ export default function JobContainer() {
 
   if(error){
     return <h1>Something went wrong</h1>
-  }
+  }  
    
   const dispatch = useDispatch();
   
   React.useEffect(() => {
     if (data && data.jobs) {
-      dispatch(setjob(data.jobs));  
+      console.log("usegetallljobs................",data.jobs);
+      
       setProducts(data.jobs)  
+      // setTotalPages(data.pages)  
+      dispatch(setjob(data.jobs));  
     }
   }, [data, dispatch]); 
 
   const handleCategoryChange = (event) => {
     setCategories(event.target.value);
+    console.log("category",event.target.value);
+    
   };
-
-  const handleCategoryOpen = () => {
-    setCategoryOpen(true);
-  };
-
-  const handleCategoryClose = () => {
-    setCategoryOpen(false);
-  };
-
-  const handleTypesChange = (event) => {
-    setTypes(event.target.value);
-  };
-
-  const handleTypesOpen = () => {
-    setTypesOpen(true);
-  };
-
-  const handleTypesClose = () => {
-    setTypesOpen(false);
-  };
-
   const handleLocationChange = (event) => {
     setLocation(event.target.value);
+    console.log("location",event.target.value);
+    
+  };
+  const handleTypesChange = (event) => {
+    setTypes(event.target.value);
+    console.log("types",event.target.value);
+
   };
 
-  const handleLocationOpen = () => {
-    setLocationOpen(true);
-  };
+
 
   const handleLocationClose = () => {
     setLocationOpen(false);
   };
+  const handleCategoryOpen = () => {
+    setCategoryOpen(true);
+  };
+  const handleTypesOpen = () => {
+    setTypesOpen(true);
+  };
+  const handleCategoryClose = () => {
+    setCategoryOpen(false);
+  };
+  const handleTypesClose = () => {
+    setTypesOpen(false);
+  };
+  const handleLocationOpen = () => {
+    setLocationOpen(true);
+  };
+  
 
   return (
     <>

@@ -36,15 +36,17 @@ import Updatejob from "./component/Updatejob";
 import UpdateUserApplication from "./pages/UpdateUserApplication";
 import ApplicationView from "./component/ApplicationView";
 import AddCategory from "./pages/AddCategory";
+import React from "react";
 
 function App() {
 
 const {user,isAuthenticated} = useSelector(v=>v.auth)
+const [search, setSearch] = React.useState("");
 
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<Layout />}>
-        <Route path="/" element={<Home />}></Route>
+        <Route path="/" element={<Home search={search} setSearch={setSearch}/>}></Route>
         <Route path="/login" element={isAuthenticated ? null : <LogIn />}></Route>
         <Route path="/signup" element={isAuthenticated ? null : <Signup />}></Route>
         <Route path="/jobdetail/:id" element={<JobDetail />}></Route>
